@@ -1,0 +1,28 @@
+{
+  "name": "@redredgroup/samsungknox",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "git clean -Xdf --exclude=\"!.env.*\""
+  },
+  "devDependencies": {
+    "husky": "8.0.3",
+    "lint-staged": "14.0.1",
+    "prettier": "3.0.3",
+    "turbo": "1.10.14",
+    "@types/uuid": "9.0.6"
+  },
+  "engines": {
+    "node": "18.16.1",
+    "pnpm": "8.9.2"
+  },
+  "maintainers": [
+    {
+      "name": "K-SEIHOON",
+      "email": "seihoonkim@hansei.kr",
+      "url": "https://github.com/jieey1140"
+    }
+  ],
+  "packageManager": "pnpm@8.9.2",
+  "repository": "https://github.com/REDREDGROUP/samsungknox.git"
+}
