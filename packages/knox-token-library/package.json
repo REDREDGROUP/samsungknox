@@ -1,14 +1,28 @@
 {
   "name": "@redredgroup/samsungknox-token-library",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "Apache-2.0",
   "main": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "module": "dist/index.mjs",
   "type": "module",
+  "homepage": "https://github.com/REDREDGROUP/samsungknox",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/REDREDGROUP/samsungknox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/REDREDGROUP/samsungknox/issues"
+  },
+  "keywords": ["samsungknox", "knox", "knox-token-library-js", "knox-sdk"],
   "files": [
     "dist"
   ],
+  "author": {
+    "name": "Seihoon Kim",
+    "email": "seihoonkim@redredgroup.com",
+    "url": "https://github.com/jieey1140"
+  },
   "maintainers": [
     {
       "name": "jieey1140",
