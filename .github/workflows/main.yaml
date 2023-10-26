@@ -23,6 +23,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
+      - name: Init Doppler Token
+        uses: dopplerhq/secrets-fetch-action@v1.1.0
+        id: doppler-token
+        with:
+          doppler-token: ${{ secrets.SAMSUNGKNOX_TOKEN_LIBRARY_DOPPLER_TOKEN }}
+          inject-env-vars: false
+
       - name: Install dependencies
         run: pnpm i
 
@@ -37,6 +44,9 @@ jobs:
       - name: Test
         working-directory: packages/knox-token-library
         run: pnpm test
+        env: 
+          JWT_TOKEN_KEY: ${{ steps.doppler-token.outputs.JWT_TOKEN_KEY }}
+          CREDENTIAL_TEST_KEY:  ${{ steps.doppler-token.outputs.CREDENTIAL_TEST_KEY }}
 
       - name: Build
         working-directory: packages/knox-token-library
