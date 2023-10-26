@@ -2,34 +2,61 @@ import fs from 'fs';
 import { CredentialType } from '../types';
 import { isNil } from 'lodash-es';
 import * as jwt from 'jsonwebtoken';
+import { ERRORS } from '../common';
+
+const validateJWT = (token: string) => {
+  const decoded = jwt.decode(token);
+  if (!decoded) {
+    throw new TypeError(ERRORS.INVALID_JWT);
+  }
+};
+
+const readCredential = (credential: { path?: string; key?: string }): CredentialType | null => {
+  if (credential.path && credential.key) {
+    throw new TypeError(ERRORS.BOTH_CREDENTIAL_DETECTED);
+  }
+
+  try {
+    if (credential.path) {
+      return JSON.parse(fs.readFileSync(credential.path, 'utf8'));
+    }
+    if (credential.key) {
+      return JSON.parse(credential.key);
+    }
+  } catch (e) {
+    throw new TypeError(ERRORS.CREDENTIAL_IS_NOT_JSON_TYPE);
+  }
+
+  return null;
+};
 
 export const initCredential = async ({
-  credentialPath,
+  credential,
   clientIdentifierJwtToken,
 }: {
-  credentialPath: string;
+  credential: { path?: string; key?: string };
   clientIdentifierJwtToken?: string;
 }): Promise<CredentialType> => {
   if (clientIdentifierJwtToken) {
-    const decoded = jwt.decode(clientIdentifierJwtToken);
-    if (!decoded) {
-      throw new TypeError('clientIdentifierJwtToken is not a json web token type. check your clientIdentifierJwtToken');
-    }
+    validateJWT(clientIdentifierJwtToken);
   }
 
-  const credential: CredentialType = JSON.parse(fs.readFileSync(credentialPath, 'utf8'));
-
-  if (isNil(credential?.Identifier)) {
-    throw new TypeError('credential -> identifier is missing. Please check the credential file.');
+  const credentialManifest = readCredential(credential);
+  if (isNil(credentialManifest)) {
+    throw new TypeError(ERRORS.CREDENTIAL_MISSING);
   }
 
-  if (isNil(credential?.Private)) {
-    throw new TypeError('credential -> Private is missing. Please check the credential file.');
+  if (isNil(credentialManifest.Identifier)) {
+    throw new TypeError(ERRORS.IDENTIFIER_MISSING);
   }
 
-  if (isNil(credential?.Public)) {
-    throw new TypeError('credential -> Public is missing. Please check the credential file.');
+  if (isNil(credentialManifest.Private)) {
+    throw new TypeError(ERRORS.PRIVATE_MISSING);
   }
 
-  return credential;
+  if (isNil(credentialManifest.Public)) {
+    throw new TypeError(ERRORS.PUBLIC_MISSING);
+  }
+
+  return credentialManifest;
 };

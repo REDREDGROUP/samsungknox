@@ -1,0 +1,49 @@
+name: Samsungknox-token-library CI
+on:
+  pull_request:
+    paths:
+      - packages/knox-token-library/**
+
+jobs:
+  everything:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16, 18, 20]
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm i
+
+      - name: Lint Format
+        working-directory: packages/knox-token-library
+        run: pnpm lint:format
+
+      - name: Type Check
+        working-directory: packages/knox-token-library
+        run: pnpm type-check
+
+      - name: Test
+        working-directory: packages/knox-token-library
+        run: pnpm test
+
+      - name: Build
+        working-directory: packages/knox-token-library
+        run: pnpm build
+
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v2
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     fail_ci_if_error: true

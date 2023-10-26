@@ -1,5 +1,6 @@
 # SamsungKnox Token Library
-[![npm version](https://badge.fury.io/js/@redredgroup/samsungknox-token-library.svg)](https://www.npmjs.com/package/@redredgroup/samsungknox-token-library)
+
+[![npm version](https://badge.fury.io/js/@redredgroup%2Fsamsungknox-token-library.svg)](https://www.npmjs.com/package/@redredgroup/samsungknox-token-library)
 
 referenced the package : [knox-token-library-js](https://www.npmjs.com/package/knox-token-library-js)
 

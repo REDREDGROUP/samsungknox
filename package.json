@@ -6,6 +6,10 @@
     "clean": "git clean -Xdf --exclude=\"!.env.*\""
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "18.1.0",
+    "@commitlint/cli": "18.2.0",
+    "cz-conventional-changelog":"3.3.0",
+    "commitizen": "4.3.0",
     "husky": "8.0.3",
     "lint-staged": "14.0.1",
     "prettier": "3.0.3",
@@ -24,5 +28,14 @@
     }
   ],
   "packageManager": "pnpm@8.9.2",
-  "repository": "https://github.com/REDREDGROUP/samsungknox.git"
+  "repository": "https://github.com/REDREDGROUP/samsungknox.git",
+  "config": {
+    "commitizen": {
+        "path": "./node_modules/cz-conventional-changelog",
+        "disableScopeLowerCase": false,
+        "disableSubjectLowerCase": false,
+        "maxHeaderWidth": 100,
+        "maxLineWidth": 100
+    }
+}
 }
