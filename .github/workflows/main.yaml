@@ -11,9 +11,6 @@ jobs:
       matrix:
         node-version: [16, 18, 20]
     steps:
-      - name: Install Doppler Cli
-        uses: dopplerhq/cli-action@v1
-
       - uses: actions/checkout@v3
 
       - uses: pnpm/action-setup@v2
@@ -36,6 +33,9 @@ jobs:
       - name: Type Check
         working-directory: packages/knox-token-library
         run: pnpm type-check
+
+      - name: Install Doppler Cli
+        uses: dopplerhq/cli-action@v1
 
       - name: Test
         working-directory: packages/knox-token-library
