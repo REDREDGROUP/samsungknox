@@ -34,9 +34,6 @@ jobs:
         working-directory: packages/knox-token-library
         run: pnpm type-check
 
-      - name: Install Doppler Cli
-        uses: dopplerhq/cli-action@v1
-
       - name: Test
         working-directory: packages/knox-token-library
         run: pnpm test:coverage
@@ -45,8 +42,6 @@ jobs:
         working-directory: packages/knox-token-library
         run: pnpm build
 
-      # - name: Upload coverage to Codecov
-      #   uses: codecov/codecov-action@v2
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
-      #     fail_ci_if_error: true
+      - name: 'Report Coverage'
+        if: always()
+        uses:  davelosert/vitest-coverage-report-action@v2
