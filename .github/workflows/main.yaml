@@ -43,5 +43,8 @@ jobs:
         run: pnpm build
 
       - name: 'Report Coverage'
-        if: always()
         uses:  davelosert/vitest-coverage-report-action@v2
+        if: always()
+        with: 
+          working-directory:  packages/knox-token-library
+
