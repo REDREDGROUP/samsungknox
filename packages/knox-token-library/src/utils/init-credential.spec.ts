@@ -1,14 +1,15 @@
 import { initCredential } from './init-credential';
 import { describe, expect, it } from 'vitest';
 import { ERRORS } from 'src/common';
-
-const PRIVATE_KEY_IS_MISSING_CASE = JSON.stringify({ Private: null, Public: 'test', Identifier: 'test' });
-const PUBLIC_KEY_IS_MISSING_CASE = JSON.stringify({ Private: 'test', Public: null, Identifier: 'test' });
-const IDENTIFIER_IS_MISSING_CASE = JSON.stringify({ Private: 'test', Public: 'test', Identifier: null });
-const BOTH_CREDENTIAL_DETECTED_CASE = { key: 'credential.json', path: 'credential.json' };
-const CREDENTIAL_TYPE_IS_NOT_JSON_CASE = { key: 'credential.unknown' };
-const CREDENTIAL_PATH_NOT_FOUND_CASE = { path: 'credential.unknown' };
-const IDENTIFIER_IS_NOT_JWT_TOKEN_CASE = { credential: { path: 'credential.json' }, clientIdentifierJwtToken: 'invalidToken' };
+import {
+  BOTH_CREDENTIAL_DETECTED_CASE,
+  CREDENTIAL_PATH_NOT_FOUND_CASE,
+  CREDENTIAL_TYPE_IS_NOT_JSON_CASE,
+  IDENTIFIER_IS_MISSING_CASE,
+  IDENTIFIER_IS_NOT_JWT_TOKEN_CASE,
+  PRIVATE_KEY_IS_MISSING_CASE,
+  PUBLIC_KEY_IS_MISSING_CASE,
+} from '../__test__';
 
 describe('initCredentialFunctionTest', () => {
   it('credential args missing', async () => {

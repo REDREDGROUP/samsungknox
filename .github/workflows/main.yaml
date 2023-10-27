@@ -39,9 +39,7 @@ jobs:
 
       - name: Test
         working-directory: packages/knox-token-library
-        run: doppler run -- pnpm test
-        env: 
-          DOPPLER_TOKEN: ${{ secrets.SAMSUNGKNOX_TOKEN_LIBRARY_DOPPLER_TOKEN }}
+        run: pnpm test:coverage
 
       - name: Build
         working-directory: packages/knox-token-library

@@ -1,5 +1,6 @@
 {
   "name": "@redredgroup/samsungknox-token-library",
+  "description": "utility that creates and signs SamsungKnox Tokens using server-side JavaScript.",
   "version": "1.1.0",
   "license": "Apache-2.0",
   "main": "dist/index.mjs",
@@ -36,7 +37,8 @@
     }
   ],
   "scripts": {
-    "test": "vitest --coverage",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
     "build": "tsup-node",
     "build:watch": "tsup-node --watch",
     "format": "prettier --write .",
