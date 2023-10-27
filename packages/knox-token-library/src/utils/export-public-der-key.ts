@@ -8,7 +8,7 @@ export const exportCredentialPublicDerKey = ({ credential }: { credential: Crede
   const exportpublicKey = rsaPublicKey.exportKey('pkcs8-public-pem');
 
   const forgePublicKey = Forge.pki.publicKeyFromPem(exportpublicKey);
-  
+
   const derBuffer = Forge.asn1.toDer(Forge.pki.publicKeyToAsn1(forgePublicKey));
 
   const publicKey = Forge.util.encode64(derBuffer.getBytes());
