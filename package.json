@@ -16,10 +16,6 @@
     "turbo": "1.10.14",
     "@types/uuid": "9.0.6"
   },
-  "engines": {
-    "node": "18.16.1",
-    "pnpm": "8.9.2"
-  },
   "maintainers": [
     {
       "name": "K-SEIHOON",
