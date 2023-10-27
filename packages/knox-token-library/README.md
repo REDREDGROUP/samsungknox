@@ -60,7 +60,10 @@ The following method is provided to generate a **signed client identifier**.
 import knoxTokenLibrary from '@redredgroup/samsungknox-token-library'
 
 const { accessToken } = await knoxTokenLibrary.generateSignedClientIdentifierJWT({
-  credentialPath: "credential.json",
+  credential: { // provide either key or path.
+    path: "credential.json",
+    key: "credential"
+  },
   clientIdentifierJwtToken: "my-client-identifier"
 });
 
@@ -81,10 +84,11 @@ Output:
 KnoxTokenUtility class provides the following method to generate a **signed api access token**.
 
 ```
-import knoxTokenLibrary from '@redredgroup/samsungknox-token-library'
-
 const { accessToken } = await knoxTokenLibrary.generateSignedAccessTokenJWT({
-  credentialPath: "credential.json",
+  credential: { // provide either key or path.
+    path: "credential.json",
+    key: "credential"
+  },
   accessToken: "my-access-token"
 });
 
@@ -108,7 +112,10 @@ KnoxTokenUtility class provides the following method to generate a **signed api 
 import knoxTokenLibrary from '@redredgroup/samsungknox-token-library'
 
 const { publicKey } = await knoxTokenLibrary.generateBase64EncodedStringPublicKey({
-  credentialPath: "credential.json",
+  credential: { // provide either key or path.
+    path: "credential.json",
+    key: "credential"
+  },
 });
 
 console.log(publicKey)
