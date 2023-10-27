@@ -46,7 +46,6 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "axios": "1.5.1",
     "jsonwebtoken": "9.0.2",
     "lodash-es": "4.17.21",
     "node-rsa": "1.1.1",
