@@ -1,53 +1,44 @@
-import { exportCredentialPrivateKey, exportCredentialPublicDerKey, generateJwtId, initCredential } from './utils';
-import jwt from 'jsonwebtoken';
+import { BaseCredentialInputType } from './types';
+import { exportCredentialPublicDerKey, generateSignedJWT, initCredential } from './utils';
 
-const jwtSignOptionsBase: jwt.SignOptions = {
-  audience: 'KnoxWSM',
-  expiresIn: '30m',
-  algorithm: 'RS512',
+type GenerateSignedClientIdentifierJwtType = BaseCredentialInputType & {
+  clientIdentifierJwtToken: string;
 };
 
-const generateSignedJWT = async (credentialPath: string, tokenOrAccess: string, isClientIdentifier: boolean): Promise<{ accessToken: string }> => {
-  const credential = await initCredential({
-    credentialPath,
-    clientIdentifierJwtToken: isClientIdentifier ? tokenOrAccess : undefined,
+type GenerateSignedAccessTokenJwtType = BaseCredentialInputType & {
+  accessToken: string;
+};
+
+type GenerateBase64EncodedStringPublicKeyType = BaseCredentialInputType & {};
+
+export const generateSignedClientIdentifierJWT = async (params: GenerateSignedClientIdentifierJwtType): Promise<{ accessToken: string }> =>
+  generateSignedJWT({
+    credential: {
+      key: params.credential.key,
+      path: params.credential.path,
+    },
+    tokenOrAccess: params.clientIdentifierJwtToken,
+    isClientIdentifier: true,
   });
 
-  const { privateKey } = exportCredentialPrivateKey({ credential });
-  const { publicKey } = exportCredentialPublicDerKey({ credential });
+export const generateSignedAccessTokenJWT = async (params: GenerateSignedAccessTokenJwtType): Promise<{ accessToken: string }> =>
+  generateSignedJWT({
+    credential: {
+      key: params.credential.key,
+      path: params.credential.path,
+    },
+    tokenOrAccess: params.accessToken,
+    isClientIdentifier: false,
+  });
 
-  const payload: {
-    publicKey: string;
-    clientIdentifier?: string;
-    accessToken?: string;
-  } = {
-    publicKey: publicKey,
-  };
-
-  if (isClientIdentifier) {
-    payload.clientIdentifier = tokenOrAccess;
-  } else {
-    payload.accessToken = tokenOrAccess;
-  }
-
-  const jwtSignOptions = { ...jwtSignOptionsBase, jwtid: generateJwtId() };
-
-  const signJwtToken = jwt.sign(payload, privateKey, jwtSignOptions);
-
-  return { accessToken: signJwtToken };
-};
-
-export const generateSignedClientIdentifierJWT = async (params: {
-  credentialPath: string;
-  clientIdentifierJwtToken: string;
-}): Promise<{ accessToken: string }> => generateSignedJWT(params.credentialPath, params.clientIdentifierJwtToken, true);
-
-export const generateSignedAccessTokenJWT = async (params: { credentialPath: string; accessToken: string }): Promise<{ accessToken: string }> =>
-  generateSignedJWT(params.credentialPath, params.accessToken, false);
-
-export const generateBase64EncodedStringPublicKey = async ({ credentialPath }: { credentialPath: string }): Promise<{ publicKey: string }> => {
+export const generateBase64EncodedStringPublicKey = async (params: GenerateBase64EncodedStringPublicKeyType): Promise<{ publicKey: string }> => {
   const { publicKey } = exportCredentialPublicDerKey({
-    credential: await initCredential({ credentialPath }),
+    credential: await initCredential({
+      credential: {
+        key: params.credential.key,
+        path: params.credential.path,
+      },
+    }),
   });
 
   return { publicKey };
