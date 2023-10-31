@@ -1,0 +1,25 @@
+{
+  "name": "@redredgroup/samsungknox-api",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "type": "module",
+  "scripts": {
+    "build": "tsup-node",
+    "build:watch": "tsup-node --watch",
+    "format": "prettier --write .",
+    "lint:format": "prettier --check .",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "prettier": "3.0.0",
+    "tsup": "6.7.0",
+    "typescript": "5.0.4"
+  },
+  "dependencies": {
+    "@redredgroup/samsungknox-token-library": "1.1.1",
+    "axios": "1.5.1"
+  }
+}
