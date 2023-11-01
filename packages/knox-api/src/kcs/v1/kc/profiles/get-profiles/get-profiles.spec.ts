@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { ERROR_MAP, KnoxRequestError } from '../../../../../knox-axios.error';
-import { getKcsProfiles } from './get-profiles';
+import { getKnoxConfigureProfiles } from './get-profiles';
 
 describe('GET /kcs/v1/kc/profiles Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
     let hasError = false;
 
     try {
-      await getKcsProfiles({
+      await getKnoxConfigureProfiles({
         region: 'US',
         knoxAccessToken: '',
         args: {},
@@ -28,7 +28,7 @@ describe('GET /kcs/v1/kc/profiles Test', () => {
     let hasError = false;
 
     try {
-      await getKcsProfiles({
+      await getKnoxConfigureProfiles({
         region: 'TEST',
         knoxAccessToken: '',
         args: {},
