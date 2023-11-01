@@ -1,6 +1,14 @@
-export type BaseApiHeaderType<T> = {
+export type BaseApiRequireArgsType<T> = {
   region: string;
 } & T;
+
+export type BaseXApiRequireType<T> = {
+  knoxAccessToken: string;
+} & T;
+
+export type BaseArgsInputType<T> = {
+  args: T;
+};
 
 export type BaseResponseType<T> =
   | {
