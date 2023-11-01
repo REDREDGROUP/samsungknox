@@ -1,5 +1,5 @@
 import { knoxDefaultAxios } from '../../../knox-axios';
-import { BaseApiHeaderType, BaseResponseType } from '../../../../types';
+import { BaseApiRequireArgsType, BaseResponseType } from '../../../../types';
 import { KnoxRequestError } from '../../../knox-axios.error';
 
 export type AccessTokenArgsType = {
@@ -17,7 +17,7 @@ export const requestAccessToken = async ({
   clientIdentifierJwt,
   validityForAccessTokenInMinutes,
   region,
-}: BaseApiHeaderType<AccessTokenArgsType>): Promise<BaseResponseType<AccessTokenResponseType>> => {
+}: BaseApiRequireArgsType<AccessTokenArgsType>): Promise<BaseResponseType<AccessTokenResponseType>> => {
   const axios = knoxDefaultAxios({ region });
 
   try {
