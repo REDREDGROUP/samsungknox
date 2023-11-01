@@ -35,9 +35,6 @@ importers:
 
   packages/knox-api:
     dependencies:
-      '@redredgroup/samsungknox-token-library':
-        specifier: 1.1.1
-        version: link:../knox-token-library
       axios:
         specifier: 1.5.1
         version: 1.5.1

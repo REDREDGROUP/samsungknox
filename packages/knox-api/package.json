@@ -58,7 +58,6 @@
   },
   "dependencies": {
     "types-package-json": "2.0.39",
-    "@redredgroup/samsungknox-token-library": "1.1.1",
     "axios": "1.5.1"
   }
 }
