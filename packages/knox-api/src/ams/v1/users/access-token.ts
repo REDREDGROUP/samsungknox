@@ -1,5 +1,6 @@
 import { knoxDefaultAxios } from '../../../knox-axios';
 import { BaseApiHeaderType, BaseResponseType } from '../../../../types';
+import { KnoxRequestError } from '../../../knox-axios.error';
 
 export type AccessTokenArgsType = {
   base64EncodedStringPublicKey: string;
@@ -35,7 +36,11 @@ export const requestAccessToken = async ({
         accessToken: data.accessToken,
       },
     };
-  } catch (e: any) {
-    throw new Error(e);
+  } catch (error: any) {
+    if (error instanceof KnoxRequestError) {
+      throw new KnoxRequestError(error.code, error.message, error.data);
+    } else {
+      throw new Error(error);
+    }
   }
 };

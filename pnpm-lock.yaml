@@ -41,7 +41,13 @@ importers:
       axios:
         specifier: 1.5.1
         version: 1.5.1
+      types-package-json:
+        specifier: 2.0.39
+        version: 2.0.39
     devDependencies:
+      '@vitest/coverage-v8':
+        specifier: 0.34.6
+        version: 0.34.6(vitest@0.34.6)
       prettier:
         specifier: 3.0.0
         version: 3.0.0
@@ -51,6 +57,9 @@ importers:
       typescript:
         specifier: 5.0.4
         version: 5.0.4
+      vitest:
+        specifier: 0.34.6
+        version: 0.34.6
 
   packages/knox-token-library:
     dependencies:
@@ -3442,6 +3451,10 @@ packages:
     resolution: {integrity: sha512-yGSza74xk0UG8k+pLh5oeoYirvIiWo5t0/o3zHHAO2tRDiZcxWP7fywNlXhqb6/r6sWvwi+RsyQMWhVLe4BVuA==}
     engines: {node: '>=10'}
     dev: true
+
+  /types-package-json@2.0.39:
+    resolution: {integrity: sha512-c8ua5W1Uu6x7LAwtwSGCl46cHmj+r2eAA+lXR1CluIZotu9V03ZHcGB9wKRZE2oIAX5IzMP/rxDV9g9ikCg9Nw==}
+    dev: false
 
   /typescript@5.0.4:
     resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}

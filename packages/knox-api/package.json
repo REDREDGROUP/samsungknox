@@ -1,12 +1,48 @@
 {
   "name": "@redredgroup/samsungknox-api",
+  "description": "Samsung Knox API Client",
   "version": "1.0.0",
   "license": "Apache-2.0",
   "main": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "module": "dist/index.mjs",
   "type": "module",
+  "homepage": "https://github.com/REDREDGROUP/samsungknox",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/REDREDGROUP/samsungknox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/REDREDGROUP/samsungknox/issues"
+  },
+  "keywords": [
+    "samsungknox",
+    "knox",
+    "knox-token-library-js",
+    "knox-sdk",
+    "knox-api",
+    "mdm",
+    "management",
+    "samsung"
+  ],
+  "files": [
+    "dist"
+  ],
+  "author": {
+    "name": "Seihoon Kim",
+    "email": "seihoonkim@redredgroup.com",
+    "url": "https://github.com/jieey1140"
+  },
+  "maintainers": [
+    {
+      "name": "jieey1140",
+      "email": "seihoonkim@redredgroup.com",
+      "url": "https://github.com/jieey1140"
+    }
+  ],
   "scripts": {
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
     "build": "tsup-node",
     "build:watch": "tsup-node --watch",
     "format": "prettier --write .",
@@ -16,9 +52,12 @@
   "devDependencies": {
     "prettier": "3.0.0",
     "tsup": "6.7.0",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "vitest": "0.34.6",
+    "@vitest/coverage-v8": "0.34.6"
   },
   "dependencies": {
+    "types-package-json": "2.0.39",
     "@redredgroup/samsungknox-token-library": "1.1.1",
     "axios": "1.5.1"
   }
