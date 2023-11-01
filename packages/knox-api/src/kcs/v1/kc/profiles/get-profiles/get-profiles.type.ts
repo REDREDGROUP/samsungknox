@@ -24,7 +24,7 @@ type WifiSecurityType = 'NONE' | 'WEP' | 'WPA' | 'WPA_WPA2';
 /**
  * API parameters for fetching profiles with optional pagination and filtering.
  */
-export type GetKcsProfilesArgsType = {
+export type GetKnoxConfigureProfilesArgsType = {
   /**
    * Field to support pagination. The number of the page to be fetched.
    * @default 0
@@ -83,9 +83,9 @@ export type GetKcsProfilesArgsType = {
 /**
  * API response for fetching profile summaries.
  */
-export type GetKcsProfilesResponseType = {
+export type GetKnoxConfigureProfilesResponseType = {
   /** List of profile objects. */
-  contents: KcsProfileType[];
+  contents: KnoxConfigureProfileType[];
   /** Total count of profiles matching the filter. */
   totalCount: number;
 };
@@ -93,7 +93,7 @@ export type GetKcsProfilesResponseType = {
 /**
  * Summary response for a profile.
  */
-type KcsProfileType = {
+type KnoxConfigureProfileType = {
   /** Total number of apps currently being used by the profile. */
   applicationCount: number;
   /** List of IDs of contents uploaded during profile creation. */
@@ -163,7 +163,7 @@ type KcsProfileType = {
   /** Object ID of the scheduled push update request made with the profile. */
   pushScheduleId?: string;
   /** QR Code enrollment information (if applicable). */
-  qrCodeEnrollment?: KcsProfileTypeQRCodeEnrollmentType;
+  qrCodeEnrollment?: KnoxConfigureProfileTypeQRCodeEnrollmentType;
   /** Date of the scheduled push update. Format: epoch. */
   scheduleTime?: number;
   /** Internal Object ID used by SEG to serve profiles to device enrollment. */
@@ -180,7 +180,7 @@ type KcsProfileType = {
  * Represents the enrollment via QR code.
  * Further properties should be added according to the actual structure.
  */
-type KcsProfileTypeQRCodeEnrollmentType = {
+type KnoxConfigureProfileTypeQRCodeEnrollmentType = {
   /** Indicates whether QR code upload by reseller is allowed. */
   allowQRCodeNotUploadedByReseller: boolean;
   /** Type of client. Details on the types should be provided based on API documentation. */

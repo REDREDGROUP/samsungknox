@@ -10,13 +10,11 @@ export type BaseArgsInputType<T> = {
   args: T;
 };
 
-export type BaseResponseType<T> =
-  | {
-      status: 'SUCCESS' | 'FAILED';
-      message: string | null;
-      result: T;
-    }
-  | undefined;
+export type BaseResponseType<T> = {
+  status: 'SUCCESS' | 'FAILED';
+  message: string | null;
+  result: T;
+};
 
 export type BaseKnoxErrorResponse = {
   code: number;
