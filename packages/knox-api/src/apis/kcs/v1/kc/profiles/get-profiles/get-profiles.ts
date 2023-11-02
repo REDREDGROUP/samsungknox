@@ -1,6 +1,6 @@
-import { KnoxRequestError } from '../../../../../knox-axios.error';
-import { knoxDefaultAxios } from '../../../../../knox-axios';
-import { BaseApiRequireArgsType, BaseArgsInputType, BaseResponseType, BaseXApiRequireType } from '../../../../../../types';
+import { KnoxRequestError } from '~/errors';
+import { knoxDefaultAxios } from '~/utils';
+import { BaseApiRequireArgsType, BaseArgsInputType, BaseResponseType, BaseXApiRequireType } from '~/types';
 import { GetKnoxConfigureProfilesResponseType, GetKnoxConfigureProfilesArgsType } from './get-profiles.type';
 
 export const getKnoxConfigureProfiles = async (

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { KnoxRequestError } from '../../../../../knox-axios.error';
+import { KnoxRequestError } from '~/errors';
 import { getKnoxConfigureLicenses } from './get-licenses';
 
 describe('GET /kcs/v1/kc/licenses Test', () => {

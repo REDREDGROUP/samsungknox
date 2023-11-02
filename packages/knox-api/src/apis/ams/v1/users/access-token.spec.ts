@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { requestAccessToken } from './access-token';
-import { KnoxRequestError } from '../../../knox-axios.error';
+import { KnoxRequestError } from '~/errors';
 
 describe('POST /v1/ams/accesstoken Test', () => {
   it('require args missing', async () => {

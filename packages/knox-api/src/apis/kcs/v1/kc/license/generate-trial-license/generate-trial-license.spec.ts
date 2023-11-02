@@ -1,16 +1,18 @@
 import { describe, expect, it } from 'vitest';
-import { KnoxRequestError } from '../../../../../knox-axios.error';
-import { getKnoxConfigureProfiles } from './get-profiles';
+import { KnoxRequestError } from '~/errors';
+import { getKnoxConfigureGenerateTrialLicense } from './generate-trial-license';
 
-describe('GET /kcs/v1/kc/profiles Test', () => {
+describe('GET /kcs/v1/kc/licenses/trial Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
     let hasError = false;
 
     try {
-      await getKnoxConfigureProfiles({
+      await getKnoxConfigureGenerateTrialLicense({
         region: 'US',
         knoxAccessToken: '',
-        args: {},
+        args: {
+          licenseType: 'PER_SEAT',
+        },
       });
     } catch (error) {
       if (error instanceof KnoxRequestError) {
@@ -28,10 +30,12 @@ describe('GET /kcs/v1/kc/profiles Test', () => {
     let hasError = false;
 
     try {
-      await getKnoxConfigureProfiles({
+      await getKnoxConfigureGenerateTrialLicense({
         region: 'TEST',
         knoxAccessToken: '',
-        args: {},
+        args: {
+          licenseType: 'PER_SEAT',
+        },
       });
     } catch (error) {
       if (error instanceof KnoxRequestError) {

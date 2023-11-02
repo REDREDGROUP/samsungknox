@@ -1,6 +1,6 @@
-import { knoxDefaultAxios } from '../../../knox-axios';
-import { BaseApiRequireArgsType, BaseResponseType } from '../../../../types';
-import { KnoxRequestError } from '../../../knox-axios.error';
+import { knoxDefaultAxios } from '~/utils';
+import { BaseApiRequireArgsType, BaseResponseType } from '~/types';
+import { KnoxRequestError } from '~/errors';
 
 export type AccessTokenArgsType = {
   base64EncodedStringPublicKey: string;

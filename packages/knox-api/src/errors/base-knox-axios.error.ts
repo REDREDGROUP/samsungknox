@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
-import { BaseKnoxErrorResponse } from '../types';
-import { readPackageJsonData } from './utils';
+import { BaseKnoxErrorResponse } from '~/types';
+import { KnoxRequestError } from './base-knox.error';
+import { readPackageJsonData } from '~/utils';
 
 // export const ERROR_MAP: Record<number | string, string> = {
 //   // Standard HTTP error codes (subset)
@@ -68,17 +69,6 @@ import { readPackageJsonData } from './utils';
 //   LIC_4103: 'x-osp-appId was not equal to the client_id of authToken.',
 //   LIC_5101: 'Unknown or internal error.',
 // };
-
-export class KnoxRequestError extends Error {
-  code: number;
-  data: string | undefined;
-
-  constructor(code: number, message: string, data?: string) {
-    super(message);
-    this.code = code;
-    this.data = data;
-  }
-}
 
 export const handleKnoxError = async (error: AxiosError<BaseKnoxErrorResponse>) => {
   if (!error.response || !error.response.data) {

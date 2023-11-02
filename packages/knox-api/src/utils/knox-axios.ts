@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { handleKnoxError } from './knox-axios.error';
+import { handleKnoxError } from '~/errors';
 
 const defaultHeaders = {
   'content-type': 'application/json',
