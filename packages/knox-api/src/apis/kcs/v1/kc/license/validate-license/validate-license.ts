@@ -1,16 +1,16 @@
+import { BaseApiRequireArgs, BaseArgsInput, BaseXApiRequire, BaseKCLicense, BaseResponse } from '~/types';
+import { KCValidateLicenseArgs } from './validate-license.type';
 import { knoxDefaultAxios } from '~/utils';
 import { KnoxRequestError } from '~/errors';
-import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseKCLicense } from '~/types';
-import { KCTrialLicenseArgs } from './generate-trial-license.type';
 
-export const kcGenerateTrialLicense = async (
-  value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCTrialLicenseArgs>>>,
+export const kcValidateLicense = async (
+  value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCValidateLicenseArgs>>>,
 ): Promise<BaseResponse<BaseKCLicense>> => {
   const { region, knoxAccessToken, args } = value;
   const axios = knoxDefaultAxios({ region });
 
   try {
-    const { data } = await axios.post<BaseKCLicense>('/kcs/v1/kc/licenses/trial', args, {
+    const { data } = await axios.post<BaseKCLicense>('/kcs/v1/kc/licenses/validation', args, {
       headers: {
         'X-KNOX-APITOKEN': knoxAccessToken,
       },

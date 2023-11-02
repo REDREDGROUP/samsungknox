@@ -1,17 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import { KnoxRequestError } from '~/errors';
-import { kcGenerateTrialLicense } from './generate-trial-license';
+import { kcValidateLicense } from './validate-license';
 
-describe('POST /kcs/v1/kc/licenses/trial Test', () => {
+describe('POST /kcs/v1/kc/licenses/validation Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
     let hasError = false;
 
     try {
-      await kcGenerateTrialLicense({
+      await kcValidateLicense({
         region: 'US',
         knoxAccessToken: '',
         args: {
-          licenseType: 'PER_SEAT',
+          licenseKey: 'TEST',
+          licenseName: 'TEST',
         },
       });
     } catch (error) {
@@ -30,11 +31,12 @@ describe('POST /kcs/v1/kc/licenses/trial Test', () => {
     let hasError = false;
 
     try {
-      await kcGenerateTrialLicense({
+      await kcValidateLicense({
         region: 'TEST',
         knoxAccessToken: '',
         args: {
-          licenseType: 'PER_SEAT',
+          licenseKey: 'TEST',
+          licenseName: 'TEST',
         },
       });
     } catch (error) {
