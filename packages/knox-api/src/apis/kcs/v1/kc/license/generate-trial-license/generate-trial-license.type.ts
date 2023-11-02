@@ -1,46 +1,25 @@
-/** Enum for possible license types */
-enum LicenseTypeEnum {
-  DYNAMIC_LEGACY = 'DYNAMIC_LEGACY',
-  SETUP_LEGACY = 'SETUP_LEGACY',
-  DYNAMIC_LEGACY_EE = 'DYNAMIC_LEGACY_EE',
-  PER_SEAT = 'PER_SEAT',
-  PER_DEVICE_PLUS = 'PER_DEVICE_PLUS',
-}
+/** license type */
+type KCLicenseType = 'PER_DEVICE_PLUS' | 'PER_SEAT';
 
-/** Enum for the license type */
-type LicenseType = 'PER_DEVICE_PLUS' | 'PER_SEAT';
+/** license Status */
+type KCLicenseStatus = 'PENDING' | 'EXPIRED' | 'ACTIVE' | 'INACTIVE' | 'TERMINATED' | 'DELETED';
 
-/** Enum for License Status */
-type LicenseStatus = 'PENDING' | 'EXPIRED' | 'ACTIVE' | 'INACTIVE' | 'TERMINATED' | 'DELETED';
+/** Usage Type */
+type KCUsageType = 'TRIAL' | 'COMMERCIAL';
 
-/** Enum for Usage Type */
-enum UsageType {
-  TRIAL = 'TRIAL',
-  COMMERCIAL = 'COMMERCIAL',
-}
+/** Task Status */
+type KCTaskStatus = 'PENDING' | 'INPROGRESS' | 'PARTIAL_COMPLETED' | 'COMPLETED' | 'INSOLVABLE';
 
-/** Enum for Task Status */
-enum TaskStatus {
-  PENDING = 'PENDING',
-  INPROGRESS = 'INPROGRESS',
-  PARTIAL_COMPLETED = 'PARTIAL_COMPLETED',
-  COMPLETED = 'COMPLETED',
-  INSOLVABLE = 'INSOLVABLE',
-}
-
-/** Enum for Task Type */
-enum TaskType {
-  REMIND_BEFORE_GRACE_PERIOD_ENDS = 'REMIND_BEFORE_GRACE_PERIOD_ENDS',
-  END_GRACE_PERIOD = 'END_GRACE_PERIOD',
-}
+/** Task Type */
+type KCTaskType = 'REMIND_BEFORE_GRACE_PERIOD_ENDS' | 'END_GRACE_PERIOD';
 
 /** Type for an object with a required licenseType field */
-export type GenerateKnoxConfigureTrialLicenseArgsType = {
-  licenseType: LicenseType;
+export type KCTrialLicenseArgs = {
+  licenseType: KCLicenseType;
 };
 
-export type GenerateKnoxConfigureTrialLicenseResponseType = {
-  licenses: GenerateKnoxConfigureTrialLicenseType[];
+export type KCTrialLicenseResponse = {
+  licenses: KCTrialLicense[];
   statusCode: number;
   statusMessage: string;
   totalCount: number;
@@ -78,7 +57,7 @@ export type GenerateKnoxConfigureTrialLicenseResponseType = {
  * @property {string} statusMessage - message about the license registration request status
  * @property {number} totalCount - total count of registered licenses
  */
-export type GenerateKnoxConfigureTrialLicenseType = {
+export type KCTrialLicense = {
   activated: number;
   activationEndDate: number;
   activationStartDate: number;
@@ -99,12 +78,12 @@ export type GenerateKnoxConfigureTrialLicenseType = {
   purchased: number;
   remaining: number;
   revocable: boolean;
-  status: LicenseStatus;
-  tasks: KCLicenseTask[];
+  status: KCLicenseStatus;
+  tasks: KCTrialLicenseTask[];
   total: number;
-  type: LicenseType;
+  type: KCLicenseType;
   updateTime: number;
-  usageType: UsageType;
+  usageType: KCUsageType;
 };
 
 /**
@@ -115,10 +94,10 @@ export type GenerateKnoxConfigureTrialLicenseType = {
  * @property {TaskStatus} status - Current status of the task.
  * @property {TaskType} type - Type of the task to be performed.
  */
-type KCLicenseTask = {
+type KCTrialLicenseTask = {
   completedOn: number;
   dueDate: number;
   processedOn: number;
-  status: TaskStatus;
-  type: TaskType;
+  status: KCTaskStatus;
+  type: KCTaskType;
 };

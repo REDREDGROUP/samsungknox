@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { KnoxRequestError } from '~/errors';
-import { getKnoxConfigureLicenses } from './get-licenses';
+import { kcGetLicenses } from './get-licenses';
 
 describe('GET /kcs/v1/kc/licenses Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
     let hasError = false;
 
     try {
-      await getKnoxConfigureLicenses({
+      await kcGetLicenses({
         region: 'US',
         knoxAccessToken: '',
         args: {},
@@ -28,7 +28,7 @@ describe('GET /kcs/v1/kc/licenses Test', () => {
     let hasError = false;
 
     try {
-      await getKnoxConfigureLicenses({
+      await kcGetLicenses({
         region: 'TEST',
         knoxAccessToken: '',
         args: {},

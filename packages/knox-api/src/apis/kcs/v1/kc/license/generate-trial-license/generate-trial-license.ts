@@ -1,16 +1,16 @@
 import { knoxDefaultAxios } from '~/utils';
 import { KnoxRequestError } from '~/errors';
-import { BaseXApiRequireType, BaseApiRequireArgsType, BaseArgsInputType, BaseResponseType } from '~/types';
-import { GenerateKnoxConfigureTrialLicenseArgsType, GenerateKnoxConfigureTrialLicenseResponseType } from './generate-trial-license.type';
+import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
+import { KCTrialLicenseArgs, KCTrialLicenseResponse } from './generate-trial-license.type';
 
-export const getKnoxConfigureGenerateTrialLicense = async (
-  value: BaseXApiRequireType<BaseApiRequireArgsType<BaseArgsInputType<GenerateKnoxConfigureTrialLicenseArgsType>>>,
-): Promise<BaseResponseType<GenerateKnoxConfigureTrialLicenseResponseType>> => {
+export const kcGenerateTrialLicense = async (
+  value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCTrialLicenseArgs>>>,
+): Promise<BaseResponse<KCTrialLicenseResponse>> => {
   const { region, knoxAccessToken, args } = value;
   const axios = knoxDefaultAxios({ region });
 
   try {
-    const { data } = await axios.post<GenerateKnoxConfigureTrialLicenseResponseType>('/kcs/v1/kc/licenses/trial', {
+    const { data } = await axios.post<KCTrialLicenseResponse>('/kcs/v1/kc/licenses/trial', {
       params: args,
       headers: {
         'X-KNOX-APITOKEN': knoxAccessToken,

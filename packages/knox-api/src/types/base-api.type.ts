@@ -1,16 +1,16 @@
-export type BaseApiRequireArgsType<T> = {
+export type BaseApiRequireArgs<T> = {
   region: string;
 } & T;
 
-export type BaseXApiRequireType<T> = {
+export type BaseXApiRequire<T> = {
   knoxAccessToken: string;
 } & T;
 
-export type BaseArgsInputType<T> = {
+export type BaseArgsInput<T> = {
   args: T;
 };
 
-export type BaseResponseType<T> = {
+export type BaseResponse<T> = {
   status: 'SUCCESS' | 'FAILED';
   message: string | null;
   result: T;

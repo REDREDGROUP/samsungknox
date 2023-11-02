@@ -13,7 +13,7 @@
     "baseUrl": ".",
     "paths": {
       "~/errors": ["src/errors"],
-      "~/types": ["types"],
+      "~/types": ["src/types"],
       "~/utils": ["src/utils"]
     }
   },

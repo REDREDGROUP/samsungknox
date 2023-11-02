@@ -22,230 +22,196 @@ type WifiProxySetting = 'NONE' | 'MANUAL' | 'AUTO_CONFIGURE';
 type WifiSecurityType = 'NONE' | 'WEP' | 'WPA' | 'WPA_WPA2';
 
 /**
- * API parameters for fetching profiles with optional pagination and filtering.
+ * Represents API parameters for fetching profiles with detailed information about each property.
+ * @property {number} [pageNum=0] - Field to support pagination. The number of the page to be fetched.
+ * @property {number} [pageSize=100] - Maximum number of records to be fetched in a single call.
+ * @property {string[]} [profileNames] - List of profile names to be filtered.
+ * @property {string[]} [profileIds] - List of profileIds to be filtered.
+ * @property {ProfileType} [profileType] - Type of profiles to be retrieved.
+ * @property {string} [knoxVersion] - Knox version of profiles to be retrieved.
+ * @property {SortBy} [sortBy="updateTime"] - Field on which results are sorted when they're returned.
+ * @property {DeviceProductType} [deviceProductType] - Type of devices: Wearable, Phone, or Tablet.
+ * @property {SortOrder} [sortOrder="descending"] - Order by which results should be arranged when they're returned.
+ * @property {DeviceLevel} [deviceLevel] - Filter for Knox devices or other devices.
  */
 export type GetKnoxConfigureProfilesArgsType = {
-  /**
-   * Field to support pagination. The number of the page to be fetched.
-   * @default 0
-   */
   pageNum?: number;
-
-  /**
-   * Maximum number of records to be fetched in a call.
-   * @default 100
-   */
   pageSize?: number;
-
-  /**
-   * List of profile names to be filtered.
-   */
   profileNames?: string[];
-
-  /**
-   * List of profileIds to be filtered.
-   */
   profileIds?: string[];
-
-  /**
-   * Type of profiles to be retrieved.
-   */
   profileType?: ProfileType;
-
-  /**
-   * Knox version of profiles to be retrieved.
-   */
   knoxVersion?: string;
-
-  /**
-   * Field on which results are sorted when they're returned.
-   * @default "updateTime"
-   */
   sortBy?: SortBy;
-
-  /**
-   * Type of devices: Wearable, Phone, or Tablet.
-   */
   deviceProductType?: DeviceProductType;
-
-  /**
-   * Order by which results should be arranged when they're returned.
-   * @default "descending"
-   */
   sortOrder?: SortOrder;
-
-  /**
-   * Filter for Knox devices or other devices.
-   */
   deviceLevel?: DeviceLevel;
 };
 
 /**
- * API response for fetching profile summaries.
+ * Represents API response for fetching profile summaries with detailed information about each property.
+ * @property {KnoxConfigureProfileType[]} contents - List of profile objects.
+ * @property {number} totalCount - Total count of profiles matching the filter.
  */
 export type GetKnoxConfigureProfilesResponseType = {
-  /** List of profile objects. */
   contents: KnoxConfigureProfileType[];
-  /** Total count of profiles matching the filter. */
   totalCount: number;
 };
 
 /**
- * Summary response for a profile.
+ * Summary response for a profile with detailed information about each property.
+ * @property {number} applicationCount - Total number of apps currently being used by the profile.
+ * @property {number[]} contentIds - List of IDs of contents uploaded during profile creation.
+ * @property {boolean} customerApproved - This field is currently not used.
+ * @property {string[]} defaultProfileResellers - List of names of resellers currently using the profile as their default profile.
+ * @property {boolean} defaultedProfile - Flag to determine whether the profile is a default profile for a customer.
+ * @property {string} description - Description of the profile.
+ * @property {number} deviceCount - Total number of devices currently assigned to the profile.
+ * @property {number} deviceDeclinedCount - This field is currently not used.
+ * @property {'Knox' | 'Other'} deviceLevel - Specifies whether the profile is meant for Knox or for other devices.
+ * @property {'Mobile' | 'Wearable'} deviceProductType - Type of device the profile is intended to be used with.
+ * @property {number} deviceStateDeactivatedTemporarilyCount - Total number of devices with the status "DeactivatedTemporarily".
+ * @property {number} deviceStateErrorCount - Total number of devices with the status "RegistrationFailed".
+ * @property {number} deviceStateFailCount - This field is currently not used.
+ * @property {number} deviceStateFailCountWithLastSuccessProfileSnapshot - This field is currently not used.
+ * @property {number} deviceStateLockedCount - Total number of devices with the status "Locked".
+ * @property {number} deviceStateOkCount - Total number of devices with the status "CustomizationSuccess".
+ * @property {number} deviceStateReadyCount - Total number of devices with the status "ReadyForEnroll".
+ * @property {number} deviceStateSkipCount - Total number of devices with the status "Skipped".
+ * @property {number} deviceStateUpdatingCount - Total number of devices with the status "Updating".
+ * @property {number} deviceStateWaitCount - This field is currently not used.
+ * @property {number} deviceVerifiedCount - This field is currently not used.
+ * @property {boolean} enterprise - This field is currently not used.
+ * @property {string} [eulaTitle] - This field is currently not used.
+ * @property {string} [eulaUrl] - This field is currently not used.
+ * @property {number} [eulaVersion] - This field is currently not used.
+ * @property {string} id - ID of the profile.
+ * @property {string} knoxVersion - Knox version the profile is using.
+ * @property {string} [modelNumber] - This field is currently not used.
+ * @property {string} name - Name of the profile.
+ * @property {boolean} profileComplete - Flag to determine whether the profile creation is complete.
+ * @property {number} [profileSize] - This field is currently not used.
+ * @property {'basic' | 'advanced'} profileType - Type of the profile.
+ * @property {string} profileVersion - Latest version of the profile.
+ * @property {string} [pushScheduleId] - Object ID of the scheduled push update request made with the profile.
+ * @property {KnoxConfigureProfileTypeQRCodeEnrollmentType} [qrCodeEnrollment] - QR Code enrollment information (if applicable).
+ * @property {number} [scheduleTime] - Date of the scheduled push update. Format: epoch.
+ * @property {string} [segProfileId] - Internal Object ID used by SEG to serve profiles to device enrollment.
+ * @property {boolean} [showEula] - This field is currently not used.
+ * @property {string} [timeZone] - Timezone of the scheduled update.
+ * @property {number} updateTime - Date of the last time the profile was updated. Format: epoch.
  */
 type KnoxConfigureProfileType = {
-  /** Total number of apps currently being used by the profile. */
   applicationCount: number;
-  /** List of IDs of contents uploaded during profile creation. */
   contentIds: number[];
-  /** This field is currently not used. */
   customerApproved: boolean;
-  /** List of names of resellers currently using the profile as their default profile. */
   defaultProfileResellers: string[];
-  /** Flag to determine whether the profile is a default profile for a customer. */
   defaultedProfile: boolean;
-  /** Description of the profile. */
   description: string;
-  /** Total number of devices currently assigned to the profile. */
   deviceCount: number;
-  /** This field is currently not used. */
   deviceDeclinedCount: number;
-  /** Specifies whether the profile is meant for Knox or for other devices. */
   deviceLevel: 'Knox' | 'Other';
-  /** Type of device the profile is intended to be used with. Can be Mobile or Wearable. */
   deviceProductType: 'Mobile' | 'Wearable';
-  /** Total number of devices with the status "DeactivatedTemporarily". */
   deviceStateDeactivatedTemporarilyCount: number;
-  /** Total number of devices with the status "RegistrationFailed". */
   deviceStateErrorCount: number;
-  /** This field is currently not used. */
   deviceStateFailCount: number;
-  /** This field is currently not used. */
   deviceStateFailCountWithLastSuccessProfileSnapshot: number;
-  /** Total number of devices with the status "Locked". */
   deviceStateLockedCount: number;
-  /** Total number of devices with the status "CustomizationSuccess". */
   deviceStateOkCount: number;
-  /** Total number of devices with the status "ReadyForEnroll". */
   deviceStateReadyCount: number;
-  /** Total number of devices with the status "Skipped". */
   deviceStateSkipCount: number;
-  /** Total number of devices with the status "Updating". */
   deviceStateUpdatingCount: number;
-  /** This field is currently not used. */
   deviceStateWaitCount: number;
-  /** This field is currently not used. */
   deviceVerifiedCount: number;
-  /** This field is currently not used. */
   enterprise: boolean;
-  /** This field is currently not used. */
   eulaTitle?: string;
-  /** This field is currently not used. */
   eulaUrl?: string;
-  /** This field is currently not used. */
   eulaVersion?: number;
-  /** ID of the profile. */
   id: string;
-  /** Knox version the profile is using. */
   knoxVersion: string;
-  /** This field is currently not used. */
   modelNumber?: string;
-  /** Name of the profile. */
   name: string;
-  /** Flag to determine whether the profile creation is complete. */
   profileComplete: boolean;
-  /** This field is currently not used. */
   profileSize?: number;
-  /** Type of the profile. Can be "basic" or "advanced". */
   profileType: 'basic' | 'advanced';
-  /** Latest version of the profile. */
   profileVersion: string;
-  /** Object ID of the scheduled push update request made with the profile. */
   pushScheduleId?: string;
-  /** QR Code enrollment information (if applicable). */
   qrCodeEnrollment?: KnoxConfigureProfileTypeQRCodeEnrollmentType;
-  /** Date of the scheduled push update. Format: epoch. */
   scheduleTime?: number;
-  /** Internal Object ID used by SEG to serve profiles to device enrollment. */
   segProfileId?: string;
-  /** This field is currently not used. */
   showEula?: boolean;
-  /** Timezone of the scheduled update. */
   timeZone?: string;
-  /** Date of the last time the profile was updated. Format: epoch. */
   updateTime: number;
 };
 
 /**
- * Represents the enrollment via QR code.
- * Further properties should be added according to the actual structure.
+ * Represents the enrollment via QR code with detailed information about each property.
+ * @property {boolean} allowQRCodeNotUploadedByReseller - Indicates whether QR code upload by reseller is allowed.
+ * @property {string} clType - Type of client. Details on the types should be provided based on API documentation.
+ * @property {CountryISO} countryISO - The country ISO code where the profile is applicable.
+ * @property {boolean} hasWifiNetworkConfig - Indicates if Wi-Fi network configuration is included.
+ * @property {string} profileId - The profile ID associated with the QR code.
+ * @property {string} qrCodeBase64 - The QR code in base64 encoding.
+ * @property {number} qrCodeCreateTime - The creation time of the QR code. Format: epoch.
+ * @property {string} qrCodeForEnrollmentLink - A link to the enrollment page that the QR code points to.
+ * @property {number} qrCodeModifiedTime - The last modified time of the QR code. Format: epoch.
+ * @property {string} serviceIdentifier - Service identifier related to the QR code.
+ * @property {boolean} skipMacRandomization - Indicates whether MAC address randomization should be skipped.
+ * @property {string} ssidName - The name of the Wi-Fi network (SSID).
+ * @property {WifiProxyDetails} wifiProxyDetails - Details about the Wi-Fi proxy configuration.
+ * @property {WifiSecurityDetails} wifiSecurityDetails - Details about the Wi-Fi security configuration.
  */
 type KnoxConfigureProfileTypeQRCodeEnrollmentType = {
-  /** Indicates whether QR code upload by reseller is allowed. */
   allowQRCodeNotUploadedByReseller: boolean;
-  /** Type of client. Details on the types should be provided based on API documentation. */
   clType: string;
-  /** The country ISO code where the profile is applicable. */
   countryISO: CountryISO;
-  /** Indicates if Wi-Fi network configuration is included. */
   hasWifiNetworkConfig: boolean;
-  /** The profile ID associated with the QR code. */
   profileId: string;
-  /** The QR code in base64 encoding. */
   qrCodeBase64: string;
-  /** The creation time of the QR code. Format: epoch. */
   qrCodeCreateTime: number;
-  /** A link to the enrollment page that the QR code points to. */
   qrCodeForEnrollmentLink: string;
-  /** The last modified time of the QR code. Format: epoch. */
   qrCodeModifiedTime: number;
-  /** Service identifier related to the QR code. */
   serviceIdentifier: string;
-  /** Indicates whether MAC address randomization should be skipped. */
   skipMacRandomization: boolean;
-  /** The name of the Wi-Fi network (SSID). */
   ssidName: string;
-  /** Details about the Wi-Fi proxy configuration. */
   wifiProxyDetails: WifiProxyDetails;
-  /** Details about the Wi-Fi security configuration. */
   wifiSecurityDetails: WifiSecurityDetails;
 };
 
 /**
- * Represents the details of a Wi-Fi proxy configuration.
+ * Represents the details of a Wi-Fi proxy configuration with detailed information about each property.
+ * @property {WifiProxySetting} wifiProxy - Type of Wi-Fi proxy configuration.
+ * @property {WifiProxyAutoConfigDetails} [wifiProxyAutoConfigDetails] - Details for auto-configuration of Wi-Fi proxy.
+ * @property {WifiProxyManualDetails} [wifiProxyManualDetails] - Details for manual configuration of Wi-Fi proxy.
  */
 type WifiProxyDetails = {
-  /** Type of Wi-Fi proxy configuration. */
   wifiProxy: WifiProxySetting;
-  /** Details for auto-configuration of Wi-Fi proxy. */
   wifiProxyAutoConfigDetails?: WifiProxyAutoConfigDetails;
-  /** Details for manual configuration of Wi-Fi proxy. */
   wifiProxyManualDetails?: WifiProxyManualDetails;
 };
 
 /**
  * Details for auto-configuration of a Wi-Fi proxy.
+ * @property {string} pacWebAddress - Web address for PAC (Proxy Auto-Configuration).
  */
 type WifiProxyAutoConfigDetails = {
-  /** Web address for PAC (Proxy Auto-Configuration). */
   pacWebAddress: string;
 };
 
 /**
- * Details for manual configuration of a Wi-Fi proxy.
+ * Represents the details for manual configuration of a Wi-Fi proxy with detailed information about each property.
+ * @property {string} byPassProxyFor - Comma-separated list of domains to bypass the proxy for.
+ * @property {string} hostName - Host name or IP address of the proxy server.
+ * @property {boolean} isAuthenticateServer - Indicates whether the proxy server requires authentication.
+ * @property {number} port - Port number on which the proxy server is listening.
+ * @property {string} userToken - A token used for authentication with the proxy server.
+ * @property {string} username - Username for authentication with the proxy server.
  */
 type WifiProxyManualDetails = {
-  /** Comma-separated list of domains to bypass the proxy for. */
   byPassProxyFor: string;
-  /** Host name or IP address of the proxy server. */
   hostName: string;
-  /** Indicates whether the proxy server requires authentication. */
   isAuthenticateServer: boolean;
-  /** Port number on which the proxy server is listening. */
   port: number;
-  /** A token used for authentication with the proxy server. */
   userToken: string;
-  /** Username for authentication with the proxy server. */
   username: string;
 };
 

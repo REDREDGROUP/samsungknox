@@ -1,11 +1,11 @@
 import { KnoxRequestError } from '~/errors';
 import { knoxDefaultAxios } from '~/utils';
-import { BaseApiRequireArgsType, BaseArgsInputType, BaseResponseType, BaseXApiRequireType } from '~/types';
+import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
 import { GetKnoxConfigureProfilesResponseType, GetKnoxConfigureProfilesArgsType } from './get-profiles.type';
 
-export const getKnoxConfigureProfiles = async (
-  value: BaseXApiRequireType<BaseApiRequireArgsType<BaseArgsInputType<GetKnoxConfigureProfilesArgsType>>>,
-): Promise<BaseResponseType<GetKnoxConfigureProfilesResponseType>> => {
+export const kcGetProfiles = async (
+  value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<GetKnoxConfigureProfilesArgsType>>>,
+): Promise<BaseResponse<GetKnoxConfigureProfilesResponseType>> => {
   const { region, knoxAccessToken, args } = value;
   const axios = knoxDefaultAxios({ region });
   try {

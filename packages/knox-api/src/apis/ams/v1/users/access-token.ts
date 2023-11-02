@@ -1,27 +1,18 @@
 import { knoxDefaultAxios } from '~/utils';
-import { BaseApiRequireArgsType, BaseResponseType } from '~/types';
+import { BaseApiRequireArgs, BaseResponse } from '~/types';
 import { KnoxRequestError } from '~/errors';
-
-export type AccessTokenArgsType = {
-  base64EncodedStringPublicKey: string;
-  clientIdentifierJwt: string;
-  validityForAccessTokenInMinutes: number;
-};
-
-export type AccessTokenResponseType = {
-  accessToken: string;
-};
+import { AccessTokenArgs, AccessTokenResponse } from './access-token.type';
 
 export const requestAccessToken = async ({
   base64EncodedStringPublicKey,
   clientIdentifierJwt,
   validityForAccessTokenInMinutes,
   region,
-}: BaseApiRequireArgsType<AccessTokenArgsType>): Promise<BaseResponseType<AccessTokenResponseType>> => {
+}: BaseApiRequireArgs<AccessTokenArgs>): Promise<BaseResponse<AccessTokenResponse>> => {
   const axios = knoxDefaultAxios({ region });
 
   try {
-    const { data } = await axios.post<AccessTokenResponseType>('/ams/v1/users/accesstoken', {
+    const { data } = await axios.post<AccessTokenResponse>('/ams/v1/users/accesstoken', {
       ...(validityForAccessTokenInMinutes && {
         validityForAccessTokenInMinutes,
       }),

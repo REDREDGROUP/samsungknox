@@ -1,16 +1,16 @@
 import { KnoxRequestError } from '~/errors';
 import { knoxDefaultAxios } from '~/utils';
-import { BaseXApiRequireType, BaseApiRequireArgsType, BaseArgsInputType, BaseResponseType } from '~/types';
-import { GetKnoxConfigureLicensesArgsType, GetKnoxConfigureLicensesResponseType } from './get-licenses.type';
+import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
+import { KCLicensesArgs, KCLicensesResponse } from './get-licenses.type';
 
-export const getKnoxConfigureLicenses = async (
-  value: BaseXApiRequireType<BaseApiRequireArgsType<BaseArgsInputType<GetKnoxConfigureLicensesArgsType>>>,
-): Promise<BaseResponseType<GetKnoxConfigureLicensesResponseType>> => {
+export const kcGetLicenses = async (
+  value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCLicensesArgs>>>,
+): Promise<BaseResponse<KCLicensesResponse>> => {
   const { region, knoxAccessToken, args } = value;
   const axios = knoxDefaultAxios({ region });
 
   try {
-    const { data } = await axios.get<GetKnoxConfigureLicensesResponseType>('/kcs/v1/kc/licenses', {
+    const { data } = await axios.get<KCLicensesResponse>('/kcs/v1/kc/licenses', {
       params: args,
       headers: {
         'X-KNOX-APITOKEN': knoxAccessToken,
