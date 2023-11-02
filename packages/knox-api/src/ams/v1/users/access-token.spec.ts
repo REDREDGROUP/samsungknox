@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { requestAccessToken } from './access-token';
-import { ERROR_MAP, KnoxRequestError } from '../../../knox-axios.error';
+import { KnoxRequestError } from '../../../knox-axios.error';
 
 describe('POST /v1/ams/accesstoken Test', () => {
   it('require args missing', async () => {
@@ -17,7 +17,7 @@ describe('POST /v1/ams/accesstoken Test', () => {
       if (error instanceof KnoxRequestError) {
         hasError = true;
         expect(error).toBeInstanceOf(KnoxRequestError);
-        expect(error.message).toMatch(ERROR_MAP[4000000]);
+        expect(error.message).toMatch('RESOURCE_INVALID_PARAM');
         expect(error.code).toBe(4000000);
       }
     }
