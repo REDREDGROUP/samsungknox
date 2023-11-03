@@ -14,7 +14,8 @@
     "paths": {
       "~/errors": ["src/errors"],
       "~/types": ["src/types"],
-      "~/utils": ["src/utils"]
+      "~/utils": ["src/utils"],
+      "~/apis": ["src/apis"]
     }
   },
   "include": ["src", "types"],
