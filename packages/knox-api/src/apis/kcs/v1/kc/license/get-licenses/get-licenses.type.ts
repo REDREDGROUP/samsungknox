@@ -1,3 +1,5 @@
+import { BaseKCLicenseAlert, BaseKCLicenseStatus, BaseKCLicenseUsageType } from '~/types';
+
 type BaseKCLicense = 'DYNAMIC_LEGACY' | 'SETUP_LEGACY' | 'DYNAMIC_LEGACY_EE' | 'PER_SEAT' | 'PER_DEVICE_PLUS';
 
 /** possible license types */
@@ -7,7 +9,7 @@ type KCLicenseType = BaseKCLicense;
 type KCResponseLicenseType = BaseKCLicense | 'CUSTOM_SDK' | 'CUSTOM_SDK_KLM';
 
 /** possible license statuses */
-type KCLicenseStatus = 'PENDING' | 'EXPIRED' | 'ACTIVE' | 'INACTIVE' | 'TERMINATED' | 'DELETED';
+type KCLicenseStatus = BaseKCLicenseStatus;
 
 /** sort by fields */
 type KCLicenseSortByField = 'purchased' | 'available' | 'assigned' | 'activated' | 'activationEndDate' | 'updateTime';
@@ -15,18 +17,8 @@ type KCLicenseSortByField = 'purchased' | 'available' | 'assigned' | 'activated'
 /** sort order */
 type KCLicenseSortOrder = 'ascending' | 'descending';
 
-/** usage types */
-type KCLicenseUsageType = 'TRIAL' | 'COMMERCIAL';
-
 /** alert types */
-type KCLicenseAlert =
-  | 'ACTIVE_LICENSE'
-  | 'DEVICE_SERVICE_EXPIRED'
-  | 'LICENSE_EXPIRED'
-  | 'LOW_REMAINING_COUNT'
-  | 'MAXED_OUT_LIMIT'
-  | 'DEVICE_SERVICE_EXPIRING_SOON'
-  | 'LICENSE_EXPIRING_SOON';
+type KCLicenseAlert = BaseKCLicenseAlert;
 
 /**
  * Represents the structure of the query parameters for a license API call
@@ -86,7 +78,7 @@ export type KCLicensesResponse = {
  * @property {KCLicenseStatus} status - Status of the license.
  * @property {number} total - Total number of seats included in this license.
  * @property {KCResponseLicenseType} type - Type of license purchased.
- * @property {KCLicenseUsageType} usageType - Whether the license is used for trial purposes or for commercial purposes.
+ * @property {BaseKCLicenseUsageType} usageType - Whether the license is used for trial purposes or for commercial purposes.
  * @property {number} totalCount - Total count of something (needs clarification on what this count is for).
  */
 export type KCLicenses = {
@@ -110,6 +102,6 @@ export type KCLicenses = {
   status: KCLicenseStatus;
   total: number;
   type: KCResponseLicenseType;
-  usageType: KCLicenseUsageType;
+  usageType: BaseKCLicenseUsageType;
   totalCount: number;
 };

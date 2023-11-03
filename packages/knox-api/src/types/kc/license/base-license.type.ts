@@ -1,9 +1,6 @@
 /** license type */
 type KCLicenseType = 'PER_DEVICE_PLUS' | 'PER_SEAT';
 
-/** license Status */
-type KCLicenseStatus = 'PENDING' | 'EXPIRED' | 'ACTIVE' | 'INACTIVE' | 'TERMINATED' | 'DELETED';
-
 /** Usage Type */
 type KCUsageType = 'TRIAL' | 'COMMERCIAL';
 
@@ -12,6 +9,21 @@ type KCTaskStatus = 'PENDING' | 'INPROGRESS' | 'PARTIAL_COMPLETED' | 'COMPLETED'
 
 /** Task Type */
 type KCTaskType = 'REMIND_BEFORE_GRACE_PERIOD_ENDS' | 'END_GRACE_PERIOD';
+
+/** usage types */
+export type BaseKCLicenseUsageType = 'TRIAL' | 'COMMERCIAL';
+
+/** possible license statuses */
+export type BaseKCLicenseStatus = 'PENDING' | 'EXPIRED' | 'ACTIVE' | 'INACTIVE' | 'TERMINATED' | 'DELETED';
+
+export type BaseKCLicenseAlert =
+  | 'ACTIVE_LICENSE'
+  | 'DEVICE_SERVICE_EXPIRED'
+  | 'LICENSE_EXPIRED'
+  | 'LOW_REMAINING_COUNT'
+  | 'MAXED_OUT_LIMIT'
+  | 'DEVICE_SERVICE_EXPIRING_SOON'
+  | 'LICENSE_EXPIRING_SOON';
 
 export type BaseKCLicense = {
   licenses: KCLicense[];
@@ -73,7 +85,7 @@ export type KCLicense = {
   purchased: number;
   remaining: number;
   revocable: boolean;
-  status: KCLicenseStatus;
+  status: BaseKCLicenseStatus;
   tasks: KCLicenseTask[];
   total: number;
   type: KCLicenseType;
