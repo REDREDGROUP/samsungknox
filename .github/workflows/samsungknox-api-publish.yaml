@@ -41,6 +41,10 @@ jobs:
         working-directory: packages/knox-api
         run: pnpm lint:format
 
+      - name: Build Knox-Token-Library
+        working-directory: packages/knox-token-library
+        run: pnpm build
+
       - name: Type Check
         working-directory: packages/knox-api
         run: pnpm type-check
