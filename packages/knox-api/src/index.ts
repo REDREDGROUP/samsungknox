@@ -1,2 +1,1 @@
-export * from './ams';
-export * from './kcs';
+export * from './apis';

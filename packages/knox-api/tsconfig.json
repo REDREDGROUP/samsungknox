@@ -10,7 +10,13 @@
     "skipLibCheck": true,
     "rootDir": ".",
     "outDir": "dist",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "~/errors": ["src/errors"],
+      "~/types": ["src/types"],
+      "~/utils": ["src/utils"],
+      "~/apis": ["src/apis"]
+    }
   },
   "include": ["src", "types"],
   "exclude": ["dist", "node_modules"]
