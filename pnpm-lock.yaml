@@ -38,13 +38,25 @@ importers:
       axios:
         specifier: 1.5.1
         version: 1.5.1
+      jsonwebtoken:
+        specifier: 9.0.2
+        version: 9.0.2
       types-package-json:
         specifier: 2.0.39
         version: 2.0.39
     devDependencies:
+      '@redredgroup/samsungknox-token-library':
+        specifier: 1.1.1
+        version: link:../knox-token-library
+      '@types/jsonwebtoken':
+        specifier: 9.0.4
+        version: 9.0.4
       '@vitest/coverage-v8':
         specifier: 0.34.6
         version: 0.34.6(vitest@0.34.6)
+      dotenv:
+        specifier: 16.3.1
+        version: 16.3.1
       prettier:
         specifier: 3.0.0
         version: 3.0.0
@@ -1488,6 +1500,11 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       is-obj: 2.0.0
+    dev: true
+
+  /dotenv@16.3.1:
+    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
+    engines: {node: '>=12'}
     dev: true
 
   /eastasianwidth@0.2.0:

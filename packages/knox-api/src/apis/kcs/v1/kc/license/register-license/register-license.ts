@@ -29,8 +29,7 @@ export const kcRegisterLicense = async (
   } catch (error: any) {
     if (error instanceof KnoxRequestError) {
       throw new KnoxRequestError(error.code, error.message, error.data);
-    } else {
-      throw new Error(error);
     }
+    throw new Error(error);
   }
 };
