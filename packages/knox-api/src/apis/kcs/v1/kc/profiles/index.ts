@@ -1,1 +1,2 @@
-export * from './get-profiles/get-profiles';
+export * from './get-profiles';
+export * from './delete-profile';
