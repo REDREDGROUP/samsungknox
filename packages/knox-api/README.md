@@ -6,7 +6,6 @@
 
 For more information on how to use it, see here. : [Documentation](https://redredgroup.github.io/samsungknox/docs/category/knox-api)
 
-
 ## API Support
 
 APIs that continue to be supported are being added and please refer to the corresponding README as soon as they are updated! :)
