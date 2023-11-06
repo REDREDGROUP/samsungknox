@@ -1,0 +1,21 @@
+version: 2
+  
+issueRules:
+  didYouMean: true
+  installScripts: true
+  telemetry: true
+  troll: true
+  malware: true
+  hasNativeCode: true
+  shellScriptOverride: true
+  gitDependency: true
+  httpDependency: true
+  invalidPackageJSON: true
+  unresolvedRequire: false
+
+githubApp:
+  enabled: true
+  pullRequestAlertsEnabled: true
+  dependencyOverviewEnabled: true
+  projectReportsEnabled: true
+  ignoreUsers: ["aBotOnGitHub"]
