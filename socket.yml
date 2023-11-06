@@ -1,13 +1,4 @@
 version: 2
-
-# projectIgnorePaths:
-#   - "ignored-folder"
-#   - "foo/bar/package.json"
-
-triggerPaths:
-  - "package.json"
-  - "pnpm-lock.yaml"
-  - "packages"
   
 issueRules:
   didYouMean: true
