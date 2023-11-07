@@ -1,12 +1,10 @@
-import { BaseKCLicenseAlert, BaseKCLicenseStatus, BaseKCLicenseUsageType } from '~/types';
-
-type BaseKCLicense = 'DYNAMIC_LEGACY' | 'SETUP_LEGACY' | 'DYNAMIC_LEGACY_EE' | 'PER_SEAT' | 'PER_DEVICE_PLUS';
+import { BaseKCLicenseAlert, BaseKCLicenseStatus, BaseKCLicenseType, BaseKCLicenseUsageType } from '~/types';
 
 /** possible license types */
-type KCLicenseType = BaseKCLicense;
+type KCLicenseType = BaseKCLicenseType;
 
 /** license types */
-type KCResponseLicenseType = BaseKCLicense | 'CUSTOM_SDK' | 'CUSTOM_SDK_KLM';
+type KCResponseLicenseType = BaseKCLicenseType | 'CUSTOM_SDK' | 'CUSTOM_SDK_KLM';
 
 /** possible license statuses */
 type KCLicenseStatus = BaseKCLicenseStatus;

@@ -28,7 +28,7 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
-
+ 
   presets: [
     [
       'classic',
@@ -44,7 +44,7 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
-
+  
   themeConfig: {
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
@@ -78,8 +78,8 @@ const config: Config = {
         },
         {
           href: 'https://github.com/REDREDGROUP/samsungknox',
-          label: 'GitHub',
           position: 'right',
+          className: 'header-github-link',
         },
       ],
     },
@@ -111,6 +111,12 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
+    algolia: {
+      appId: 'Q0ALUGVYTA',
+      apiKey: '472314be6391bcd9c9ec9319af2994a9',
+      contextualSearch: true,
+      indexName: 'samsungknox',
+    }
   } satisfies Preset.ThemeConfig,
 };
 
