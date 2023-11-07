@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { KnoxRequestError } from '~/errors';
 import { kcGetProfileDetails } from './get-profile-details';
 
-describe('DELETE /kcs/v1/kc/profiles/${args.profileId}/details Test', () => {
+describe('GET /kcs/v1/kc/profiles/${args.profileId}/details Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
     let hasError = false;
 
