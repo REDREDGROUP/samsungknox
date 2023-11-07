@@ -1,5 +1,4 @@
-/** Enum for profile type */
-type ProfileType = 'basic' | 'advanced';
+import { BaseKCProfileCountryISO, BaseKCProfileType, BaseKCProfileWifiProxySetting, BaseKCProfileWifiSecurity } from '~/types';
 
 /** Enum for device product type */
 type DeviceProductType = 'Wearable' | 'Phone' | 'Tablet';
@@ -12,14 +11,6 @@ type SortOrder = 'ascending' | 'descending';
 
 /** Enum for device level */
 type DeviceLevel = 'Knox' | 'Other';
-
-type CountryISO = 'US' | 'EU' | 'CN' | 'ALL';
-
-/** Enum for Wi-Fi proxy settings */
-type WifiProxySetting = 'NONE' | 'MANUAL' | 'AUTO_CONFIGURE';
-
-/** Enum for Wi-Fi security types */
-type WifiSecurityType = 'NONE' | 'WEP' | 'WPA' | 'WPA_WPA2';
 
 /**
  * Represents API parameters for fetching profiles with detailed information about each property.
@@ -39,7 +30,7 @@ export type GetKnoxConfigureProfilesArgsType = {
   pageSize?: number;
   profileNames?: string[];
   profileIds?: string[];
-  profileType?: ProfileType;
+  profileType?: BaseKCProfileType;
   knoxVersion?: string;
   sortBy?: SortBy;
   deviceProductType?: DeviceProductType;
@@ -132,7 +123,7 @@ type KnoxConfigureProfileType = {
   name: string;
   profileComplete: boolean;
   profileSize?: number;
-  profileType: 'basic' | 'advanced';
+  profileType: BaseKCProfileType;
   profileVersion: string;
   pushScheduleId?: string;
   qrCodeEnrollment?: KnoxConfigureProfileTypeQRCodeEnrollmentType;
@@ -163,7 +154,7 @@ type KnoxConfigureProfileType = {
 type KnoxConfigureProfileTypeQRCodeEnrollmentType = {
   allowQRCodeNotUploadedByReseller: boolean;
   clType: string;
-  countryISO: CountryISO;
+  countryISO: BaseKCProfileCountryISO;
   hasWifiNetworkConfig: boolean;
   profileId: string;
   qrCodeBase64: string;
@@ -179,12 +170,12 @@ type KnoxConfigureProfileTypeQRCodeEnrollmentType = {
 
 /**
  * Represents the details of a Wi-Fi proxy configuration with detailed information about each property.
- * @property {WifiProxySetting} wifiProxy - Type of Wi-Fi proxy configuration.
+ * @property {BaseKCProfileWifiProxySetting} wifiProxy - Type of Wi-Fi proxy configuration.
  * @property {WifiProxyAutoConfigDetails} [wifiProxyAutoConfigDetails] - Details for auto-configuration of Wi-Fi proxy.
  * @property {WifiProxyManualDetails} [wifiProxyManualDetails] - Details for manual configuration of Wi-Fi proxy.
  */
 type WifiProxyDetails = {
-  wifiProxy: WifiProxySetting;
+  wifiProxy: BaseKCProfileWifiProxySetting;
   wifiProxyAutoConfigDetails?: WifiProxyAutoConfigDetails;
   wifiProxyManualDetails?: WifiProxyManualDetails;
 };
@@ -220,7 +211,7 @@ type WifiProxyManualDetails = {
  */
 type WifiSecurityDetails = {
   /** Type of security applied to the Wi-Fi connection. */
-  security: WifiSecurityType;
+  security: BaseKCProfileWifiSecurity;
   /** A token related to the Wi-Fi security configuration. */
   securityToken: string;
 };

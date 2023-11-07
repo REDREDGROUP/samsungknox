@@ -13,6 +13,8 @@ type KCTaskType = 'REMIND_BEFORE_GRACE_PERIOD_ENDS' | 'END_GRACE_PERIOD';
 /** usage types */
 export type BaseKCLicenseUsageType = 'TRIAL' | 'COMMERCIAL';
 
+export type BaseKCLicenseType = 'DYNAMIC_LEGACY' | 'SETUP_LEGACY' | 'DYNAMIC_LEGACY_EE' | 'PER_SEAT' | 'PER_DEVICE_PLUS';
+
 /** possible license statuses */
 export type BaseKCLicenseStatus = 'PENDING' | 'EXPIRED' | 'ACTIVE' | 'INACTIVE' | 'TERMINATED' | 'DELETED';
 

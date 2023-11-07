@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Get Profiles 
+title: Get Profile (Many)
 ---
 
 ### Get Knox Configure Profiles

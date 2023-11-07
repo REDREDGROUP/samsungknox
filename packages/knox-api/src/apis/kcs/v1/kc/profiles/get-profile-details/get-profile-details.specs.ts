@@ -1,17 +1,17 @@
 import { describe, expect, it } from 'vitest';
 import { KnoxRequestError } from '~/errors';
-import { kcDeleteProfile } from './delete-profile';
+import { kcGetProfileDetails } from './get-profile-details';
 
-describe('DELETE /kcs/v1/kc/profile Test', () => {
+describe('DELETE /kcs/v1/kc/profiles/${args.profileId}/details Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
     let hasError = false;
 
     try {
-      await kcDeleteProfile({
+      await kcGetProfileDetails({
         region: 'US',
         knoxAccessToken: '',
         args: {
-          profileIds: ['TEST'],
+          profileId: 'TEST',
         },
       });
     } catch (error) {
@@ -30,11 +30,11 @@ describe('DELETE /kcs/v1/kc/profile Test', () => {
     let hasError = false;
 
     try {
-      await kcDeleteProfile({
+      await kcGetProfileDetails({
         region: 'TEST',
         knoxAccessToken: '',
         args: {
-          profileIds: ['TEST'],
+          profileId: 'TEST',
         },
       });
     } catch (error) {
