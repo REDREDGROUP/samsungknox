@@ -45,13 +45,15 @@
     "test:coverage": "vitest --coverage",
     "build": "tsup-node",
     "build:watch": "tsup-node --watch",
+    "build:production": "NODE_ENV=production tsup-node",
     "format": "prettier --write .",
     "lint:format": "prettier --check .",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@redredgroup/samsungknox-token-library": "1.1.1",
+    "@redredgroup/samsungknox-token-library": "1.1.2",
     "@vitest/coverage-v8": "0.34.6",
+    "@types/node": "20.9.0",
     "dotenv": "16.3.1",
     "prettier": "3.0.0",
     "tsup": "6.7.0",
@@ -61,7 +63,6 @@
   },
   "dependencies": {
     "axios": "1.5.1",
-    "jsonwebtoken": "9.0.2",
-    "types-package-json": "2.0.39"
+    "jsonwebtoken": "9.0.2"
   }
 }
