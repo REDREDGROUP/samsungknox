@@ -43,7 +43,7 @@ jobs:
 
       - name: Build Knox-Token-Library
         working-directory: packages/knox-token-library
-        run: pnpm build
+        run: pnpm build:production
 
       - name: Type Check
         working-directory: packages/knox-api

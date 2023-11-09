@@ -2,28 +2,22 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+const GITHUB_URL = 'https://github.com/REDREDGROUP/samsungknox'
+
 const config: Config = {
   title: 'Samsung Knox Library',
   tagline: 'Samsung provides an SDK that makes it easier to use the Samsung Knox API.',
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
   url: 'https://redredgroup.github.io',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/samsungknox/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'REDREDGROUP', // Usually your GitHub org/user name.
-  projectName: 'samsungknox', // Usually your repo name.
+  organizationName: 'REDREDGROUP',
+  projectName: 'samsungknox',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -34,9 +28,9 @@ const config: Config = {
       'classic',
       {
         docs: {
+          
           sidebarPath: './sidebars.ts',
-          editUrl:
-            'https://github.com/REDREDGROUP/samsungknox',
+          editUrl: GITHUB_URL,
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -46,6 +40,16 @@ const config: Config = {
   ],
   
   themeConfig: {
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
+    },
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
+    },
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'SamsungKnox Library',
@@ -77,14 +81,13 @@ const config: Config = {
           ],
         },
         {
-          href: 'https://github.com/REDREDGROUP/samsungknox',
+          href: GITHUB_URL,
           position: 'right',
           className: 'header-github-link',
         },
       ],
     },
     footer: {
-      style: 'dark',
       links: [
         {
           title: 'Docs',
@@ -93,17 +96,35 @@ const config: Config = {
               label: 'Samsung Knox Token Library',
               to: '/docs/knox-token-library',
             },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'Samsung Knox API',
+              to: '/docs/knox-api',
             },
           ],
         },
+        {
+          title: 'Social',
+          items: [
+            {
+              label: 'GitHub',
+              href: GITHUB_URL,
+            },
+          ],
+        },
+        {
+          title: 'Info',
+          items: [
+              {
+              html: `
+              <p>
+              All rights to SamsungKnox products are reserved by Samsung, and REDREDGROUP Web Service has no relationship with Samsung.
+              <br/>
+              <a href="https://docs.samsungknox.com" target="_blank" >Go To SamsungKnox Official Document</a>
+              </p>
+              `
+            }
+          ]
+        }
       ],
       copyright: `Copyright © 2023 REDREDGROUP Web Service. All Right Reserved.`,
     },
