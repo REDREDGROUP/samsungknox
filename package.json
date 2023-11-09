@@ -1,20 +1,7 @@
 {
   "name": "@redredgroup/samsungknox",
   "private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "clean": "git clean -Xdf --exclude=\"!.env.*\""
-  },
-  "devDependencies": {
-    "@commitlint/config-conventional": "18.1.0",
-    "@commitlint/cli": "18.2.0",
-    "cz-conventional-changelog":"3.3.0",
-    "commitizen": "4.3.0",
-    "husky": "8.0.3",
-    "lint-staged": "14.0.1",
-    "prettier": "3.0.3",
-    "turbo": "1.10.14"
-  },
+  "repository": "https://github.com/REDREDGROUP/samsungknox.git",
   "maintainers": [
     {
       "name": "K-SEIHOON",
@@ -22,15 +9,36 @@
       "url": "https://github.com/jieey1140"
     }
   ],
-  "packageManager": "pnpm@8.9.2",
-  "repository": "https://github.com/REDREDGROUP/samsungknox.git",
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "git clean -Xdf --exclude=\"!.env.*\"",
+    "syncpack:fix": "syncpack fix-mismatches --config ./.syncpackrc.js",
+    "syncpack:format": "syncpack format --config ./.syncpackrc.js",
+    "syncpack:lint": "syncpack lint --config ./.syncpackrc.js",
+    "syncpack:list": "syncpack list --config ./.syncpackrc.js"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "18.2.0",
+    "@commitlint/config-conventional": "18.1.0",
+    "commitizen": "4.3.0",
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "8.0.3",
+    "lint-staged": "14.0.1",
+    "prettier": "3.0.3",
+    "syncpack": "11.2.1",
+    "turbo": "1.10.14"
+  },
+  "engines": {
+    "node": "18.16.1"
+  },
   "config": {
     "commitizen": {
-        "path": "./node_modules/cz-conventional-changelog",
-        "disableScopeLowerCase": false,
-        "disableSubjectLowerCase": false,
-        "maxHeaderWidth": 100,
-        "maxLineWidth": 100
+      "path": "./node_modules/cz-conventional-changelog",
+      "disableScopeLowerCase": false,
+      "disableSubjectLowerCase": false,
+      "maxHeaderWidth": 100,
+      "maxLineWidth": 100
     }
-}
+  },
+  "packageManager": "pnpm@8.9.2"
 }
