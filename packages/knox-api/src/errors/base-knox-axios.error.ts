@@ -1,7 +1,6 @@
 import { AxiosError } from 'axios';
 import { BaseKnoxErrorResponse } from '~/types';
 import { KnoxRequestError } from './base-knox.error';
-import { readPackageJsonData } from '~/utils';
 
 // export const ERROR_MAP: Record<number | string, string> = {
 //   // Standard HTTP error codes (subset)
@@ -72,13 +71,13 @@ import { readPackageJsonData } from '~/utils';
 
 export const handleKnoxError = async (error: AxiosError<BaseKnoxErrorResponse>) => {
   if (!error.response || !error.response.data) {
-    const { bugReportUrl } = await readPackageJsonData();
     throw new KnoxRequestError(
       0,
       `
     Check the Internet or check the region. Case-insensitive (e.g. EU or US). 
     If there seems to be another problem, please report the issue rule to us:
-    ${bugReportUrl}
+
+    https://github.com/REDREDGROUP/samsungknox/issues
     `,
     );
   }

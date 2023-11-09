@@ -16,7 +16,7 @@ export default defineConfig({
     };
   },
   target: 'esnext',
-  sourcemap: true,
+  sourcemap: process.env.NODE_ENV !== 'production',
   dts: true,
   clean: true,
 });

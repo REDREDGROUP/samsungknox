@@ -1,5 +1,10 @@
 <h1 align="center"> Samsung Knox </h1>
 
+## Documentation
+
+For more information on how to use it, see here. : [Documentation](https://redredgroup.github.io/samsungknox)
+
+
 ## Introduction
 
 Samsung Knox has been designed to conveniently utilize Knox API products in an SDK format.

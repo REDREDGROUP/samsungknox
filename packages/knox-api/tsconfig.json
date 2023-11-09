@@ -18,6 +18,6 @@
       "~/apis": ["src/apis"]
     }
   },
-  "include": ["src", "types", "../knox-docs/plugins/test.ts"],
+  "include": ["src", "tsup.config.ts"],
   "exclude": ["dist", "node_modules"]
 }
