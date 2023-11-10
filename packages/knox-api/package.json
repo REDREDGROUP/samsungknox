@@ -5,25 +5,20 @@
   "license": "Apache-2.0",
   "main": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "module": "dist/index.mjs",
   "type": "module",
+  "module": "dist/index.mjs",
   "homepage": "https://github.com/REDREDGROUP/samsungknox",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/REDREDGROUP/samsungknox.git"
-  },
-  "bugs": {
-    "url": "https://github.com/REDREDGROUP/samsungknox/issues"
-  },
+  "repository": "REDREDGROUP/samsungknox.git",
+  "bugs": "https://github.com/REDREDGROUP/samsungknox/issues",
   "keywords": [
-    "samsungknox",
     "knox",
-    "knox-token-library-js",
-    "knox-sdk",
     "knox-api",
-    "mdm",
+    "knox-sdk",
+    "knox-token-library-js",
     "management",
-    "samsung"
+    "mdm",
+    "samsung",
+    "samsungknox"
   ],
   "files": [
     "dist"
@@ -41,28 +36,28 @@
     }
   ],
   "scripts": {
-    "test": "vitest",
-    "test:coverage": "vitest --coverage",
     "build": "tsup-node",
-    "build:watch": "tsup-node --watch",
     "build:production": "NODE_ENV=production tsup-node",
+    "build:watch": "tsup-node --watch",
     "format": "prettier --write .",
     "lint:format": "prettier --check .",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
     "type-check": "tsc --noEmit"
-  },
-  "devDependencies": {
-    "@redredgroup/samsungknox-token-library": "1.1.2",
-    "@vitest/coverage-v8": "0.34.6",
-    "@types/node": "20.9.0",
-    "dotenv": "16.3.1",
-    "prettier": "3.0.0",
-    "tsup": "6.7.0",
-    "typescript": "5.0.4",
-    "vitest": "0.34.6",
-    "@types/jsonwebtoken": "9.0.4"
   },
   "dependencies": {
     "axios": "1.5.1",
     "jsonwebtoken": "9.0.2"
+  },
+  "devDependencies": {
+    "@redredgroup/samsungknox-token-library": "1.1.2",
+    "@types/jsonwebtoken": "9.0.4",
+    "@types/node": "20.9.0",
+    "@vitest/coverage-v8": "0.34.6",
+    "dotenv": "16.3.1",
+    "prettier": "3.0.0",
+    "tsup": "6.7.0",
+    "typescript": "5.0.4",
+    "vitest": "0.34.6"
   }
 }
