@@ -2,19 +2,34 @@ import { BaseApiRequireArgs, BaseArgsInput, BaseXApiRequire, BaseKCLicense, Base
 import { KCValidateLicenseArgs } from './validate-license.type';
 import { knoxDefaultAxios } from '~/utils';
 import { KnoxRequestError } from '~/errors';
+import { AxiosInstance } from 'axios';
 
 export const kcValidateLicense = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCValidateLicenseArgs>>>,
 ): Promise<BaseResponse<BaseKCLicense>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region });
+  const axios = knoxDefaultAxios({ region, knoxApiToken: knoxAccessToken });
+  return request({ args, axios });
+};
 
-  try {
-    const { data } = await axios.post<BaseKCLicense>('/kcs/v1/kc/licenses/validation', args, {
-      headers: {
-        'X-KNOX-APITOKEN': knoxAccessToken,
-      },
+export class ValidateLicense {
+  private axios: AxiosInstance;
+
+  constructor({ axios }: { axios: AxiosInstance }) {
+    this.axios = axios;
+  }
+
+  public async validateLicense({ args }: BaseArgsInput<KCValidateLicenseArgs>): Promise<BaseResponse<BaseKCLicense>> {
+    return request({
+      args: args,
+      axios: this.axios,
     });
+  }
+}
+
+const request = async ({ args, axios }: { args: KCValidateLicenseArgs; axios: AxiosInstance }): Promise<BaseResponse<BaseKCLicense>> => {
+  try {
+    const { data } = await axios.post<BaseKCLicense>('/kcs/v1/kc/licenses/validation', args, {});
 
     return {
       status: 'SUCCESS',
