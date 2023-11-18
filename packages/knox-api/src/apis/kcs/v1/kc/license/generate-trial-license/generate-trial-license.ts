@@ -2,19 +2,34 @@ import { knoxDefaultAxios } from '~/utils';
 import { KnoxRequestError } from '~/errors';
 import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseKCLicense } from '~/types';
 import { KCTrialLicenseArgs } from './generate-trial-license.type';
+import { AxiosInstance } from 'axios';
 
 export const kcGenerateTrialLicense = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCTrialLicenseArgs>>>,
 ): Promise<BaseResponse<BaseKCLicense>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region });
+  const axios = knoxDefaultAxios({ region, knoxAccessToken });
+  return request({ args, axios });
+};
 
-  try {
-    const { data } = await axios.post<BaseKCLicense>('/kcs/v1/kc/licenses/trial', args, {
-      headers: {
-        'X-KNOX-APITOKEN': knoxAccessToken,
-      },
+export class GenerateTrialLicense {
+  private axios: AxiosInstance;
+
+  constructor({ axios }: { axios: AxiosInstance }) {
+    this.axios = axios;
+  }
+
+  public async generateTrialLicense({ args }: BaseArgsInput<KCTrialLicenseArgs>): Promise<BaseResponse<BaseKCLicense>> {
+    return request({
+      args: args,
+      axios: this.axios,
     });
+  }
+}
+
+const request = async ({ args, axios }: { args: KCTrialLicenseArgs; axios: AxiosInstance }): Promise<BaseResponse<BaseKCLicense>> => {
+  try {
+    const { data } = await axios.post<BaseKCLicense>('/kcs/v1/kc/licenses/trial', args, {});
 
     return {
       status: 'SUCCESS',

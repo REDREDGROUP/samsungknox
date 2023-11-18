@@ -5,10 +5,13 @@ const defaultHeaders = {
   'content-type': 'application/json',
 };
 
-export const knoxDefaultAxios = ({ region }: { region: string }) => {
+export const knoxDefaultAxios = ({ region, knoxAccessToken }: { region: string; knoxAccessToken?: string }) => {
   const instance = axios.create({
     baseURL: `https://${region.toLowerCase()}-kcs-api.samsungknox.com`,
     headers: {
+      ...(knoxAccessToken && {
+        'X-KNOX-APITOKEN': knoxAccessToken,
+      }),
       ...defaultHeaders,
     },
   });

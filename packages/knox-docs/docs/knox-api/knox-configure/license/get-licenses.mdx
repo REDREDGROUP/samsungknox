@@ -1,0 +1,72 @@
+---
+sidebar_position: 1
+title: Get License (Many)
+keywords:
+  - knox-api
+  - Knox Configure
+  - get licenses
+last_update:
+  date: 11/18/2023
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Get Licenses
+
+To get the **license of KnoxConfigure**, use the following methods.
+
+## Example
+
+<Tabs
+  groupId="syntax"
+  defaultValue="class"
+  values={[
+    { label: 'class', value: 'class', },
+    { label: 'function', value: 'function', }
+  ]
+}>
+<TabItem value="class">
+
+```ts
+import { KnoxInstance } from '@redredgroup/samsungknox-api';
+const instance = new KnoxInstance({
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+const getLicenses = await instance.kcLicense.getLicense({
+  args: {}, // <- other optional param
+});
+
+console.log(getLicenses);
+```
+
+</TabItem>
+
+<TabItem value="function">
+
+```ts
+import { kcGetLicenses } from '@redredgroup/samsungknox-api';
+
+const getLicenses = await kcGetLicenses({
+  args: {}, // <- other optional param
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+console.log(getLicenses);
+```
+
+</TabItem>
+</Tabs>
+
+Input parameters:
+
+- args: Insert params for the profile (optional) See this document for more params. : https://docs.samsungknox.com/dev/knox-configure/api/#tag/License-APIs/operation/getLicensesUsingGET
+- region: Insert your Knox Region. Most are the EU. (Case-insensitive)
+- knoxAccessToken: Your **X-KNOX-APITOKEN**
+
+Output:
+
+- Profiles registered with KnoxConfigure respond in Array format.

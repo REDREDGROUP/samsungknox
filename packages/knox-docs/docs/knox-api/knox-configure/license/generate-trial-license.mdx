@@ -1,0 +1,76 @@
+---
+sidebar_position: 5
+title: Generate Trial License
+keywords:
+  - knox-api
+  - Knox Configure
+  - generate trial license
+last_update:
+  date: 11/18/2023
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Generate Trial License
+
+To generate **trial license for KnoxConfigure**, use the following methods
+
+## Example
+
+<Tabs
+  groupId="syntax"
+  defaultValue="class"
+  values={[
+    { label: 'class', value: 'class', },
+    { label: 'function', value: 'function', }
+  ]
+}>
+<TabItem value="class">
+
+```ts
+import { KnoxInstance } from '@redredgroup/samsungknox-api';
+const instance = new KnoxInstance({
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+const generateTrialLicense = await instance.kcLicense.generateTrialLicense({
+  args: {
+    licenseType: 'PER_DEVICE_PLUS', // KCLicenseType
+  },
+});
+
+console.log(generateTrialLicense);
+```
+
+</TabItem>
+
+<TabItem value="function">
+
+```ts
+import { kcGenerateTrialLicense } from '@redredgroup/samsungknox-api';
+
+const generateTrialLicense = await kcGenerateTrialLicense({
+  args: {
+    licenseType: 'PER_DEVICE_PLUS', //KCLicenseType
+  },
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+console.log(generateTrialLicense);
+```
+
+</TabItem>
+</Tabs>
+
+Input parameters:
+
+- args: Insert parameters for the profile (required) **licenseType**
+- region: Insert the Knox region. Most of them are EU (case insensitive)
+- knoxAccessToken: Your **X-KNOX-APITOKEN**.
+
+Output:
+
+- Respond with the result of issuing a new trial license.
