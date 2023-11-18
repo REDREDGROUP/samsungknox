@@ -31,10 +31,20 @@ const config: Config = {
           
           sidebarPath: './sidebars.ts',
           editUrl: GITHUB_URL,
+          
+          // versions: {
+          //   current: {
+          //     label: 'current',
+          //   },
+          // },
+          // lastVersion: 'current',
+          showLastUpdateAuthor: false,
+          showLastUpdateTime: true,
         },
         theme: {
           customCss: './src/css/custom.css',
         },
+        
       } satisfies Preset.Options,
     ],
   ],
@@ -80,6 +90,10 @@ const config: Config = {
             },
           ],
         },
+        // {
+        //   type: 'docsVersionDropdown',
+        //   position: 'right',
+        // },
         {
           href: GITHUB_URL,
           position: 'right',
