@@ -8,7 +8,7 @@ export const kcSendCommandToMultipleDevices = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCSendCommandToMultipleDeviceArgs>>>,
 ): Promise<BaseResponse<KCSendCommandToMultipleDeviceResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxApiToken: knoxAccessToken });
+  const axios = knoxDefaultAxios({ region, knoxAccessToken });
   return request({ args, axios });
 };
 

@@ -39,15 +39,9 @@ html[data-theme='dark'] .header-github-link:before {
 
 /* index */
 #hero {
-  background-image: linear-gradient(
-    var(--ifm-footer-background-color),
-    var(--ifm-navbar-background-color)
-  );
+  background-image: linear-gradient(var(--ifm-footer-background-color), var(--ifm-navbar-background-color));
 }
 
 html[data-theme='dark'] #hero {
-  background-image: linear-gradient(
-    var(--ifm-navbar-background-color),
-    var(--ifm-background-color)
-  );
+  background-image: linear-gradient(var(--ifm-navbar-background-color), var(--ifm-background-color));
 }

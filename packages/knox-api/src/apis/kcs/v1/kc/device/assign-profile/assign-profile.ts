@@ -8,7 +8,7 @@ export const kcAssignProfileDevices = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCAssignProfileDeviceArgs>>>,
 ): Promise<BaseResponse<KCAssignProfileDeviceResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxApiToken: knoxAccessToken });
+  const axios = knoxDefaultAxios({ region, knoxAccessToken });
   return request({ args, axios });
 };
 

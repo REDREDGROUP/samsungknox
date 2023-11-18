@@ -8,7 +8,7 @@ export const kcDeleteProfile = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCDeleteProfileArgs>>>,
 ): Promise<BaseResponse<KCDeleteProfileResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxApiToken: knoxAccessToken });
+  const axios = knoxDefaultAxios({ region, knoxAccessToken });
   return request({ args, axios });
 };
 

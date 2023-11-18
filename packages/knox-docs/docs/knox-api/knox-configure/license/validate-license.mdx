@@ -1,0 +1,78 @@
+---
+sidebar_position: 4
+title: Validate License
+keywords:
+  - knox-api
+  - Knox Configure
+  - validate licenses
+last_update:
+  date: 11/18/2023
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Validate License
+
+To validate the **license of KnoxConfigure**, use the following methods.
+
+## Example
+
+<Tabs
+  groupId="syntax"
+  defaultValue="class"
+  values={[
+    { label: 'class', value: 'class', },
+    { label: 'function', value: 'function', }
+  ]
+}>
+<TabItem value="class">
+
+```ts
+import { KnoxInstance } from '@redredgroup/samsungknox-api';
+const instance = new KnoxInstance({
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+const validateLicense = await instance.kcLicense.validateLicense({
+  args: {
+    licenseKey: 'YOUR_LICENSE_KEY',
+    licenseName: 'YOUR_LICENSE_NAME',
+  },
+});
+
+console.log(validateLicense);
+```
+
+</TabItem>
+
+<TabItem value="function">
+
+```ts
+import { kcValidateLicense } from '@redredgroup/samsungknox-api';
+
+const validateLicense = await kcValidateLicense({
+  args: {
+    licenseKey: 'YOUR_LICENSE_KEY',
+    licenseName: 'YOUR_LICENSE_NAME',
+  },
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+console.log(validateLicense);
+```
+
+</TabItem>
+</Tabs>
+
+Input parameters:
+
+- args: Insert parameters for the profile (required) **licenseKey** and **licenseName**.
+- region: Insert the Knox region. Most of them are EU (case insensitive)
+- knoxAccessToken: Your **X-KNOX-APITOKEN**.
+
+Output:
+
+- Responds with the validation results for that license.

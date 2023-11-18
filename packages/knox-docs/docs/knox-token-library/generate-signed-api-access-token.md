@@ -9,14 +9,15 @@ KnoxTokenUtility class provides the following method to generate a **signed api 
 
 ```ts
 const { accessToken } = await knoxTokenLibrary.generateSignedAccessTokenJWT({
-  credential: { // provide either key or path.
-    path: "credential.json",
-    key: "credential"
+  credential: {
+    // provide either key or path.
+    path: 'credential.json',
+    key: 'credential',
   },
-  accessToken: "my-access-token"
+  accessToken: 'my-access-token',
 });
 
-console.log(accessToken)
+console.log(accessToken);
 ```
 
 Input parameters:

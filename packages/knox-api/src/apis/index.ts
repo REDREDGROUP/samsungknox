@@ -23,14 +23,14 @@ export class KnoxInstance {
   public kcDevice: KCDevice;
 
   private axios: AxiosInstance;
-  private knoxApiToken: string | null = null;
+  private knoxAccessToken: string | null = null;
   private region: string | null = null;
 
-  constructor({ knoxApiToken, region }: { knoxApiToken: string; region: string }) {
-    if (!knoxApiToken) {
+  constructor({ knoxAccessToken, region }: { knoxAccessToken: string; region: string }) {
+    if (!knoxAccessToken) {
       throw new Error('For the Class type, an X-KNOX-APITOKEN must be injected into the instance.');
     } else {
-      this.knoxApiToken = knoxApiToken;
+      this.knoxAccessToken = knoxAccessToken;
     }
 
     if (!region) {
@@ -44,7 +44,7 @@ export class KnoxInstance {
 
     this.axios = knoxDefaultAxios({
       region: this.region,
-      knoxApiToken: this.knoxApiToken,
+      knoxAccessToken: this.knoxAccessToken,
     });
 
     this.kcProfile = new KCProfile(this.axios);

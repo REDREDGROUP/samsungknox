@@ -8,7 +8,7 @@ export const kcGetProfiles = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<GetKnoxConfigureProfilesArgsType>>>,
 ): Promise<BaseResponse<GetKnoxConfigureProfilesResponseType>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxApiToken: knoxAccessToken });
+  const axios = knoxDefaultAxios({ region, knoxAccessToken });
   return request({ args, axios });
 };
 

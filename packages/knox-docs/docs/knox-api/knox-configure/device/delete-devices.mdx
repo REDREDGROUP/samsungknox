@@ -1,0 +1,80 @@
+---
+sidebar_position: 3
+title: Delete Device
+keywords:
+  - knox-api
+  - Knox Configure
+  - device delete
+last_update:
+  date: 11/18/2023
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+### Delete Device
+
+:::warning
+If you delete your device, you'll need to contact your partner or SamsungKnox to reenroll your device. You can't manually enroll things like licenses.
+:::
+
+To Delete a device for KnoxConfigure, use the following methods
+
+## Example
+
+<Tabs
+  groupId="installation"
+  defaultValue="class"
+  values={[
+    { label: 'class', value: 'class', },
+    { label: 'function', value: 'function', }
+  ]
+}>
+<TabItem value="class">
+
+```ts
+import { KnoxInstance } from '@redredgroup/samsungknox-api';
+const instance = new KnoxInstance({
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+const kcDeleteDevice = await instance.kcDevice.deleteDevice({
+  args: {
+    deviceIds: ['YOUR_DEVICE_ID1'],
+  }, // <- other optional param
+});
+
+console.log(kcDeleteDevice);
+```
+
+</TabItem>
+
+<TabItem value="function">
+
+```ts
+import { kcDeleteDevices } from '@redredgroup/samsungknox-api';
+
+const kcDeleteDevice = await kcDeleteDevices({
+  args: {
+    deviceIds: ['YOUR_DEVICE_ID1'],
+  }, // <- other optional param
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+console.log(kcDeleteDevice);
+```
+
+</TabItem>
+</Tabs>
+
+Input parameters:
+
+- args: Insert parameters for the device (required) **deviceIds**.
+- region: Insert the Knox region. Most of them are EU (case insensitive)
+- knoxAccessToken: Your **X-KNOX-APITOKEN**.
+
+Output:
+
+- The total number of devices, including the number of successful and unsuccessful attempts to delete a device, and the number of pending devices are also responded

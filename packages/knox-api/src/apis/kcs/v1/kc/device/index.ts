@@ -9,7 +9,7 @@ import {
 import { GetDevice, KCGetDevicesArgs, KCGetDevicesResponse } from './get-devices';
 import { GetDeviceLog, KCGetDeviceLogsArgs, KCGetDeviceLogsResponse } from './get-device-logs';
 import { DeleteDevice, KCDeleteDevicesArgs, KCDeleteDevicesResponse } from './delete-devices';
-import { AssignProfileDevice } from './assign-profile';
+import { AssignProfileDevice, KCAssignProfileDeviceArgs, KCAssignProfileDeviceResponse } from './assign-profile';
 
 /**
  * Functions Export
@@ -48,12 +48,16 @@ export class KCDevice {
     return this.GetDevice.getDevices({ args });
   }
 
-  public async GetDeviceLogs({ args }: BaseArgsInput<KCGetDeviceLogsArgs>): Promise<BaseResponse<KCGetDeviceLogsResponse>> {
+  public async getDeviceLogs({ args }: BaseArgsInput<KCGetDeviceLogsArgs>): Promise<BaseResponse<KCGetDeviceLogsResponse>> {
     return this.GetDeviceLog.GetDeviceLogs({ args });
   }
 
   public async deleteDevice({ args }: BaseArgsInput<KCDeleteDevicesArgs>): Promise<BaseResponse<KCDeleteDevicesResponse>> {
     return this.DeleteDevice.deleteDevice({ args });
+  }
+
+  public async assignProfileDevices({ args }: BaseArgsInput<KCAssignProfileDeviceArgs>): Promise<BaseResponse<KCAssignProfileDeviceResponse>> {
+    return this.AssignProfileDevice.assignProfileDevices({ args });
   }
 
   public async unassignProfileDevices({

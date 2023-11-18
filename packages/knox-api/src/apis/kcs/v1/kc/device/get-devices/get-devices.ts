@@ -8,7 +8,7 @@ export const kcGetDevices = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCGetDevicesArgs>>>,
 ): Promise<BaseResponse<KCGetDevicesResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxApiToken: knoxAccessToken });
+  const axios = knoxDefaultAxios({ region, knoxAccessToken });
   return request({ args, axios });
 };
 

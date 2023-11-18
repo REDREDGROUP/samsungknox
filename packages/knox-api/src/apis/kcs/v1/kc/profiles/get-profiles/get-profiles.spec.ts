@@ -134,7 +134,7 @@ describe('(CLASS) GET /kcs/v1/kc/profiles Test', () => {
     });
 
     const instance = new KnoxInstance({
-      knoxApiToken: accessToken,
+      knoxAccessToken: accessToken,
       region: 'EU',
     });
 

@@ -8,7 +8,7 @@ export const kcDeleteDevices = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCDeleteDevicesArgs>>>,
 ): Promise<BaseResponse<KCDeleteDevicesResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxApiToken: knoxAccessToken });
+  const axios = knoxDefaultAxios({ region, knoxAccessToken });
   return request({ args, axios });
 };
 

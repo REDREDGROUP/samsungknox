@@ -19,7 +19,6 @@ The recommended environment for installation and use is as follows:
 **Node.js 16 or higher**
 :::
 
-
 <Tabs
   groupId="installation"
   defaultValue="npm"
@@ -35,11 +34,7 @@ npm install @redredgroup/samsungknox-api
 ```
 </TabItem>
 
-<TabItem value="yarn">
-```shell
-yarn install @redredgroup/samsungknox-api
-```
-</TabItem>
+<TabItem value="yarn">```shell yarn install @redredgroup/samsungknox-api ```</TabItem>
 
 <TabItem value="pnpm">
 ```shell
@@ -48,10 +43,9 @@ pnpm install @redredgroup/samsungknox-api
 </TabItem>
 </Tabs>
 
-
 ## Class or function calls
-The cases for both codes are described for every endpoint, and you can use them in any way that makes sense for your own codebase. 
 
+The cases for both codes are described for every endpoint, and you can use them in any way that makes sense for your own codebase.
 
 ## Using the API with instances (Class)
 
@@ -62,27 +56,31 @@ This feature is available in @redredgroup/samsungknox-api version **1.4.0 or lat
 If you're using the Class syntax or in a situation where region and X-KNOX-APITOKEN don't change due to region, it's recommended that you use a KnoxInstance to access the API. With Class, you can pass region and knoxAccessToken as variables once and not have to specify them for each API.
 
 ### Example
-Below is an example of calling [Get Profile (Many)][kc-get-profiles-url] as an instance to Knox Configure. 
+
+Below is an example of calling [Get Profile (Many)][kc-get-profiles-url] as an instance to Knox Configure.
 
 ```ts
 import { KnoxInstance } from '@redredgroup/samsungknox-api';
-  const instance =  new KnoxInstance ({
+const instance = new KnoxInstance({
   knoxAccessToken: 'YOUR-X-KNOX-APITOKEN',
-  region: 'YOUR-KNOX-REGION'
-  })
+  region: 'YOUR-KNOX-REGION',
+});
 
 const getProfiles = await instance.kcProfile.getProfiles({
-  args: {} // <- KnoxConfigure Get Profiles Param
-})
+  args: {}, // <- KnoxConfigure Get Profiles Param
+});
 
-console.log(getProfiles)
+console.log(getProfiles);
 ```
 
 ## Using the API with Functions
+
 If you are using the Function syntax or have a lot of region changes due to region, you may want to consider using functions to access the API. Functions allow you to pass region and knoxAccessToken to each function, which is advantageous for getting data from different regions for different APIs or for getting a lot of simple data.
 
-### Example 
-Below is an example of calling [Get Profile (Many)][kc-get-profiles-url] as a Function in Knox Configure. 
+### Example
+
+Below is an example of calling [Get Profile (Many)][kc-get-profiles-url] as a Function in Knox Configure.
+
 ```ts
 import { kcGetProfiles } from '@redredgroup/samsungknox-api';
 

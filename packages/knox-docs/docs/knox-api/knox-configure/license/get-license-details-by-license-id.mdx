@@ -1,0 +1,76 @@
+---
+sidebar_position: 2
+title: Get License Detail (By License ID)
+keywords:
+  - knox-api
+  - Knox Configure
+  - get license detail (by license id)
+last_update:
+  date: 11/18/2023
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Get License Detail (By License ID)
+
+To get the license detail(By License ID) of KnoxConfigure, use the following methods.
+
+## Example
+
+<Tabs
+  groupId="syntax"
+  defaultValue="class"
+  values={[
+    { label: 'class', value: 'class', },
+    { label: 'function', value: 'function', }
+  ]
+}>
+<TabItem value="class">
+
+```ts
+import { KnoxInstance } from '@redredgroup/samsungknox-api';
+const instance = new KnoxInstance({
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+const getLicenseDetailById = await instance.kcLicense.getLicenseDetailByLicenseId({
+  args: {
+    licenseId: 'YOUR_LICENSE_ID',
+  },
+});
+
+console.log(getLicenseDetailById);
+```
+
+</TabItem>
+
+<TabItem value="function">
+
+```ts
+import { kcGetLicenseDetailByLicenseId } from '@redredgroup/samsungknox-api';
+
+const getLicenseDetailById = await kcGetLicenseDetailByLicenseId({
+  args: {
+    licenseId: 'YOUR_LICENSE_ID',
+  },
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+console.log(getLicenseDetailById);
+```
+
+</TabItem>
+</Tabs>
+
+Input parameters:
+
+- args: Insert parameters for the profile (required) **licenseId**.
+- region: Insert the Knox region. Most of them are EU (case insensitive)
+- knoxAccessToken: Your **X-KNOX-APITOKEN**.
+
+Output:
+
+- Respond with the details of that license ID.

@@ -8,7 +8,7 @@ export const kcValidateLicense = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCValidateLicenseArgs>>>,
 ): Promise<BaseResponse<BaseKCLicense>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxApiToken: knoxAccessToken });
+  const axios = knoxDefaultAxios({ region, knoxAccessToken });
   return request({ args, axios });
 };
 
