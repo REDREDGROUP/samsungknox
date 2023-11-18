@@ -10,6 +10,7 @@
     }
   ],
   "scripts": {
+    "format": "turbo run format",
     "build": "turbo run build",
     "clean": "git clean -Xdf --exclude=\"!.env.*\"",
     "syncpack:fix": "syncpack fix-mismatches --config ./.syncpackrc.js",
