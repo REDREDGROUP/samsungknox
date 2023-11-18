@@ -2,19 +2,40 @@ import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from
 import { KCGetProfileDetailsArgs, KCGetProfileDetailsResponse } from './get-profile-details.type';
 import { knoxDefaultAxios } from '~/utils';
 import { KnoxRequestError } from '~/errors';
+import { AxiosInstance } from 'axios';
 
 export const kcGetProfileDetails = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCGetProfileDetailsArgs>>>,
 ): Promise<BaseResponse<KCGetProfileDetailsResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region });
+  const axios = knoxDefaultAxios({ region, knoxAccessToken });
+  return request({ args, axios });
+};
 
-  try {
-    const { data } = await axios.get<KCGetProfileDetailsResponse>(`/kcs/v1/kc/profiles/${args.profileId}/details`, {
-      headers: {
-        'X-KNOX-APITOKEN': knoxAccessToken,
-      },
+export class GetProfileDetails {
+  private axios: AxiosInstance;
+
+  constructor({ axios }: { axios: AxiosInstance }) {
+    this.axios = axios;
+  }
+
+  public async getProfileDetails({ args }: BaseArgsInput<KCGetProfileDetailsArgs>): Promise<BaseResponse<KCGetProfileDetailsResponse>> {
+    return request({
+      args: args,
+      axios: this.axios,
     });
+  }
+}
+
+const request = async ({
+  args,
+  axios,
+}: {
+  args: KCGetProfileDetailsArgs;
+  axios: AxiosInstance;
+}): Promise<BaseResponse<KCGetProfileDetailsResponse>> => {
+  try {
+    const { data } = await axios.get<KCGetProfileDetailsResponse>(`/kcs/v1/kc/profiles/${args.profileId}/details`, {});
 
     return {
       status: 'SUCCESS',

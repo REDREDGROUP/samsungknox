@@ -1,0 +1,76 @@
+---
+sidebar_position: 3
+title: Delete Profile (Many)
+keywords:
+  - knox-api
+  - Knox Configure
+  - delete profile
+last_update:
+  date: 11/18/2023
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Delete Profiles
+
+To delete the **profiles of KnoxConfigure**, use the following methods.
+
+## Example
+
+<Tabs
+  groupId="syntax"
+  defaultValue="class"
+  values={[
+    { label: 'class', value: 'class', },
+    { label: 'function', value: 'function', }
+  ]
+}>
+<TabItem value="class">
+
+```ts
+import { KnoxInstance } from '@redredgroup/samsungknox-api';
+const instance = new KnoxInstance({
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+const deleteProfiles = await instance.kcProfile.deleteProfile({
+  args: {
+    profileIds: ['YOUR_PROFILE_ID1', 'YOUR_PROFILE_ID2'],
+  }, // <- other optional param
+});
+
+console.log(deleteProfiles);
+```
+
+</TabItem>
+
+<TabItem value="function">
+
+```ts
+import { kcDeleteProfile } from '@redredgroup/samsungknox-api';
+
+const deleteProfiles = await kcDeleteProfile({
+  args: {
+    profileIds: ['YOUR_PROFILE_ID1', 'YOUR_PROFILE_ID2'],
+  },
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+console.log(deleteProfiles);
+```
+
+</TabItem>
+</Tabs>
+
+Input parameters:
+
+- args: Insert parameters for the profile (required) **profileIds**.
+- region: Insert the Knox region. Most of them are EU (case insensitive)
+- knoxAccessToken: Your **X-KNOX-APITOKEN**.
+
+Output:
+
+- completed status response code and message is output.

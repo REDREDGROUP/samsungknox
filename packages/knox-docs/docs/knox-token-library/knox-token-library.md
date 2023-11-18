@@ -19,7 +19,6 @@ The keys below must have Cloud API privileges on Samsung Knox. If you do not hav
 
 Read: https://docs.samsungknox.com/dev/knox-cloud-authentication/tutorial/tutorial-for-customers-generate-access-token/
 
-
 # Intended Use
 
 The workflow for making api calls to Knox Cloud Services is divided into a portal workflow, and a programmatic workflow.
@@ -28,12 +27,10 @@ Check out the official Samsung Knox documentation below for more information.
 
 https://docs.samsungknox.com/dev/knox-cloud-authentication
 
-
 ### Portal flow
 
 1.  Download credential from Knox Api Portal
 2.  Generate and Download ClientIdentifier (api-key) for a specific Knox Solution
-
 
 ### Programmatic flow
 

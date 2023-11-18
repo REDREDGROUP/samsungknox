@@ -1,8 +1,8 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-const GITHUB_URL = 'https://github.com/REDREDGROUP/samsungknox'
+const GITHUB_URL = 'https://github.com/REDREDGROUP/samsungknox';
 
 const config: Config = {
   title: 'Samsung Knox Library',
@@ -22,15 +22,23 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
- 
+
   presets: [
     [
       'classic',
       {
         docs: {
-          
           sidebarPath: './sidebars.ts',
           editUrl: GITHUB_URL,
+
+          // versions: {
+          //   current: {
+          //     label: 'current',
+          //   },
+          // },
+          // lastVersion: 'current',
+          showLastUpdateAuthor: false,
+          showLastUpdateTime: true,
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -38,7 +46,7 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
-  
+
   themeConfig: {
     docs: {
       sidebar: {
@@ -80,6 +88,10 @@ const config: Config = {
             },
           ],
         },
+        // {
+        //   type: 'docsVersionDropdown',
+        //   position: 'right',
+        // },
         {
           href: GITHUB_URL,
           position: 'right',
@@ -114,17 +126,17 @@ const config: Config = {
         {
           title: 'Info',
           items: [
-              {
+            {
               html: `
               <p>
               All rights to SamsungKnox products are reserved by Samsung, and REDREDGROUP Web Service has no relationship with Samsung.
               <br/>
               <a href="https://docs.samsungknox.com" target="_blank" >Go To SamsungKnox Official Document</a>
               </p>
-              `
-            }
-          ]
-        }
+              `,
+            },
+          ],
+        },
       ],
       copyright: `Copyright © 2023 REDREDGROUP Web Service. All Right Reserved.`,
     },
@@ -137,7 +149,7 @@ const config: Config = {
       apiKey: '472314be6391bcd9c9ec9319af2994a9',
       contextualSearch: true,
       indexName: 'samsungknox',
-    }
+    },
   } satisfies Preset.ThemeConfig,
 };
 

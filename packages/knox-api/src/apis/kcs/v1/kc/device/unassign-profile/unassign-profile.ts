@@ -2,19 +2,43 @@ import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from
 import { KCUnassignProfileDevicesArgs, KCUnassignProfileDevicesResponse } from './unassign-profile.type';
 import { knoxDefaultAxios } from '~/utils';
 import { KnoxRequestError } from '~/errors';
+import { AxiosInstance } from 'axios';
 
 export const kcUnassignProfileDevices = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCUnassignProfileDevicesArgs>>>,
 ): Promise<BaseResponse<KCUnassignProfileDevicesResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region });
+  const axios = knoxDefaultAxios({ region, knoxAccessToken });
+  return request({ args, axios });
+};
 
+export class UnassignProfileDevices {
+  private axios: AxiosInstance;
+
+  constructor({ axios }: { axios: AxiosInstance }) {
+    this.axios = axios;
+  }
+
+  public async unassignProfileDevices({
+    args,
+  }: BaseArgsInput<KCUnassignProfileDevicesArgs>): Promise<BaseResponse<KCUnassignProfileDevicesResponse>> {
+    return request({
+      args: args,
+      axios: this.axios,
+    });
+  }
+}
+
+const request = async ({
+  args,
+  axios,
+}: {
+  args: KCUnassignProfileDevicesArgs;
+  axios: AxiosInstance;
+}): Promise<BaseResponse<KCUnassignProfileDevicesResponse>> => {
   try {
     const { data } = await axios.put<KCUnassignProfileDevicesResponse>('/kcs/v1/kc/devices/unassign', {
       ...args,
-      headers: {
-        'X-KNOX-APITOKEN': knoxAccessToken,
-      },
     });
 
     return {

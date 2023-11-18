@@ -8,17 +8,18 @@ title: Generate Signed ClientIdentifier
 The following method is provided to generate a **signed client identifier**.
 
 ```ts
-import knoxTokenLibrary from '@redredgroup/samsungknox-token-library'
+import knoxTokenLibrary from '@redredgroup/samsungknox-token-library';
 
 const { accessToken } = await knoxTokenLibrary.generateSignedClientIdentifierJWT({
-  credential: { // provide either key or path.
-    path: "credential.json",
-    key: "credential"
+  credential: {
+    // provide either key or path.
+    path: 'credential.json',
+    key: 'credential',
   },
-  clientIdentifierJwtToken: "my-client-identifier"
+  clientIdentifierJwtToken: 'my-client-identifier',
 });
 
-console.log(accessToken)
+console.log(accessToken);
 ```
 
 Input parameters:

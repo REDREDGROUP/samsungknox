@@ -9,16 +9,17 @@ description: Describes how to use the library to generate Base64 encoded Public 
 KnoxTokenUtility class provides the following method to generate a **signed api access token**.
 
 ```ts
-import knoxTokenLibrary from '@redredgroup/samsungknox-token-library'
+import knoxTokenLibrary from '@redredgroup/samsungknox-token-library';
 
 const { publicKey } = await knoxTokenLibrary.generateBase64EncodedStringPublicKey({
-  credential: { // provide either key or path.
-    path: "credential.json",
-    key: "credential"
+  credential: {
+    // provide either key or path.
+    path: 'credential.json',
+    key: 'credential',
   },
 });
 
-console.log(publicKey)
+console.log(publicKey);
 ```
 
 Input parameters:

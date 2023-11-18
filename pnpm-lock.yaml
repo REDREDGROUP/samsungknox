@@ -46,7 +46,7 @@ importers:
         version: 9.0.2
     devDependencies:
       '@redredgroup/samsungknox-token-library':
-        specifier: 1.1.2
+        specifier: 1.1.3
         version: link:../knox-token-library
       '@types/jsonwebtoken':
         specifier: 9.0.4
@@ -112,6 +112,9 @@ importers:
       '@types/unist':
         specifier: 3.0.1
         version: 3.0.1
+      prettier:
+        specifier: 3.0.0
+        version: 3.0.0
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
