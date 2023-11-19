@@ -1,6 +1,6 @@
 import { Axios, AxiosInstance } from 'axios';
 import { knoxDefaultAxios } from '~/utils';
-import { KCDevice, KCLicense, KCProfile } from './kcs';
+import { KCContentManagementApplication, KCDevice, KCLicense, KCProfile } from './kcs';
 
 /**
  * Functions Export
@@ -21,6 +21,7 @@ export class KnoxInstance {
   public kcProfile: KCProfile;
   public kcLicense: KCLicense;
   public kcDevice: KCDevice;
+  public kcContentManagementApplication: KCContentManagementApplication;
 
   private axios: AxiosInstance;
   private knoxAccessToken: string | null = null;
@@ -50,5 +51,6 @@ export class KnoxInstance {
     this.kcProfile = new KCProfile(this.axios);
     this.kcLicense = new KCLicense(this.axios);
     this.kcDevice = new KCDevice(this.axios);
+    this.kcContentManagementApplication = new KCContentManagementApplication(this.axios);
   }
 }
