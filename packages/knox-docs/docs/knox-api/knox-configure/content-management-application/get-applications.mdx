@@ -1,20 +1,20 @@
 ---
 sidebar_position: 1
-title: Get Device (Many)
+title: Get Applications (Many)
 keywords:
   - knox-api
   - Knox Configure
-  - device
+  - get applications
 last_update:
-  date: 11/18/2023
+  date: 11/20/2023
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Get Devices
+### Get Knox Configure Applications
 
-To get the **devices of KnoxConfigure**, use the following methods.
+To Get the **applications of KnoxConfigure**, use the following methods.
 
 ## Example
 
@@ -35,11 +35,11 @@ const instance = new KnoxInstance({
   knoxAccessToken: 'YOUR_JWT_TOKEN',
 });
 
-const kcGetDeviceList = await instance.kcDevice.getDevices({
-  args: {}, // <- KnoxConfigure Get Profiles Param
+const kcGetApplication = await instance.kcContentManagementApplication.getApplications({
+  args: {}, // <- other optional param
 });
 
-console.log(kcGetDeviceList);
+console.log(kcGetApplication);
 ```
 
 </TabItem>
@@ -47,15 +47,15 @@ console.log(kcGetDeviceList);
 <TabItem value="function">
 
 ```ts
-import { kcGetDevices } from '@redredgroup/samsungknox-api';
+import { kcGetApplications } from '@redredgroup/samsungknox-api';
 
-const kcGetDeviceList = await kcGetDevices({
-  args: {}, // <- KnoxConfigure Get Profiles Param
+const kcGetApplication = await kcGetApplications({
+  args: {}, // <- other optional param
   region: 'YOUR_KNOX_REGION',
   knoxAccessToken: 'YOUR_JWT_TOKEN',
 });
 
-console.log(kcGetDeviceList);
+console.log(kcGetApplication);
 ```
 
 </TabItem>
@@ -63,10 +63,10 @@ console.log(kcGetDeviceList);
 
 Input parameters:
 
-- args: Insert params for the device (optional) See this document for more params. : https://docs.samsungknox.com/dev/knox-configure/api/#tag/Device-APIs/operation/getDevicesUsingGET_2
+- args: Insert params for the get applications (optional) See this document for more params. : https://docs.samsungknox.com/dev/knox-configure/api/#tag/Content-Management-Application-APIs/operation/getApplicationListUsingGET
 - region: Insert the Knox region. Most of them are EU (case insensitive)
 - knoxAccessToken: Your **X-KNOX-APITOKEN**.
 
 Output:
 
-- Device registered with KnoxConfigure respond in Array format.
+- All the details about the application are displayed.
