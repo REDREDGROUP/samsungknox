@@ -6,7 +6,11 @@ import {
 import { requestAccessToken } from '~/apis';
 import { GenerateKnoxApiTokenArgs } from './generate-knox-api-token.type';
 
-export const generateKnoxApiToken = async ({ credential, clientIdentifierJwtToken }: GenerateKnoxApiTokenArgs): Promise<{ accessToken: string }> => {
+export const generateKnoxApiToken = async ({
+  credential,
+  clientIdentifierJwtToken,
+  region,
+}: GenerateKnoxApiTokenArgs): Promise<{ accessToken: string }> => {
   const data = await generateSignedClientIdentifierJWT({
     credential: {
       key: credential.credentialKey,
@@ -23,7 +27,7 @@ export const generateKnoxApiToken = async ({ credential, clientIdentifierJwtToke
   });
 
   const { result } = await requestAccessToken({
-    region: 'EU',
+    region,
     base64EncodedStringPublicKey: publicKey,
     clientIdentifierJwt: data.accessToken,
     validityForAccessTokenInMinutes: 10,

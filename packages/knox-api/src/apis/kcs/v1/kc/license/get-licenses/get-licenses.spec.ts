@@ -7,7 +7,7 @@ import {
   generateBase64EncodedStringPublicKey,
   generateSignedAccessTokenJWT,
 } from '@redredgroup/samsungknox-token-library';
-import { KnoxInstance, requestAccessToken } from '~/apis';
+import { KnoxInstance, generateKnoxApiToken, requestAccessToken } from '~/apis';
 
 describe('GET /kcs/v1/kc/licenses Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
@@ -56,32 +56,12 @@ describe('GET /kcs/v1/kc/licenses Test', () => {
       if (!process.env.CREDENTIAL_KEY || !process.env.CLIENT_IDENTIFIER_JWT_TOKEN) {
         throw new TypeError('env is missing');
       }
-
-      const data = await generateSignedClientIdentifierJWT({
+      const { accessToken } = await generateKnoxApiToken({
+        region: 'EU',
         credential: {
-          key: process.env.CREDENTIAL_KEY,
+          credentialKey: process.env.CREDENTIAL_KEY,
         },
         clientIdentifierJwtToken: process.env.CLIENT_IDENTIFIER_JWT_TOKEN,
-      });
-
-      const { publicKey } = await generateBase64EncodedStringPublicKey({
-        credential: {
-          key: process.env.CREDENTIAL_KEY,
-        },
-      });
-
-      const { result } = await requestAccessToken({
-        region: 'EU',
-        base64EncodedStringPublicKey: publicKey,
-        clientIdentifierJwt: data.accessToken,
-        validityForAccessTokenInMinutes: 10,
-      });
-
-      const { accessToken } = await generateSignedAccessTokenJWT({
-        credential: {
-          key: process.env.CREDENTIAL_KEY,
-        },
-        accessToken: result.accessToken,
       });
 
       const getProfiles = await kcGetLicenses({

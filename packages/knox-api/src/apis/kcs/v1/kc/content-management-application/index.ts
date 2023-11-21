@@ -6,6 +6,7 @@ import { GetApplication, KCGetApplicationResponse, KCGetApplicationsArgs } from 
 /**
  * Functions Export
  */
+export * from './create-application-profile';
 export * from './get-applications';
 export * from './delete-application-versions';
 
