@@ -1,5 +1,7 @@
 require 'fastlane/action'
 require_relative '../helper/knox_token_generator'
+# require_relative '../helper/knox_configure_library_already_exists_app_version_check'
+require_relative '../helper/knox_configure_library_upload_app'
 
 module Fastlane
   module Actions
@@ -7,10 +9,27 @@ module Fastlane
       def self.run(params)
         UI.message("Welcome to Knox Configure Library Application Upload Fastlane!")
 
-        credential = { path: params[:credential_path], key: params[:credential_key] }
-        clientIdentifierJwtToken = params[:clientIdentifierJwtToken]
+        credential = { 
+          path: params[:credential_path], 
+          key: params[:credential_key] 
+        }
 
-      signed_jwt = KnoxTokenGenerator.generate_knox_access_token(credential, clientIdentifierJwtToken)
+        access_token = KnoxTokenGenerator.generate_knox_access_token(
+          credential, 
+          params[:clientIdentifierJwtToken]
+        )
+
+        # application_info = KnoxConfigureLibraryAlreadyExistsAppVersionCheck.search_by_package_name(
+        #   access_token[:token], 
+        #   params[:package_name]
+        # )
+
+        KnoxConfigureLibraryUploadApp.upload_app(
+          access_token[:token], 
+          params[:app_file_path]
+        )
+
+        UI.success(access_token)
 
       end
 
@@ -32,10 +51,14 @@ module Fastlane
 
       def self.available_options
         [
-          FastlaneCore::ConfigItem.new(key: :kc_app_name,
-                                       env_name: "KC_APP_NAME",
-                                       description: "",
-                                       optional: false),
+          # FastlaneCore::ConfigItem.new(key: :app_name,
+          #                              env_name: "KC_APP_NAME",
+          #                              description: "",
+          #                              optional: false),
+          # FastlaneCore::ConfigItem.new(key: :package_name,
+          #                              env_name: "KC_PACKAGE_NAME",
+          #                              description: "",
+          #                              optional: false),
           FastlaneCore::ConfigItem.new(key: :description,
                                        env_name: "KC_APP_DESCRIPTION",
                                        description: "",
@@ -45,11 +68,11 @@ module Fastlane
                                        description: "Path to your APK file",
                                        optional: true),
           FastlaneCore::ConfigItem.new(key: :credential_key,
-                                       env_name: "KNOX_CREDENTIAL",
+                                       env_name: "KNOX_CREDENTIAL_KEY",
                                        description: "",
                                        optional: true),
           FastlaneCore::ConfigItem.new(key: :credential_path,
-                                       env_name: "KNOX_CREDENTIAL",
+                                       env_name: "KNOX_CREDENTIAL_PATH",
                                        description: "",
                                        optional: true),
           FastlaneCore::ConfigItem.new(key: :clientIdentifierJwtToken,
