@@ -3,7 +3,7 @@ name: Samsungknox-fastlane CI
 on:
   pull_request:
     paths:
-      - packages/fastlane/fastlane-plugin-samsungknox/**
+      - packages/fastlane-plugin-samsungknox/**
 
 jobs:
   test:
@@ -23,15 +23,15 @@ jobs:
         ruby-version: 2.5
 
     - name: Install dependencies
-      working-directory: packages/fastlane/fastlane-plugin-samsungknox
+      working-directory: packages/fastlane-plugin-samsungknox
       run: bundle check || bundle install --jobs=4 --retry=3 --path vendor/bundle
 
     - name: Run tests
-      working-directory: packages/fastlane/fastlane-plugin-samsungknox
+      working-directory: packages/fastlane-plugin-samsungknox
       run: bundle exec rake
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: test-results
-        path: packages/fastlane/fastlane-plugin-samsungknox/test-results
+        path: packages/fastlane-plugin-samsungknox/test-results
