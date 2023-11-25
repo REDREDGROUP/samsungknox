@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.author        = 'jieey1140'
   spec.email         = 'seihoonkim@redredgroup.com'
 
-  spec.summary       = 'SamsungKnox products to Fastlanehttps://redredgroup.github.io/samsungknox/docs/knox-fastlane'
+  spec.summary       = 'SamsungKnox products to Fastlane https://redredgroup.github.io/samsungknox/docs/knox-fastlane'
   spec.homepage      = "https://github.com/REDREDGROUP/samsungknox"
   spec.license       = "Apache-2.0"
 

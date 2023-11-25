@@ -46,7 +46,7 @@ importers:
         version: 9.0.2
     devDependencies:
       '@redredgroup/samsungknox-token-library':
-        specifier: 1.1.3
+        specifier: 1.1.4
         version: link:../knox-token-library
       '@types/jsonwebtoken':
         specifier: 9.0.4
@@ -118,6 +118,15 @@ importers:
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
+
+  packages/knox-fastlane-plugin:
+    devDependencies:
+      '@prettier/plugin-ruby':
+        specifier: 4.0.2
+        version: 4.0.2(prettier@3.0.0)
+      prettier:
+        specifier: 3.0.0
+        version: 3.0.0
 
   packages/knox-token-library:
     dependencies:
@@ -3188,6 +3197,14 @@ packages:
   /@polka/url@1.0.0-next.23:
     resolution: {integrity: sha512-C16M+IYz0rgRhWZdCmK+h58JMv8vijAA61gmz2rspCSwKwzBebpdcsiUmwrtJRdphuY30i6BSLEOP8ppbNLyLg==}
     dev: false
+
+  /@prettier/plugin-ruby@4.0.2(prettier@3.0.0):
+    resolution: {integrity: sha512-TOGsMoOLF0BLwRozqtTB/w7HpDHotDSBPfLsMBpCjlMONLSoCWBF1NhZQjiioyLim7tCltzFrCqZp11WcrPOzA==}
+    peerDependencies:
+      prettier: ^3.0.0
+    dependencies:
+      prettier: 3.0.0
+    dev: true
 
   /@sideway/address@4.1.4:
     resolution: {integrity: sha512-7vwq+rOHVWjyXxVlR76Agnvhy8I9rpzjosTESvmhNeXOXdZZB15Fl+TI9x1SiHZH5Jv2wTGduSxFDIaq0m3DUw==}

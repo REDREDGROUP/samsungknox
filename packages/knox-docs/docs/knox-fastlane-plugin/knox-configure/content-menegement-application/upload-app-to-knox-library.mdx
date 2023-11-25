@@ -1,0 +1,49 @@
+---
+sidebar_position: 1
+title: Upload App To Library
+keywords:
+  - knox-fastlane
+  - Knox Configure
+  - upload app
+last_update:
+  date: 11/25/2023
+---
+
+# Upload App to Library
+
+To upload app the **knox library**, use the following methods.
+
+## Example
+
+```Ruby
+lane :deploy_to_samsungknox do
+
+ ...your app build step
+
+  knox_configure_library_upload_app(
+    credential_key: ENV['CREDENTIAL_KEY'],
+    credential_path: 'YOUR_CREDENTIAL_PATH',
+    clientIdentifierJwtToken: ENV['CLIENT_IDENTIFIER_JWT_TOKEN'],
+    app_description: 'YOUR_APP_DESCRIPTION', #Optinal
+    app_file_path: 'YOUR_APP_FILE_PATH',
+    api_region: 'YOUR_API_REGION',
+  )
+end
+```
+
+Input parameters:
+
+:::warning
+Provide only one of the following: **credential_key** or **credential_path**. The recommendation is to inject the key via an environment variable.
+:::
+
+- clientIdentifierJwtToken: Client IdentifierJwtToken Token **(For more information on how to get one, see [here](/docs/knox-token-library/).)**
+- credential_key: your credential key (JSON.stringfy) **(For more information on how to get one, see [here](/docs/knox-token-library/).)**
+- credential_path: your credential path (JSON.stringfy)
+- api_region: Insert the Knox region. Most of them are EU (case insensitive)
+- app_description: description of the app. (Optional)
+- app_file_path: The path to the built app (must include an extension like .apk)
+
+Output:
+
+- A mantra will be printed stating that the app deployment is complete.
