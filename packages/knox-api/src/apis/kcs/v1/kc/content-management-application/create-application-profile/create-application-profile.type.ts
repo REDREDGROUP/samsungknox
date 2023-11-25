@@ -1,8 +1,5 @@
 /**
  * Additional end-user license agreement (EULA).
- * @property {string} termsAndConditions - The terms and conditions of the EULA to be added.
- * @property {string} title - Title of the EULA to be added.
- * @property {EulaType} type - Type of EULA. Can be 'enrollment', 'adminPortal', 'updateEula', 'specialPermission'.
  * @property {number[]} applicationIds - List of unique content IDs of the applications to be included in the profile.
  * @property {CCCustomerSupport} customerSupport - Contains the company and customer support details of the profile.
  * @property {string} description - Description of the profile to be created. Appears on enrollment.
@@ -15,25 +12,48 @@
  * @property {KCAddWelcomeScreenConfig} welcomeScreenConfig - Branding customization for the background and logo.
  */
 export type KCCreateApplicationProfileArgs = {
-  // termsAndConditions: string;
-  // title: string;
-  // type: EulaType;
+  additionalEula: AdditionalEula;
   applicationIds?: number[];
-  customerSupport: CCCustomerSupport;
+  customerSupport?: ApplicationProfileCustomerSupport;
   description?: string;
-  deviceLevel?: DeviceLevel;
-  enrollmentPreference?: EnrollmentPreference;
-  folderConfig?: KCAddFolderRequest;
+  deviceLevel?: 'Knox' | 'Other';
+  enrollmentPreference?: 'DO_NOT_ALLOW' | 'ALLOW_USER_CANCEL' | 'ALLOW_SKIP_SETUP_WIZARD';
+  folderConfig?: FolderConfig;
   kdaDefaultLicenseKey?: string;
   knoxVersion?: string;
   name: string;
-  welcomeScreenConfig?: KCAddWelcomeScreenConfig;
+  welcomeScreenConfig?: WelcomeScreenConfig;
 };
 
 /**
- * Enumeration of EULA types.
+ * Schema for the response of a profile creation or update.
+ * @property {number} createTime - Date and time the profile was created. Represented as an epoch timestamp.
+ * @property {string} creator - Email address of the IT admin that created the profile.
+ * @property {string} modifier - Email address of the IT admin that modified the profile. Same as creator if not modified.
+ * @property {string} name - Name of the profile as specified in the request.
+ * @property {string} profileId - Unique identifier of the profile that was created.
+ * @property {number} updateTime - Date and time the profile was last updated. Represented as an epoch timestamp. Same as createTime if not updated.
  */
-export type EulaType = 'enrollment' | 'adminPortal' | 'updateEula' | 'specialPermission';
+export type KCCreateApplicationProfileResponse = {
+  createTime: number;
+  creator: string;
+  modifier: string;
+  name: string;
+  profileId: string;
+  updateTime: number;
+};
+
+/**
+ * Additional end-user license agreement (EULA).
+ * @property {string} termsAndConditions - The terms and conditions of the EULA to be added.
+ * @property {string} title - Title of the EULA to be added.
+ * @property {EulaType} type - Type of the EULA. Can be one of 'enrollment', 'adminPortal', 'updateEula', 'specialPermission'.
+ */
+type AdditionalEula = {
+  termsAndConditions: string;
+  title: string;
+  type?: 'enrollment' | 'adminPortal' | 'updateEula' | 'specialPermission';
+};
 
 /**
  * Company and customer support details of the profile.
@@ -47,7 +67,7 @@ export type EulaType = 'enrollment' | 'adminPortal' | 'updateEula' | 'specialPer
  * @property {string} supportPhoneNumber - Phone number for customer support.
  * @property {string} zipCode - Zip code that appears during enrollment.
  */
-export type CCCustomerSupport = {
+type ApplicationProfileCustomerSupport = {
   city?: string;
   companyName?: string;
   country?: string;
@@ -64,9 +84,9 @@ export type CCCustomerSupport = {
  * @property {GooglePlayFolder} googlePlayFolderConfiguration - Defines how the Google Play shortcuts folder will appear.
  * @property {Resolution} resolutionConfiguration - Defines the row and column resolution of the shortcuts folder screen.
  */
-export type KCAddFolderRequest = {
-  googlePlayFolderConfiguration: GooglePlayFolder;
-  resolutionConfiguration: Resolution;
+type FolderConfig = {
+  googlePlayFolderConfiguration: GooglePlayFolderConfiguration;
+  resolutionConfiguration: ResolutionConfiguration;
 };
 
 /**
@@ -76,7 +96,7 @@ export type KCAddFolderRequest = {
  * @property {number} x - Column where the shortcuts folder will be placed.
  * @property {number} y - Row where the shortcuts folder will be placed.
  */
-export type GooglePlayFolder = {
+type GooglePlayFolderConfiguration = {
   folderName: string;
   page: number;
   x: number;
@@ -89,7 +109,7 @@ export type GooglePlayFolder = {
  * @property {number} pageCount - Number of pages.
  * @property {number} rowCount - Number of rows in each page.
  */
-export type Resolution = {
+type ResolutionConfiguration = {
   columnCount: number;
   pageCount: number;
   rowCount: number;
@@ -103,37 +123,22 @@ export type Resolution = {
  * @property {boolean} hideSupportLink - Indicates if the support link should be hidden.
  * @property {string} textBody - Custom text for the enrollment screen.
  */
-export type KCAddWelcomeScreenConfig = {
-  backGroundSetting: KCBrandingSetting;
-  foreGroundSetting: KCBrandingSetting;
+type WelcomeScreenConfig = {
+  backGroundSetting: GroundSetting;
+  foreGroundSetting: GroundSetting;
   hasCustomText: boolean;
   hideSupportLink?: boolean;
   textBody?: string;
 };
 
 /**
- * Branding setting details.
+ * setting details.
  * @property {BrandingType} brandingType - Type of branding, either 'IMAGE' or 'COLOR'.
  * @property {string} content - Hex code of the color or contentId of the uploaded image.
  * @property {string} fileName - Path and filename of the image.
  */
-export type KCBrandingSetting = {
-  brandingType: BrandingType;
+type GroundSetting = {
+  brandingType: 'IMAGE' | 'COLOR';
   content: string;
   fileName?: string;
 };
-
-/**
- * Enumeration of branding types.
- */
-export type BrandingType = 'IMAGE' | 'COLOR';
-
-/**
- * Enumeration of device levels.
- */
-export type DeviceLevel = 'Knox' | 'Other';
-
-/**
- * Enumeration of enrollment preferences.
- */
-export type EnrollmentPreference = 'DO_NOT_ALLOW' | 'ALLOW_USER_CANCEL' | 'ALLOW_SKIP_SETUP_WIZARD';
