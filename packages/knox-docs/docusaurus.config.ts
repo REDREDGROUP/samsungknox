@@ -48,6 +48,14 @@ const config: Config = {
   ],
 
   themeConfig: {
+    announcementBar: {
+      id: 'support_us',
+      content:
+        'Knox Fastlane (Beta) has been released! see the <a target="_blank" href="/samsungknox/docs/knox-fastlane-plugin">Knox Fastlane Plugin documentation</a> for more information on how to use it.',
+      backgroundColor: '#fafbfc',
+      textColor: '#091E42',
+      isCloseable: false,
+    },
     docs: {
       sidebar: {
         hideable: true,
@@ -88,6 +96,12 @@ const config: Config = {
             },
           ],
         },
+        {
+          label: 'Knox Fastlane Plugin (Beta)',
+          to: '/docs/knox-fastlane-plugin',
+          sidebarId: 's',
+          position: 'left',
+        },
         // {
         //   type: 'docsVersionDropdown',
         //   position: 'right',
@@ -102,15 +116,19 @@ const config: Config = {
     footer: {
       links: [
         {
-          title: 'Docs',
+          title: 'Product Docs',
           items: [
             {
-              label: 'Samsung Knox Token Library',
+              label: 'Knox Token Library',
               to: '/docs/knox-token-library',
             },
             {
-              label: 'Samsung Knox API',
+              label: 'Knox API',
               to: '/docs/knox-api',
+            },
+            {
+              label: 'Knox Fastlane Plugin (Beta)',
+              to: '/docs/knox-fastlane-plugin',
             },
           ],
         },

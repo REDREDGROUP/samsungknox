@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "format": "turbo run format",
+    "lint:format": "turbo run lint:format",
     "build": "turbo run build",
     "changeset": "changeset",
     "changeset:version": "changeset version",

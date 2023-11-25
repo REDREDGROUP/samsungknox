@@ -18,9 +18,10 @@ Despite the vast scope of the Knox API, the documentation is limited to static R
 <div align="center">
 
 [![npm version](https://img.shields.io/npm/v/@redredgroup%2Fsamsungknox-token-library.svg?style=flat-square)](https://www.npmjs.com/package/@redredgroup/samsungknox-token-library)
+[![License](https://img.shields.io/badge/license-Apache2.0-green.svg?style=flat-square)](https://github.com/REDREDGROUP/samsungknox/blob/master/LICENSE)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/@redredgroup%2Fsamsungknox-token-library?style=flat-square)](https://bundlephobia.com/package/@redredgroup%2Fsamsungknox-token-library@latest)
 [![npm downloads](https://img.shields.io/npm/dm/@redredgroup%2Fsamsungknox-token-library.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@redredgroup%2Fsamsungknox-token-library)
-
+[![Platforms](https://img.shields.io/badge/os-macos%20--%20linux%20--%20windows-blue?style=flat-square)](#)
 </div>
 This library is essential when using the Samsung Knox API as it pertains to JWT signing. It fully supports the existing packages and is even more stable. It includes basic functions for token and authentication key verification.
 
@@ -36,13 +37,27 @@ For a detailed explanation, please click [here](https://github.com/REDREDGROUP/s
 <div align="center">
 
 [![npm version](https://img.shields.io/npm/v/@redredgroup%2Fsamsungknox-api.svg?style=flat-square)](https://www.npmjs.com/package/@redredgroup/samsungknox-api)
+[![License](https://img.shields.io/badge/license-Apache2.0-green.svg?style=flat-square)](https://github.com/REDREDGROUP/samsungknox/blob/master/LICENSE)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/@redredgroup%2Fsamsungknox-api?style=flat-square)](https://bundlephobia.com/package/@redredgroup%2Fsamsungknox-api@latest)
 [![npm downloads](https://img.shields.io/npm/dm/@redredgroup%2Fsamsungknox-api.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@redredgroup%2Fsamsungknox-api)
+[![Platforms](https://img.shields.io/badge/os-macos%20--%20linux%20--%20windows-blue?style=flat-square)](#)
 
 </div>
 This library can be used when utilizing the APIs for Samsung Knox. It includes fundamental verification features and supports almost all types found in the Knox documentation to near perfection.
 
 </br>
+
+### [@redredgroup/samsungknox-fastlane](https://rubygems.org/gems/fastlane-plugin-samsungknox)
+
+<div align="center">
+
+[![Gem](https://img.shields.io/gem/v/fastlane-plugin-samsungknox.svg?style=flat-square)](https://rubygems.org/gems/fastlane-plugin-samsungknox)
+[![License](https://img.shields.io/badge/license-Apache2.0-green.svg?style=flat-square)](https://github.com/REDREDGROUP/samsungknox/blob/master/LICENSE)
+[![Platforms](https://img.shields.io/badge/os-macos%20--%20linux%20--%20windows-blue?style=flat-square)](#)
+
+</div>
+
+
 
 <div align="center">
 
@@ -62,4 +77,4 @@ APIs that continue to be supported are being added and please refer to the corre
 
 ## License
 
-Apache
+Apache 2.0

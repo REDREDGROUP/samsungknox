@@ -10,6 +10,9 @@
             "cache": false
         },
         "lint": {},
+        "lint:format": {
+            "cache": false
+        },
         "lint:fix": {
             "cache": false
         },
