@@ -7,16 +7,14 @@ module Fastlane
   module Actions
     class KnoxConfigureLibraryUploadAppAction < Action
       def self.run(params)
-        UI.message("Welcome to Knox Configure Library Application Upload Fastlane!")
+        UI.header("Step: KC Upload App")
 
-        credential = { 
+        access_token = KnoxTokenGenerator.generate_knox_access_token({
           path: params[:credential_path], 
           key: params[:credential_key] 
-        }
-
-        access_token = KnoxTokenGenerator.generate_knox_access_token(
-          credential, 
-          params[:clientIdentifierJwtToken]
+          },
+          params[:clientIdentifierJwtToken],
+          params[:api_region].downcase
         )
 
         # application_info = KnoxConfigureLibraryAlreadyExistsAppVersionCheck.search_by_package_name(
@@ -26,11 +24,9 @@ module Fastlane
 
         KnoxConfigureLibraryUploadApp.upload_app(
           access_token[:token], 
-          params[:app_file_path]
+          params[:app_file_path],
+          params[:app_description]
         )
-
-        UI.success(access_token)
-
       end
 
       def self.description
@@ -42,7 +38,6 @@ module Fastlane
       end
 
       def self.return_value
-        # If your method provides a return value, you can describe here what it does
       end
 
       def self.details
@@ -59,7 +54,9 @@ module Fastlane
           #                              env_name: "KC_PACKAGE_NAME",
           #                              description: "",
           #                              optional: false),
-          FastlaneCore::ConfigItem.new(key: :description,
+          
+          # App Configuretion
+          FastlaneCore::ConfigItem.new(key: :app_description,
                                        env_name: "KC_APP_DESCRIPTION",
                                        description: "",
                                        optional: true),
@@ -67,6 +64,16 @@ module Fastlane
                                        env_name: "KC_APP_FILE_PATH",
                                        description: "Path to your APK file",
                                        optional: true),
+          
+          # Knox Credential Configuration
+          FastlaneCore::ConfigItem.new(key: :api_region,
+                                       env_name: "KC_API_REGION",
+                                       description: "",
+                                       optional: false,
+                                       verify_block: proc do |value|
+                                          UI.user_error!("No API region for Knox Credential given, pass using `api_region: 'value'`") unless (value and not value.empty?)
+                                        end
+                                      ),
           FastlaneCore::ConfigItem.new(key: :credential_key,
                                        env_name: "KNOX_CREDENTIAL_KEY",
                                        description: "",

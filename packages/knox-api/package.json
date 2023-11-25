@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "type": "module",
   "module": "dist/index.mjs",
-  "homepage": "https://github.com/REDREDGROUP/samsungknox",
+  "homepage": "https://redredgroup.github.io/samsungknox",
   "repository": "REDREDGROUP/samsungknox.git",
   "bugs": "https://github.com/REDREDGROUP/samsungknox/issues",
   "keywords": [

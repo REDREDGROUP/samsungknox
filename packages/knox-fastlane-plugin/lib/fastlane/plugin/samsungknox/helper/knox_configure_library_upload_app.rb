@@ -5,7 +5,7 @@ module Fastlane
   UI = FastlaneCore::UI unless Fastlane.const_defined?("UI")
 
   module KnoxConfigureLibraryUploadApp
-    def self.upload_app(access_token, app_file_path)
+    def self.upload_app(access_token, app_file_path, app_description)
       uri = URI('https://eu-kcs-api.samsungknox.com/kcs/v1/kc/applications/upload')
 
       File.open(app_file_path) do |file|

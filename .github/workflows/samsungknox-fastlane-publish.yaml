@@ -1,0 +1,30 @@
+name: Samsungknox-fastlane Gems Publish
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - 'knox-fastlane-plugin@*'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0'
+
+    - name: Install dependencies
+      working-directory: packages/knox-fastlane-plugin
+      run: bundle install
+
+    - name: Release Gem
+      working-directory: packages/knox-fastlane-plugin
+      run: bundle exec rake releases
+      env:
+        RUBYGEMS_AUTH_TOKEN: ${{ secrets.RUBYGEMS_AUTH_TOKEN }}

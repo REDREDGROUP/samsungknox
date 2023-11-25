@@ -54,8 +54,8 @@ module Fastlane
       base64_public_key
     end
 
-    def self.get_access_token(validity_for_access_token_in_minutes, base64_encoded_string_public_key, client_identifier_jwt)
-      uri = URI('https://eu-kcs-api.samsungknox.com/ams/v1/users/accesstoken')
+    def self.get_access_token(validity_for_access_token_in_minutes, base64_encoded_string_public_key, client_identifier_jwt, api_region)
+      uri = URI("https://#{api_region}-kcs-api.samsungknox.com/ams/v1/users/accesstoken")
     
       request_body = {
         base64EncodedStringPublicKey: base64_encoded_string_public_key,
@@ -74,8 +74,8 @@ module Fastlane
       end
     end
 
-    def self.generate_knox_access_token(credential, clientIdentifierJwtToken)
-      UI.header('Step: 🔐 KNOX ACCESS TOKEN GENERATE STEP 🔐 ')
+    def self.generate_knox_access_token(credential, clientIdentifierJwtToken, api_region)
+      UI.header('Step: 🔐 KNOX ACCESS TOKEN GENERATE 🔐 ')
 
       UI.message('⏳ Sign the knox token using the credential...')
       generate_signed_jwt_result = generate_signed_jwt(credential, clientIdentifierJwtToken, true)
@@ -84,7 +84,7 @@ module Fastlane
       sign_by_client_identifier_jwt_token = generate_signed_jwt_result[:token]
 
       UI.message('⏳ Request the knox client identifier jwt ams access token...')
-      ams_access_token = get_access_token(30, base64_encoding_public_Key, sign_by_client_identifier_jwt_token)
+      ams_access_token = get_access_token(30, base64_encoding_public_Key, sign_by_client_identifier_jwt_token, api_region)
       UI.message('⏳ Sign the knox token using the ams access token and private key...')
       token = generate_signed_jwt(credential, ams_access_token, false)
 
