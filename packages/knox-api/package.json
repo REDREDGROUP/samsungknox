@@ -1,7 +1,7 @@
 {
   "name": "@redredgroup/samsungknox-api",
   "description": "Samsung Knox API Client",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "license": "Apache-2.0",
   "main": "dist/index.mjs",
   "types": "dist/index.d.ts",
