@@ -7,13 +7,17 @@
     "accesstoken",
     "APITOKEN",
     "commitlint",
+    "Csdk",
+    "galaxystore",
     "jieey",
     "jwtid",
+    "playstore",
     "redredgroup",
     "samsungknox",
     "SEIHOON",
     "syncpack",
     "syncpackrc",
+    "TIZEN",
     "tsup",
     "uuidv"
   ]

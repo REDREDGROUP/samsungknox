@@ -1,0 +1,86 @@
+---
+sidebar_position: 3
+title: Upload An In House App (Knox Library)
+keywords:
+  - knox-api
+  - Knox Configure
+  - upload an in house app (Knox Library)
+last_update:
+  date: 11/26/2023
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Upload An In House App (Knox Library)
+
+:::warning
+Apps that are uploaded to the Knox Configure Library must have an arbitrarily different version.
+
+For example, if an app called test has a version of 1.0.0, uploading the same version of test 1.0.0 to that endpoint will result in an error.
+Always check the version before attempting to upload.
+:::
+
+To Upload the **in house app (Knox Library) of KnoxConfigure**, use the following methods.
+
+## Example
+
+<Tabs
+  groupId="syntax"
+  defaultValue="class"
+  values={[
+    { label: 'class', value: 'class', },
+    { label: 'function', value: 'function', }
+  ]
+}>
+<TabItem value="class">
+
+```ts
+import { KnoxInstance } from '@redredgroup/samsungknox-api';
+
+const instance = new KnoxInstance({
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+const uploadAnInHouseApp = await instance.kcContentManagementApplication.uploadAnInHouseApp({
+  args: {
+    name: '',
+    file: '',
+  }, // <- other optional param
+});
+
+console.log(uploadAnInHouseApp);
+```
+
+</TabItem>
+
+<TabItem value="function">
+
+```ts
+import { kcUploadAnInHouseApp } from '@redredgroup/samsungknox-api';
+
+const uploadAnInHouseApp = await kcUploadAnInHouseApp({
+  args: {
+    name: '',
+    file: '',
+  }, // <- other optional param
+  region: 'YOUR-KNOX-REGION',
+  knoxAccessToken: 'YOUR-X-KNOX-APITOKEN',
+});
+
+console.log(uploadAnInHouseApp);
+```
+
+</TabItem>
+</Tabs>
+
+Input parameters:
+
+- args: Insert parameters for the device (required) **name** and **file**.
+- region: Insert the Knox region. Most of them are EU (case insensitive)
+- knoxAccessToken: Your **X-KNOX-APITOKEN**.
+
+Output:
+
+- Responds with the results of the application upload.

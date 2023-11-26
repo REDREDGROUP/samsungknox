@@ -1,0 +1,84 @@
+---
+sidebar_position: 3
+title: Create Application Profile
+keywords:
+  - knox-api
+  - Knox Configure
+  - create application profile
+last_update:
+  date: 11/26/2023
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Create Application Profile
+
+To Create the **application profile of KnoxConfigure**, use the following methods.
+
+## Example
+
+<Tabs
+  groupId="syntax"
+  defaultValue="class"
+  values={[
+    { label: 'class', value: 'class', },
+    { label: 'function', value: 'function', }
+  ]
+}>
+<TabItem value="class">
+
+```ts
+import { KnoxInstance } from '@redredgroup/samsungknox-api';
+const instance = new KnoxInstance({
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+const kcCreateApplicationProfile = await instance.kcContentManagementApplication.createApplicationProfile({
+  args: {
+    additionalEula: {
+      termsAndConditions: 'YOUR_TERMS_AND_CONDITIONS',
+      title: 'YOUR_TITLE',
+    },
+    name: 'YOUR_PROFILE_NAME',
+  }, // <- other optional param
+});
+
+console.log(kcCreateApplicationProfile);
+```
+
+</TabItem>
+
+<TabItem value="function">
+
+```ts
+import { kcCreateApplicationProfile } from '@redredgroup/samsungknox-api';
+
+const createApplicationProfile = await kcCreateApplicationProfile({
+  args: {
+    additionalEula: {
+      termsAndConditions: 'YOUR_TERMS_AND_CONDITIONS',
+      title: 'YOUR_TITLE',
+    },
+    name: 'YOUR_PROFILE_NAME',
+  }, // <- other optional param
+  region: 'YOUR-KNOX-REGION',
+  knoxAccessToken: 'YOUR-X-KNOX-APITOKEN',
+});
+
+console.log(createApplicationProfile);
+```
+
+</TabItem>
+</Tabs>
+
+Input parameters:
+
+- args: Insert parameters for the device (required) **additionalEula(termsAndConditions, title)** and **name**.
+- region: Insert the Knox region. Most of them are EU (case insensitive)
+- knoxAccessToken: Your **X-KNOX-APITOKEN**.
+
+Output:
+
+- Response with the results of the application profile created.

@@ -1,18 +1,19 @@
 import { describe, expect, it } from 'vitest';
 import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
-import { kcDeleteApplicationVersions } from './delete-application-versions';
-import { KnoxInstance } from '~/apis';
+import { KnoxInstance, kcUploadAPublicAppFromPlayStoreOrGalaxyStore } from '~/apis';
 
-describe('DELETE /kcs/v1/kc/applications/{applicationId} Test', () => {
+describe('POST /kcs/v1/kc/applications Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
     let hasError = false;
 
     try {
-      await kcDeleteApplicationVersions({
+      await kcUploadAPublicAppFromPlayStoreOrGalaxyStore({
         region: 'US',
         knoxAccessToken: '',
         args: {
-          applicationId: 'TEST_APP',
+          name: '',
+          platform: 'ANDROID',
+          source: 'GOOGLE_PLAY_STORE',
         },
       });
     } catch (error) {
@@ -31,11 +32,13 @@ describe('DELETE /kcs/v1/kc/applications/{applicationId} Test', () => {
     let hasError = false;
 
     try {
-      await kcDeleteApplicationVersions({
+      await kcUploadAPublicAppFromPlayStoreOrGalaxyStore({
         region: 'TEST',
         knoxAccessToken: '',
         args: {
-          applicationId: 'TEST_APP',
+          name: '',
+          platform: 'ANDROID',
+          source: 'GOOGLE_PLAY_STORE',
         },
       });
     } catch (error) {
@@ -50,7 +53,7 @@ describe('DELETE /kcs/v1/kc/applications/{applicationId} Test', () => {
   });
 });
 
-describe('CLASS POST /kcs/v1/kc/applications/profile Test', () => {
+describe('CLASS POST /kcs/v1/kc/applications Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
     let hasError = false;
 
@@ -60,9 +63,11 @@ describe('CLASS POST /kcs/v1/kc/applications/profile Test', () => {
         region: 'US',
       });
 
-      await instance.kcContentManagementApplication.deleteApplicationVersions({
+      await instance.kcContentManagementApplication.uploadAPublicAppFromPlayStoreOrGalaxyStore({
         args: {
-          applicationId: 'TEST_APP',
+          name: '',
+          platform: 'ANDROID',
+          source: 'GOOGLE_PLAY_STORE',
         },
       });
     } catch (error) {
@@ -86,9 +91,11 @@ describe('CLASS POST /kcs/v1/kc/applications/profile Test', () => {
         region: 'TEST',
       });
 
-      await instance.kcContentManagementApplication.deleteApplicationVersions({
+      await instance.kcContentManagementApplication.uploadAPublicAppFromPlayStoreOrGalaxyStore({
         args: {
-          applicationId: 'TEST_APP',
+          name: '',
+          platform: 'ANDROID',
+          source: 'GOOGLE_PLAY_STORE',
         },
       });
     } catch (error) {

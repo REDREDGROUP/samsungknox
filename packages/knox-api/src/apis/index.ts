@@ -1,6 +1,7 @@
 import { Axios, AxiosInstance } from 'axios';
 import { knoxDefaultAxios } from '~/utils';
 import { KCContentManagementApplication, KCDevice, KCLicense, KCProfile } from './kcs';
+import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
 
 /**
  * Functions Export
@@ -30,7 +31,7 @@ export class KnoxInstance {
 
   constructor({ knoxAccessToken, region }: { knoxAccessToken: string; region: string }) {
     if (!knoxAccessToken) {
-      throw new Error('For the Class type, an X-KNOX-APITOKEN must be injected into the instance.');
+      throw new KnoxRequestError(0, ERROR_MESSAGES.KNOX_ACCESS_TOKEN_MISSING);
     } else {
       this.knoxAccessToken = knoxAccessToken;
     }
