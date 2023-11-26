@@ -1,17 +1,17 @@
 import { describe, expect, it } from 'vitest';
 import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
-import { KnoxInstance, kcGetMediaFile } from '~/apis';
+import { KnoxInstance, kcUploadMediaFileContentInCms } from '~/apis';
 
-describe('GET /kcs/v1/kc/assets/${contentId} Test', () => {
+describe('POST /kcs/v1/kc/assets Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
     let hasError = false;
 
     try {
-      await kcGetMediaFile({
+      await kcUploadMediaFileContentInCms({
         region: 'US',
         knoxAccessToken: '',
         args: {
-          contentId: '',
+          file: '',
         },
       });
     } catch (error) {
@@ -30,11 +30,11 @@ describe('GET /kcs/v1/kc/assets/${contentId} Test', () => {
     let hasError = false;
 
     try {
-      await kcGetMediaFile({
+      await kcUploadMediaFileContentInCms({
         region: 'TEST',
         knoxAccessToken: '',
         args: {
-          contentId: '',
+          file: '',
         },
       });
     } catch (error) {
@@ -49,7 +49,7 @@ describe('GET /kcs/v1/kc/assets/${contentId} Test', () => {
   });
 });
 
-describe('CLASS GET /kcs/v1/kc/assets/${contentId} Test', () => {
+describe('CLASS POST /kcs/v1/kc/assets Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
     let hasError = false;
 
@@ -59,9 +59,9 @@ describe('CLASS GET /kcs/v1/kc/assets/${contentId} Test', () => {
         region: 'US',
       });
 
-      await instance.kcContentManagementAsset.getMediaFile({
+      await instance.kcContentManagementAsset.uploadMediaFileContentInCms({
         args: {
-          contentId: '',
+          file: '',
         },
       });
     } catch (error) {
@@ -85,9 +85,9 @@ describe('CLASS GET /kcs/v1/kc/assets/${contentId} Test', () => {
         region: 'TEST',
       });
 
-      await instance.kcContentManagementAsset.getMediaFile({
+      await instance.kcContentManagementAsset.uploadMediaFileContentInCms({
         args: {
-          contentId: '',
+          file: '',
         },
       });
     } catch (error) {
