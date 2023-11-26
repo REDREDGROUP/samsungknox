@@ -7,7 +7,7 @@ import {
   generateSignedAccessTokenJWT,
   generateSignedClientIdentifierJWT,
 } from '@redredgroup/samsungknox-token-library';
-import { requestAccessToken } from '~/apis';
+import { generateKnoxApiToken, requestAccessToken } from '~/apis';
 
 describe('PUT /kcs/v1/kc/devices/unassign Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
@@ -61,31 +61,12 @@ describe('PUT /kcs/v1/kc/devices/unassign Test', () => {
         throw new TypeError('env is missing');
       }
 
-      const data = await generateSignedClientIdentifierJWT({
+      const { accessToken } = await generateKnoxApiToken({
+        region: 'EU',
         credential: {
-          key: process.env.CREDENTIAL_KEY,
+          credentialKey: process.env.CREDENTIAL_KEY,
         },
         clientIdentifierJwtToken: process.env.CLIENT_IDENTIFIER_JWT_TOKEN,
-      });
-
-      const { publicKey } = await generateBase64EncodedStringPublicKey({
-        credential: {
-          key: process.env.CREDENTIAL_KEY,
-        },
-      });
-
-      const { result } = await requestAccessToken({
-        region: 'EU',
-        base64EncodedStringPublicKey: publicKey,
-        clientIdentifierJwt: data.accessToken,
-        validityForAccessTokenInMinutes: 10,
-      });
-
-      const { accessToken } = await generateSignedAccessTokenJWT({
-        credential: {
-          key: process.env.CREDENTIAL_KEY,
-        },
-        accessToken: result.accessToken,
       });
 
       const getDeviceLogs = await kcGetDeviceLogs({

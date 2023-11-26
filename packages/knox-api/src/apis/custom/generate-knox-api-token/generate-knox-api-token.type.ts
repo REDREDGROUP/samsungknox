@@ -1,6 +1,7 @@
 export type GenerateKnoxApiTokenArgs = {
   credential: CredentialOptions;
   clientIdentifierJwtToken: string;
+  region: string;
 };
 
 type CredentialOptions =

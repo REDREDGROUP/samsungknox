@@ -9,6 +9,7 @@ describe('CUSTOM generate knox api token Test', () => {
   it('credential key missing', async () => {
     await expect(
       generateKnoxApiToken({
+        region: 'EU',
         credential: {
           credentialKey: '',
         },
@@ -20,6 +21,7 @@ describe('CUSTOM generate knox api token Test', () => {
   it('credential path is invalid', async () => {
     await expect(
       generateKnoxApiToken({
+        region: 'EU',
         credential: {
           credentialPath: 'credential.unknown',
         },
@@ -31,6 +33,7 @@ describe('CUSTOM generate knox api token Test', () => {
   it('credential key is invalid', async () => {
     await expect(
       generateKnoxApiToken({
+        region: 'EU',
         credential: {
           credentialKey: 'credential.unknown',
         },
@@ -46,6 +49,7 @@ describe('CUSTOM generate knox api token Test', () => {
       }
 
       const knoxApiToken = await generateKnoxApiToken({
+        region: 'EU',
         credential: {
           credentialKey: process.env.CREDENTIAL_KEY,
         },

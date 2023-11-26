@@ -1,0 +1,84 @@
+---
+sidebar_position: 2
+title: Delete Application Version (Version Many)
+keywords:
+  - knox-api
+  - Knox Configure
+  - delete application versions
+last_update:
+  date: 11/20/2023
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+### Delete Knox Configure Application Versions
+
+:::warning
+All versions for applicationId will be deleted when the externalIds option is not used in args! If you need to clear specific versions, be sure to enable the externalIds option. (If you only have one version of your app, don't include this option).
+
+<br />
+
+Reference: **Comma-separated list of app versions to be deleted. If this is empty, the whole app defined by applicationId will be deleted. Do not pass any value if the app only has one version**
+:::
+
+To delete the **application versions of KnoxConfigure**, use the following methods.
+
+## Example
+
+<Tabs
+  groupId="syntax"
+  defaultValue="class"
+  values={[
+    { label: 'class', value: 'class', },
+    { label: 'function', value: 'function', }
+  ]
+}>
+<TabItem value="class">
+
+```ts
+import { KnoxInstance } from '@redredgroup/samsungknox-api';
+const instance = new KnoxInstance({
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+const kcDeleteApplication = await instance.kcContentManagementApplication.deleteApplicationVersions({
+  args: {
+    applicationId: 'YOUR_APPLICATION_ID',
+  }, // <- other optional param
+});
+
+console.log(kcDeleteApplication);
+```
+
+</TabItem>
+
+<TabItem value="function">
+
+```ts
+import { kcDeleteApplicationVersions } from '@redredgroup/samsungknox-api';
+
+const kcDeleteApplication = await kcDeleteApplicationVersions({
+  args: {
+    applicationId: 'YOUR_APPLICATION_ID',
+  },
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+console.log(kcDeleteApplication);
+```
+
+</TabItem>
+</Tabs>
+
+Input parameters:
+
+- args: Insert parameters for the delete application version (required) **applicationId**.
+- region: Insert the Knox region. Most of them are EU (case insensitive)
+- knoxAccessToken: Your **X-KNOX-APITOKEN**.
+
+Output:
+
+- Detailed count information of deleted applications is displayed.

@@ -2,14 +2,14 @@ import 'dotenv/config';
 import { describe, expect, it } from 'vitest';
 import { KnoxRequestError } from '~/errors';
 
-import { generateKnoxApiToken, kcGetDevices, requestAccessToken } from '~/apis';
+import { generateKnoxApiToken, kcGetApplications, requestAccessToken } from '~/apis';
 
-describe('GET /kcs/v1/kc/licenses Test', () => {
+describe('GET /kcs/v1/kc/applications Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
     let hasError = false;
 
     try {
-      await kcGetDevices({
+      await kcGetApplications({
         region: 'US',
         knoxAccessToken: '',
         args: {},
@@ -30,7 +30,7 @@ describe('GET /kcs/v1/kc/licenses Test', () => {
     let hasError = false;
 
     try {
-      await kcGetDevices({
+      await kcGetApplications({
         region: 'TEST',
         knoxAccessToken: '',
         args: {},
@@ -60,7 +60,7 @@ describe('GET /kcs/v1/kc/licenses Test', () => {
         clientIdentifierJwtToken: process.env.CLIENT_IDENTIFIER_JWT_TOKEN,
       });
 
-      const getDevices = await kcGetDevices({
+      const getDevices = await kcGetApplications({
         region: 'EU',
         knoxAccessToken: accessToken,
         args: {},
@@ -69,9 +69,9 @@ describe('GET /kcs/v1/kc/licenses Test', () => {
       expect(getDevices).toHaveProperty('status', 'SUCCESS');
       expect(getDevices).toHaveProperty('message', null);
       expect(getDevices).toHaveProperty('result');
-      expect(getDevices.result).toHaveProperty('deviceList');
+      expect(getDevices.result).toHaveProperty('applications');
       expect(getDevices.result).toHaveProperty('totalCount');
-      expect(Array.isArray(getDevices.result.deviceList)).toBe(true);
+      expect(Array.isArray(getDevices.result.applications)).toBe(true);
       expect(typeof getDevices.result.totalCount).toBe('number');
     } catch (error: any) {
       throw new Error(error);

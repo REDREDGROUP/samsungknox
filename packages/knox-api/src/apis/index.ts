@@ -1,6 +1,7 @@
 import { Axios, AxiosInstance } from 'axios';
 import { knoxDefaultAxios } from '~/utils';
-import { KCDevice, KCLicense, KCProfile } from './kcs';
+import { KCContentManagementApplication, KCDevice, KCLicense, KCProfile } from './kcs';
+import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
 
 /**
  * Functions Export
@@ -22,6 +23,7 @@ export class KnoxInstance {
   public kcProfile: KCProfile;
   public kcLicense: KCLicense;
   public kcDevice: KCDevice;
+  public kcContentManagementApplication: KCContentManagementApplication;
 
   private axios: AxiosInstance;
   private knoxAccessToken: string | null = null;
@@ -29,7 +31,7 @@ export class KnoxInstance {
 
   constructor({ knoxAccessToken, region }: { knoxAccessToken: string; region: string }) {
     if (!knoxAccessToken) {
-      throw new Error('For the Class type, an X-KNOX-APITOKEN must be injected into the instance.');
+      throw new KnoxRequestError(0, ERROR_MESSAGES.KNOX_ACCESS_TOKEN_MISSING);
     } else {
       this.knoxAccessToken = knoxAccessToken;
     }
@@ -51,5 +53,6 @@ export class KnoxInstance {
     this.kcProfile = new KCProfile(this.axios);
     this.kcLicense = new KCLicense(this.axios);
     this.kcDevice = new KCDevice(this.axios);
+    this.kcContentManagementApplication = new KCContentManagementApplication(this.axios);
   }
 }

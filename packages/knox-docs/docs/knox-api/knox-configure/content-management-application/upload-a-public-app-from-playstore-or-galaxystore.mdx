@@ -1,0 +1,81 @@
+---
+sidebar_position: 3
+title: Upload A Public App From Play Store Or Galaxy Store
+keywords:
+  - knox-api
+  - Knox Configure
+  - upload a public app from play store or galaxy store
+last_update:
+  date: 11/26/2023
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Upload A Public App From Play Store Or Galaxy Store
+
+To Upload the **public app (Play Store Or Galaxy Store) application of KnoxConfigure**, use the following methods.
+
+## Example
+
+<Tabs
+  groupId="syntax"
+  defaultValue="class"
+  values={[
+    { label: 'class', value: 'class', },
+    { label: 'function', value: 'function', }
+  ]
+}>
+<TabItem value="class">
+
+```ts
+import { KnoxInstance } from '@redredgroup/samsungknox-api';
+
+const instance = new KnoxInstance({
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+const uploadAPublicAppFromPlayStoreOrGalaxyStore = await instance.kcContentManagementApplication.uploadAPublicAppFromPlayStoreOrGalaxyStore({
+  args: {
+    name: 'YOUR_APP_NAME',
+    platform: 'ANDROID',
+    source: 'GOOGLE_PLAY_STORE',
+  }, // <- other optional param
+});
+
+console.log(uploadAPublicAppFromPlayStoreOrGalaxyStore);
+```
+
+</TabItem>
+
+<TabItem value="function">
+
+```ts
+import { kcUploadAPublicAppFromPlayStoreOrGalaxyStore } from '@redredgroup/samsungknox-api';
+
+const uploadAPublicAppFromPlayStoreOrGalaxyStore = await kcUploadAPublicAppFromPlayStoreOrGalaxyStore({
+  args: {
+    name: 'YOUR_APP_NAME',
+    platform: 'ANDROID',
+    source: 'GOOGLE_PLAY_STORE',
+  }, // <- other optional param
+  region: 'YOUR-KNOX-REGION',
+  knoxAccessToken: 'YOUR-X-KNOX-APITOKEN',
+});
+
+console.log(uploadAPublicAppFromPlayStoreOrGalaxyStore);
+```
+
+</TabItem>
+</Tabs>
+
+Input parameters:
+
+- args: Insert parameters for the device (required) **name**, **platform**, **source**.
+- region: Insert the Knox region. Most of them are EU (case insensitive)
+- knoxAccessToken: Your **X-KNOX-APITOKEN**.
+
+Output:
+
+- Responds with the results of the application upload.
