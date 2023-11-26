@@ -59,7 +59,7 @@ jobs:
 
       - name: Build
         working-directory: packages/knox-api
-        run: pnpm build
+        run: pnpm build:production
 
       - name: Publish to npm
         working-directory: packages/knox-api
