@@ -1,6 +1,6 @@
 import { Axios, AxiosInstance } from 'axios';
 import { knoxDefaultAxios } from '~/utils';
-import { KCContentManagementApplication, KCDevice, KCLicense, KCProfile } from './kcs';
+import { KCContentManagementApplication, KCContentManagementAsset, KCDevice, KCLicense, KCProfile } from './kcs';
 import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
 
 /**
@@ -24,6 +24,7 @@ export class KnoxInstance {
   public kcLicense: KCLicense;
   public kcDevice: KCDevice;
   public kcContentManagementApplication: KCContentManagementApplication;
+  public kcContentManagementAsset: KCContentManagementAsset;
 
   private axios: AxiosInstance;
   private knoxAccessToken: string | null = null;
@@ -54,5 +55,6 @@ export class KnoxInstance {
     this.kcLicense = new KCLicense(this.axios);
     this.kcDevice = new KCDevice(this.axios);
     this.kcContentManagementApplication = new KCContentManagementApplication(this.axios);
+    this.kcContentManagementAsset = new KCContentManagementAsset(this.axios);
   }
 }
