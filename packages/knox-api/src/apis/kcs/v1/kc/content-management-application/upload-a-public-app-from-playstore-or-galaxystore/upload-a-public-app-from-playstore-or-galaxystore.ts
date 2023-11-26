@@ -11,10 +11,7 @@ export const kcUploadAPublicAppFromPlayStoreOrGalaxyStore = (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCUploadAPublicFromPlayStoreOrGalaxyStoreAppArgs>>>,
 ): Promise<BaseResponse<KCUploadAPublicFromPlayStoreOrGalaxyStoreAppResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({
-    region,
-    knoxAccessToken,
-  });
+  const axios = knoxDefaultAxios({ region, knoxAccessToken });
   return request({ args, axios });
 };
 
@@ -43,9 +40,7 @@ const request = async ({
   axios: AxiosInstance;
 }): Promise<BaseResponse<KCUploadAPublicFromPlayStoreOrGalaxyStoreAppResponse>> => {
   try {
-    const { data } = await axios.post<KCUploadAPublicFromPlayStoreOrGalaxyStoreAppResponse>(`/kcs/v1/kc/applications`, {
-      params: args,
-    });
+    const { data } = await axios.post<KCUploadAPublicFromPlayStoreOrGalaxyStoreAppResponse>(`/kcs/v1/kc/applications`, args);
 
     return {
       status: 'SUCCESS',

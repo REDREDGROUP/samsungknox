@@ -1,0 +1,76 @@
+---
+sidebar_position: 1
+title: Get Media File
+keywords:
+  - knox-api
+  - Knox Configure
+  - get media
+last_update:
+  date: 11/27/2023
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Get Media File
+
+To get the **media file of KnoxConfigure**, use the following methods.
+
+## Example
+
+<Tabs
+  groupId="syntax"
+  defaultValue="class"
+  values={[
+    { label: 'class', value: 'class', },
+    { label: 'function', value: 'function', }
+  ]
+}>
+<TabItem value="class">
+
+```ts
+import { KnoxInstance } from '@redredgroup/samsungknox-api';
+const instance = new KnoxInstance({
+  region: 'YOUR_KNOX_REGION',
+  knoxAccessToken: 'YOUR_JWT_TOKEN',
+});
+
+const getMediaFile = await instance.kcContentManagementAsset.getMediaFile({
+  args: {
+    contentId: 'YOUR_CONTENT_ID',
+  },
+});
+
+console.log(getMediaFile);
+```
+
+</TabItem>
+
+<TabItem value="function">
+
+```ts
+import { kcGetMediaFile } from '@redredgroup/samsungknox-api';
+
+const getMediaFile = await kcGetMediaFile({
+  args: {
+    contentId: 'YOUR_CONTENT_ID',
+  },
+  region: 'YOUR-KNOX-REGION',
+  knoxAccessToken: 'YOUR-X-KNOX-APITOKEN',
+});
+
+console.log(getMediaFile);
+```
+
+</TabItem>
+</Tabs>
+
+Input parameters:
+
+- args: Insert parameters for the media file (required) **contentId**.
+- region: Insert the Knox region. Most of them are EU (case insensitive)
+- knoxAccessToken: Your **X-KNOX-APITOKEN**.
+
+Output:
+
+- The asset download address is responded to as downloadUrl.

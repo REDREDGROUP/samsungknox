@@ -10,12 +10,12 @@
     }
   ],
   "scripts": {
-    "format": "turbo run format",
-    "lint:format": "turbo run lint:format",
     "build": "turbo run build",
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "clean": "git clean -Xdf --exclude=\"!.env.*\"",
+    "format": "turbo run format",
+    "lint:format": "turbo run lint:format",
     "syncpack:fix": "syncpack fix-mismatches --config ./.syncpackrc.js",
     "syncpack:format": "syncpack format --config ./.syncpackrc.js",
     "syncpack:lint": "syncpack lint --config ./.syncpackrc.js",

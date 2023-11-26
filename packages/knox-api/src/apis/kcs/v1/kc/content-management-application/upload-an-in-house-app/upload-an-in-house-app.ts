@@ -41,9 +41,7 @@ const request = async ({
   axios: AxiosInstance;
 }): Promise<BaseResponse<KCUploadAnInHouseAppResponse>> => {
   try {
-    const { data } = await axios.post<KCUploadAnInHouseAppResponse>(`/kcs/v1/kc/applications/upload`, {
-      params: args,
-    });
+    const { data } = await axios.post<KCUploadAnInHouseAppResponse>(`/kcs/v1/kc/applications/upload`, args);
 
     return {
       status: 'SUCCESS',
