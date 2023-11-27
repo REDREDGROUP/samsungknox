@@ -23,8 +23,12 @@ jobs:
       working-directory: packages/knox-fastlane-plugin
       run: bundle install
 
+    - name: Rake install
+      working-directory: packages/knox-fastlane-plugin
+      run: bundle exec rake install
+
     - name: Release Gem
       working-directory: packages/knox-fastlane-plugin
-      run: bundle exec rake releases
+      run: bundle exec rake release
       env:
         RUBYGEMS_AUTH_TOKEN: ${{ secrets.RUBYGEMS_AUTH_TOKEN }}
