@@ -25,7 +25,8 @@ module Fastlane
         KnoxConfigureLibraryUploadApp.upload_app(
           access_token[:token], 
           params[:app_file_path],
-          params[:app_description]
+          params[:app_description],
+          params[:api_region].downcase
         )
       end
 

@@ -67,7 +67,7 @@ module Fastlane
     
       if response.is_a?(Net::HTTPSuccess)
         data = JSON.parse(response.body)
-        UI.success('✅ ams accessToken generated successfully!')
+        UI.success('✅ ams accessToken generated successfully')
         return data["accessToken"]
       else
         raise "Request failed with response: #{response.body}"
@@ -77,15 +77,15 @@ module Fastlane
     def self.generate_knox_access_token(credential, clientIdentifierJwtToken, api_region)
       UI.header('Step: 🔐 KNOX ACCESS TOKEN GENERATE 🔐 ')
 
-      UI.message('⏳ Sign the knox token using the credential...')
+      UI.message('🔐 Sign in the knox token using the credential...')
       generate_signed_jwt_result = generate_signed_jwt(credential, clientIdentifierJwtToken, true)
 
       base64_encoding_public_Key = generate_signed_jwt_result[:public_key]
       sign_by_client_identifier_jwt_token = generate_signed_jwt_result[:token]
 
-      UI.message('⏳ Request the knox client identifier jwt ams access token...')
+      UI.message('⏳ Request the knox client identifier jwt ams access token.')
       ams_access_token = get_access_token(30, base64_encoding_public_Key, sign_by_client_identifier_jwt_token, api_region)
-      UI.message('⏳ Sign the knox token using the ams access token and private key...')
+      UI.message('🔐 Sign the knox token using the ams access token and private key.')
       token = generate_signed_jwt(credential, ams_access_token, false)
 
       return { token: token[:token] }
@@ -114,7 +114,7 @@ module Fastlane
 
       token = JWT.encode(payload, private_key, 'RS512')
 
-      UI.success('✅ token generated successfully!')
+      UI.success('✅ token generated successfully')
       return { public_key: public_key, token: token }
     end
   end
