@@ -5,7 +5,7 @@ on:
     branches:
       - master
     tags:
-      - 'knox-fastlane-plugin@*'
+      - 'knox-fastlane@*'
 
 jobs:
   build-and-deploy:
