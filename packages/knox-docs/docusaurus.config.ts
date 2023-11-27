@@ -45,6 +45,13 @@ const config: Config = {
         },
       } satisfies Preset.Options,
     ],
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'G-PR2Y55ZKJD',
+        anonymizeIP: true,
+      },
+    ]
   ],
 
   themeConfig: {
