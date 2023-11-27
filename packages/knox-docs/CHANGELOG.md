@@ -1,5 +1,11 @@
 # @redredgroup/samsungknox-docs
 
+## 1.6.2
+
+### Patch Changes
+
+- Fixed an issue that prevented GTAG from being enabled.
+
 ## 1.6.1
 
 ### Patch Changes
