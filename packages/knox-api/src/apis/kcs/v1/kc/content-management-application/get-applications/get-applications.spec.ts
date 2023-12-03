@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { describe, expect, it } from 'vitest';
 import { KnoxRequestError } from '~/errors';
 
-import { generateKnoxApiToken, kcGetApplications, requestAccessToken } from '~/apis';
+import { generateKnoxApiToken, kcGetApplications } from '~/apis';
 
 describe('GET /kcs/v1/kc/applications Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {

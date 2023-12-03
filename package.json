@@ -15,6 +15,7 @@
     "changeset:version": "changeset version",
     "clean": "git clean -Xdf --exclude=\"!.env.*\"",
     "format": "turbo run format",
+    "lint": "turbo run lint",
     "lint:format": "turbo run lint:format",
     "syncpack:fix": "syncpack fix-mismatches --config ./.syncpackrc.js",
     "syncpack:format": "syncpack format --config ./.syncpackrc.js",

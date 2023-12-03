@@ -47,6 +47,10 @@ jobs:
         working-directory: packages/knox-api
         run: pnpm type-check
 
+      - name: Lint
+        working-directory: packages/knox-api
+        run: pnpm lint
+
       - name: Test
         working-directory: packages/knox-api
         run: pnpm test:coverage
