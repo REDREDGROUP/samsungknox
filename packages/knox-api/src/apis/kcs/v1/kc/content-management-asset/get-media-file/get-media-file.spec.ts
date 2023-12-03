@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
-import { KnoxInstance, kcGetMediaFile } from '~/apis';
+import { KcInstance, kcGetMediaFile } from '~/apis';
 
 describe('GET /kcs/v1/kc/assets/${contentId} Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
@@ -54,12 +54,12 @@ describe('CLASS GET /kcs/v1/kc/assets/${contentId} Test', () => {
     let hasError = false;
 
     try {
-      const instance = new KnoxInstance({
+      const instance = new KcInstance({
         knoxAccessToken: '',
         region: 'US',
       });
 
-      await instance.kcContentManagementAsset.getMediaFile({
+      await instance.v1.ContentManagementAsset.getMediaFile({
         args: {
           contentId: '',
         },
@@ -80,12 +80,12 @@ describe('CLASS GET /kcs/v1/kc/assets/${contentId} Test', () => {
     let hasError = false;
 
     try {
-      const instance = new KnoxInstance({
+      const instance = new KcInstance({
         knoxAccessToken: 'asd',
         region: 'TEST',
       });
 
-      await instance.kcContentManagementAsset.getMediaFile({
+      await instance.v1.ContentManagementAsset.getMediaFile({
         args: {
           contentId: '',
         },

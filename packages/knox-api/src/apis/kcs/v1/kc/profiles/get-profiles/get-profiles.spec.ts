@@ -8,7 +8,7 @@ import {
   generateSignedAccessTokenJWT,
 } from '@redredgroup/samsungknox-token-library';
 import { requestAccessToken } from 'src/apis/ams';
-import { KnoxInstance, generateKnoxApiToken } from '~/apis';
+import { KcInstance, generateKnoxApiToken } from '~/apis';
 
 describe('GET /kcs/v1/kc/profiles Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
@@ -114,12 +114,12 @@ describe('(CLASS) GET /kcs/v1/kc/profiles Test', () => {
       accessToken: result.accessToken,
     });
 
-    const instance = new KnoxInstance({
+    const instance = new KcInstance({
       knoxAccessToken: accessToken,
       region: 'EU',
     });
 
-    const getProfiles = await instance.kcProfile.getProfiles({
+    const getProfiles = await instance.v1.Profile.getProfiles({
       args: {},
     });
 
