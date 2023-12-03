@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
 import { kcCreateApplicationProfile } from './create-application-profile';
-import { KnoxInstance } from '~/apis';
+import { KcInstance } from '~/apis';
 
 describe('POST /kcs/v1/kc/applications/profile Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
@@ -63,12 +63,12 @@ describe('CLASS POST /kcs/v1/kc/applications/profile Test', () => {
     let hasError = false;
 
     try {
-      const instance = new KnoxInstance({
+      const instance = new KcInstance({
         knoxAccessToken: '',
         region: 'US',
       });
 
-      await instance.kcContentManagementApplication.createApplicationProfile({
+      await instance.v1.ContentManagementApplication.createApplicationProfile({
         args: {
           additionalEula: {
             termsAndConditions: '',
@@ -93,12 +93,12 @@ describe('CLASS POST /kcs/v1/kc/applications/profile Test', () => {
     let hasError = false;
 
     try {
-      const instance = new KnoxInstance({
+      const instance = new KcInstance({
         knoxAccessToken: '',
         region: 'TEST',
       });
 
-      await instance.kcContentManagementApplication.createApplicationProfile({
+      await instance.v1.ContentManagementApplication.createApplicationProfile({
         args: {
           additionalEula: {
             termsAndConditions: '',

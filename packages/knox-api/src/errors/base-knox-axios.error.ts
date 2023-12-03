@@ -4,6 +4,7 @@ import { KnoxRequestError } from './base-knox.error';
 
 export const ERROR_MESSAGES = {
   KNOX_ACCESS_TOKEN_MISSING: 'For the Class type, an X-KNOX-APITOKEN must be injected into the instance.',
+  KNOX_REGION_MISSING: 'For the Class type, an region must be injected into the instance.',
 };
 
 // export const ERROR_MAP: Record<number | string, string> = {

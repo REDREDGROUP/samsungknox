@@ -1,1 +1,1 @@
-export * from './knox-axios';
+export * from './instance';

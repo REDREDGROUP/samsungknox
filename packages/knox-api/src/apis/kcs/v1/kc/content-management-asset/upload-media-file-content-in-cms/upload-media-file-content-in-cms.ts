@@ -1,6 +1,6 @@
 import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
 import { KCUploadMediaFileContentInCmsArgs, KCUploadMediaFileContentInCmsResponse } from './upload-media-file-content-in-cms.type';
-import { knoxDefaultAxios } from '~/utils';
+import { knoxKcsInstance } from '~/utils';
 import { AxiosInstance } from 'axios';
 import { KnoxRequestError } from '~/errors';
 
@@ -8,7 +8,7 @@ export const kcUploadMediaFileContentInCms = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCUploadMediaFileContentInCmsArgs>>>,
 ): Promise<BaseResponse<KCUploadMediaFileContentInCmsResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxAccessToken });
+  const axios = knoxKcsInstance({ region, knoxAccessToken });
   return request({ args, axios });
 };
 

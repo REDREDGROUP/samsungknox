@@ -1,6 +1,6 @@
 import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
 import { KCDeleteApplicationVersionsResponse, KCDeleteApplicationVersionsArgs } from './delete-application-versions.type';
-import { knoxDefaultAxios } from '~/utils';
+import { knoxKcsInstance } from '~/utils';
 import { KnoxRequestError } from '~/errors';
 import { AxiosInstance } from 'axios';
 
@@ -8,7 +8,7 @@ export const kcDeleteApplicationVersions = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCDeleteApplicationVersionsArgs>>>,
 ): Promise<BaseResponse<KCDeleteApplicationVersionsResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxAccessToken });
+  const axios = knoxKcsInstance({ region, knoxAccessToken });
   return request({ args, axios });
 };
 
