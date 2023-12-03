@@ -1,6 +1,6 @@
 import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
 import { KCGetMediaFileArgs, KCGetMediaFileResponse } from './get-media-file.type';
-import { knoxDefaultAxios } from '~/utils';
+import { knoxKcsInstance } from '~/utils';
 import { AxiosInstance } from 'axios';
 import { KnoxRequestError } from '~/errors';
 
@@ -8,7 +8,7 @@ export const kcGetMediaFile = (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCGetMediaFileArgs>>>,
 ): Promise<BaseResponse<KCGetMediaFileResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxAccessToken });
+  const axios = knoxKcsInstance({ region, knoxAccessToken });
   return request({ args, axios });
 };
 

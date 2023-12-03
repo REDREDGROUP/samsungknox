@@ -1,6 +1,6 @@
 import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
 import { KCCreateApplicationProfileArgs, KCCreateApplicationProfileResponse } from './create-application-profile.type';
-import { knoxDefaultAxios } from '~/utils';
+import { knoxKcsInstance } from '~/utils';
 import { AxiosInstance } from 'axios';
 import { KnoxRequestError } from '~/errors';
 
@@ -8,7 +8,7 @@ export const kcCreateApplicationProfile = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCCreateApplicationProfileArgs>>>,
 ): Promise<BaseResponse<KCCreateApplicationProfileResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxAccessToken });
+  const axios = knoxKcsInstance({ region, knoxAccessToken });
   return request({ args, axios });
 };
 
