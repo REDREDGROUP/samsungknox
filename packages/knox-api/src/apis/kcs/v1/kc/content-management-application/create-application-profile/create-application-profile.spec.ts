@@ -78,7 +78,6 @@ describe('CLASS POST /kcs/v1/kc/applications/profile Test', () => {
         },
       });
     } catch (error) {
-      console.log(error);
       if (error instanceof KnoxRequestError) {
         hasError = true;
         expect(error).toBeInstanceOf(KnoxRequestError);
