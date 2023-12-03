@@ -1,4 +1,4 @@
-import { Axios, AxiosInstance } from 'axios';
+import { AxiosInstance } from 'axios';
 import { knoxDefaultAxios } from '~/utils';
 import { KCContentManagementApplication, KCContentManagementAsset, KCDevice, KCLicense, KCProfile } from './kcs';
 import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';

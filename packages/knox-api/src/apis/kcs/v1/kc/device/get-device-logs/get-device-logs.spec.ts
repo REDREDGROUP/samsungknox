@@ -2,12 +2,7 @@ import 'dotenv/config';
 import { describe, expect, it } from 'vitest';
 import { KnoxRequestError } from '~/errors';
 import { kcGetDeviceLogs } from './get-device-logs';
-import {
-  generateBase64EncodedStringPublicKey,
-  generateSignedAccessTokenJWT,
-  generateSignedClientIdentifierJWT,
-} from '@redredgroup/samsungknox-token-library';
-import { generateKnoxApiToken, requestAccessToken } from '~/apis';
+import { generateKnoxApiToken } from '~/apis';
 
 describe('PUT /kcs/v1/kc/devices/unassign Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {

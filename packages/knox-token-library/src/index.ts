@@ -9,7 +9,7 @@ type GenerateSignedAccessTokenJwtType = BaseCredentialInputType & {
   accessToken: string;
 };
 
-type GenerateBase64EncodedStringPublicKeyType = BaseCredentialInputType & {};
+type GenerateBase64EncodedStringPublicKeyType = BaseCredentialInputType;
 
 export const generateSignedClientIdentifierJWT = async (params: GenerateSignedClientIdentifierJwtType): Promise<{ accessToken: string }> =>
   generateSignedJWT({
