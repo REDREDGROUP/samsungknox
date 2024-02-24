@@ -1,6 +1,7 @@
 {
   "name": "@redredgroup/samsungknox",
   "private": true,
+  "version": "1.0.0",
   "repository": "https://github.com/REDREDGROUP/samsungknox.git",
   "maintainers": [
     {
@@ -46,5 +47,5 @@
       "maxLineWidth": 100
     }
   },
-  "packageManager": "pnpm@8.9.2"
+  "packageManager": "pnpm@8.10.5"
 }

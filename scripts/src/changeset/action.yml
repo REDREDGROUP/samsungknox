@@ -1,0 +1,34 @@
+name: Changesets
+description: 'A GitHub action to automate releases with Changesets'
+
+inputs:
+  log-level: 
+    description: 'Action Log Level'
+    required: true
+    default: 'action'
+  version:
+    description: "The command to update version, edit CHANGELOG, read and delete changesets. Default to `changeset version` if not provided"
+    required: false
+  cwd:
+    description: 'Sets the cwd for the node process. Default to `process.cwd()`'
+    required: false
+  commit:
+    description: 'The commit message. Default to `Version Packages`'
+    required: false
+  title:
+    description: 'The pull request title. Default to `Version Packages`'
+    required: false
+  setupGitUser:
+    description: 'Sets up the git user for commits as `"github-actions[bot]"`. Default to `true`'
+    required: false
+    default: 'true'
+outputs:
+  pullRequestNumber:
+    description: The pull request number that was created or updated
+branding:
+  icon: "package"
+  color: "blue"
+
+runs:
+  using: "node16"
+  main: "../../dist/index.js"

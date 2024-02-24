@@ -1,0 +1,40 @@
+{
+  "name": "@samsungknox/scripts",
+  "version": "0.1.0",
+  "scripts": {
+    "build:production": "NODE_ENV=production tsup-node",
+    "build:watch": "tsup-node --watch",
+    "postinstall": "pnpm build:production",
+    "script:create-release": "node ./dist/changeset/scripts/create-release.js"
+  },
+  "devDependencies": {
+    "@actions/core": "1.3.0",
+    "@actions/exec": "1.1.0",
+    "@actions/github": "4.0.0",
+    "@changesets/errors": "0.2.0",
+    "@changesets/git": "3.0.0",
+    "@changesets/logger": "0.1.0",
+    "@changesets/parse": "0.4.0",
+    "@changesets/pre": "1.0.9",
+    "@changesets/read": "0.5.3",
+    "@changesets/types": "6.0.0",
+    "@manypkg/get-packages": "1.1.3",
+    "@octokit/rest": "19.0.3",
+    "@types/fs-extra": "11.0.4",
+    "@types/prettier": "2.7.3",
+    "@types/node": "20.4.9",
+    "@types/semver": "7.5.0",
+    "chalk": "4.1.2",
+    "fs-extra": "11.2.0",
+    "mdast-util-to-string": "1.0.6",
+    "prettier": "3.0.0",
+    "remark-parse": "7.0.1",
+    "remark-stringify": "7.0.3",
+    "resolve-from": "5.0.0",
+    "semver": "7.5.2",
+    "ts-node": "10.9.2",
+    "tsup": "6.5.0",
+    "typescript": "5.2.2",
+    "unified": "8.3.2"
+  }
+}
