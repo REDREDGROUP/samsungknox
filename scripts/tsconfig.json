@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "types": ["node"],
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2020",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": false,
+    "paths": {
+      "@/common": ["./src/common/index.ts"]
+    }
+  },
+  "exclude": ["dist", "node_modules", "**/*spec.ts"],
+  "include": ["src", "tsup.config.ts"]
+}
