@@ -19,7 +19,7 @@ jobs:
       (github.event.pull_request.merged == true && github.head_ref == 'changeset-release/develop') ||
       (inputs.force_deploy == true)
     name: Create Release Note
-    runs-on: [self-hosted, linux, x64]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
