@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master
-    tags:
-      - 'knox-api@*'
+    paths:
+      - 'packages/knox-api/CHANGELOG.md'
 
 jobs:
   publish-npm:

@@ -160,7 +160,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © 2023 REDREDGROUP Web Service. All Right Reserved.`,
+      copyright: `Copyright © 2024 REDREDGROUP Web Service. All Right Reserved.`,
     },
     prism: {
       theme: prismThemes.github,
