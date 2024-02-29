@@ -1,5 +1,11 @@
 # @redredgroup/samsungknox-docs
 
+## 1.6.3
+
+### Patch Changes
+
+- e9efdfd: Update Copyright year to 2024
+
 ## 1.6.2
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@samsungknox/scripts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "build:production": "NODE_ENV=production tsup-node",
     "build:watch": "tsup-node --watch",

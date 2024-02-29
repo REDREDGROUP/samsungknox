@@ -1,7 +1,7 @@
 {
   "name": "@redredgroup/samsungknox-api",
   "description": "Samsung Knox API Client",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "license": "Apache-2.0",
   "main": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -52,7 +52,7 @@
     "jsonwebtoken": "9.0.2"
   },
   "devDependencies": {
-    "@redredgroup/samsungknox-token-library": "1.1.4",
+    "@redredgroup/samsungknox-token-library": "1.1.5",
     "@types/jsonwebtoken": "9.0.4",
     "@types/node": "20.9.0",
     "@typescript-eslint/eslint-plugin": "6.13.1",
