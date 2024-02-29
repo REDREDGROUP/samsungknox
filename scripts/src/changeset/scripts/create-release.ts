@@ -48,8 +48,8 @@ async function main(): Promise<void> {
   const commitSha: string = process.env.GITHUB_SHA;
   const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
-  const releaseVersion = await getRootPackageJsonMetadata();
-  const tagName = `v${releaseVersion}`;
+  const { version } = await getRootPackageJsonMetadata();
+  const tagName = `v${version}`;
 
   log.debug(`tag_name=${tagName}${EOL}`);
   log.action(`Creating release tag ${tagName} at ${commitSha}`);
@@ -59,7 +59,7 @@ async function main(): Promise<void> {
   log.info(`Successfully! release tag ${tagName} at ${commitSha}`);
 
   await fs.appendFile(process.env.GITHUB_OUTPUT, `tag_name=${tagName}${EOL}`);
-  await fs.appendFile(process.env.GITHUB_OUTPUT, `version=${releaseVersion}${EOL}`);
+  await fs.appendFile(process.env.GITHUB_OUTPUT, `version=${version}${EOL}`);
 }
 
 main().catch((error) => {

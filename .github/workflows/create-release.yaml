@@ -1,0 +1,53 @@
+name: Create Release
+
+on:
+  pull_request:
+    branches:
+      - develop
+    types: [closed]
+  workflow_dispatch:
+    inputs:
+      force_deploy:
+        type: boolean
+        description: '(Force Deploy) If you need force deploy, change this option to true.'
+        required: true
+        default: false
+
+jobs:
+  create-release:
+    if: >
+      (github.event.pull_request.merged == true && github.head_ref == 'changeset-release/main') ||
+      (inputs.force_deploy == 'true')
+    name: Create Release Note
+    runs-on: [self-hosted, linux, x64]
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "pnpm"
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Install dependencies
+        run: pnpm i
+
+      - name: Create a release tag
+        working-directory: scripts
+        id: create_tag
+        run: pnpm script:create-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create a release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.create_tag.outputs.tag_name }}
+          body_path: docs/releases/${{ steps.create_tag.outputs.tag_name }}-changelog.md
+          token: ${{ secrets.GITHUB_TOKEN }}
