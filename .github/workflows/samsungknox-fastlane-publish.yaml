@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master
-    tags:
-      - 'knox-fastlane@*'
+    paths:
+      - 'packages/knox-fastlane/CHANGELOG.md'
 
 jobs:
   build-and-deploy:

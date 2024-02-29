@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master
-    tags:
-      - 'knox-token-library@*'
+    paths:
+      - 'packages/knox-token-library/CHANGELOG.md'
 
 jobs:
   publish-npm:
