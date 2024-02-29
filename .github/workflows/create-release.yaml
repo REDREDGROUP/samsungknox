@@ -16,7 +16,7 @@ on:
 jobs:
   create-release:
     if: >
-      (github.event.pull_request.merged == true && github.head_ref == 'changeset-release/main') ||
+      (github.event.pull_request.merged == true && github.head_ref == 'changeset-release/develop') ||
       (inputs.force_deploy == 'true')
     name: Create Release Note
     runs-on: [self-hosted, linux, x64]

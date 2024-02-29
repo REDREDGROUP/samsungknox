@@ -49,7 +49,7 @@ importers:
         version: 9.0.2
     devDependencies:
       '@redredgroup/samsungknox-token-library':
-        specifier: 1.1.4
+        specifier: 1.1.5
         version: link:../knox-token-library
       '@types/jsonwebtoken':
         specifier: 9.0.4

@@ -104,7 +104,7 @@ export const createGitPullRequest = async ({
   octokit: InstanceType<typeof GitHub>;
   option: {
     baseBranch: string; // main
-    versionBranch: string; // changeset-release/main
+    versionBranch: string; // changeset-release/develop
     pullRequestTitle: string;
     pullRequestBody: string;
     githubRepo: Context['repo'];

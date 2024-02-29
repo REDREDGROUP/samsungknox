@@ -13,7 +13,7 @@ type GitRepoOptions = {
   repo: string;
 };
 
-export const MAIN_BRANCHES = ['main', 'origin/main', 'changeset-release/main'];
+export const MAIN_BRANCHES = ['main', 'origin/develop', 'changeset-release/develop'];
 
 export const GIT_REPO_OPTIONS: GitRepoOptions = {
   owner: 'REDREDGROUP',
@@ -51,7 +51,7 @@ export const createChangeLogPullRequestDefaultBody = ({
   log: Logger;
   changelogPath: string;
 }) => {
-  const changeLogPullRequestDefaultBody = `See [${changelogPath}](https://github.com/REDREDGROUP/samsungknox/blob/main/${changelogPath}) for more information.`;
+  const changeLogPullRequestDefaultBody = `See [${changelogPath}](https://github.com/REDREDGROUP/samsungknox/blob/master/${changelogPath}) for more information.`;
 
   log.debug(`Received: changeLogPullRequestDefaultBody ${changeLogPullRequestDefaultBody}`);
 
