@@ -1,5 +1,11 @@
 # @redredgroup/samsungknox-api
 
+## 1.6.2
+
+### Patch Changes
+
+- d85fa48: Added Eslint, which now prevents unnecessary imports, unused code, or unexpected console code from entering.
+
 ## 1.6.1
 
 ### Patch Changes
