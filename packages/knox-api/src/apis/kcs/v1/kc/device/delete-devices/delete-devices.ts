@@ -1,6 +1,6 @@
 import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
 import { KCDeleteDevicesArgs, KCDeleteDevicesResponse } from './delete-devices.type';
-import { knoxDefaultAxios } from '~/utils';
+import { knoxKcsInstance } from '~/utils';
 import { KnoxRequestError } from '~/errors';
 import { AxiosInstance } from 'axios';
 
@@ -8,7 +8,7 @@ export const kcDeleteDevices = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCDeleteDevicesArgs>>>,
 ): Promise<BaseResponse<KCDeleteDevicesResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxAccessToken });
+  const axios = knoxKcsInstance({ region, knoxAccessToken });
   return request({ args, axios });
 };
 

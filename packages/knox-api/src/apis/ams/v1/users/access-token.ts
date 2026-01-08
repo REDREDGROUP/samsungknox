@@ -1,4 +1,4 @@
-import { knoxDefaultAxios } from '~/utils';
+import { knoxAmsInstance, knoxKcsInstance } from '~/utils';
 import { BaseApiRequireArgs, BaseResponse } from '~/types';
 import { KnoxRequestError } from '~/errors';
 import { AccessTokenArgs, AccessTokenResponse } from './access-token.type';
@@ -9,7 +9,7 @@ export const requestAccessToken = async ({
   validityForAccessTokenInMinutes,
   region,
 }: BaseApiRequireArgs<AccessTokenArgs>): Promise<BaseResponse<AccessTokenResponse>> => {
-  const axios = knoxDefaultAxios({ region });
+  const axios = knoxAmsInstance({ region });
 
   try {
     const { data } = await axios.post<AccessTokenResponse>('/ams/v1/users/accesstoken', {

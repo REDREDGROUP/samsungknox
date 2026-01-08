@@ -1,6 +1,6 @@
 import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
 import { KCGetDevicesArgs, KCGetDevicesResponse } from './get-devices.type';
-import { knoxDefaultAxios } from '~/utils';
+import { knoxKcsInstance } from '~/utils';
 import { KnoxRequestError } from '~/errors';
 import { AxiosInstance } from 'axios';
 
@@ -8,7 +8,7 @@ export const kcGetDevices = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCGetDevicesArgs>>>,
 ): Promise<BaseResponse<KCGetDevicesResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxAccessToken });
+  const axios = knoxKcsInstance({ region, knoxAccessToken });
   return request({ args, axios });
 };
 

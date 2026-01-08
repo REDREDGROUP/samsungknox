@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
 import { kcDeleteApplicationVersions } from './delete-application-versions';
-import { KnoxInstance } from '~/apis';
+import { KcInstance } from '~/apis';
 
 describe('DELETE /kcs/v1/kc/applications/{applicationId} Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {
@@ -55,12 +55,12 @@ describe('CLASS POST /kcs/v1/kc/applications/profile Test', () => {
     let hasError = false;
 
     try {
-      const instance = new KnoxInstance({
+      const instance = new KcInstance({
         knoxAccessToken: '',
         region: 'US',
       });
 
-      await instance.kcContentManagementApplication.deleteApplicationVersions({
+      await instance.v1.ContentManagementApplication.deleteApplicationVersions({
         args: {
           applicationId: 'TEST_APP',
         },
@@ -81,12 +81,12 @@ describe('CLASS POST /kcs/v1/kc/applications/profile Test', () => {
     let hasError = false;
 
     try {
-      const instance = new KnoxInstance({
+      const instance = new KcInstance({
         knoxAccessToken: 'asd',
         region: 'TEST',
       });
 
-      await instance.kcContentManagementApplication.deleteApplicationVersions({
+      await instance.v1.ContentManagementApplication.deleteApplicationVersions({
         args: {
           applicationId: 'TEST_APP',
         },

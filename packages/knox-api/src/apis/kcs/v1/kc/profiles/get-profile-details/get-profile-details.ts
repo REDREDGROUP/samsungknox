@@ -1,6 +1,6 @@
 import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
 import { KCGetProfileDetailsArgs, KCGetProfileDetailsResponse } from './get-profile-details.type';
-import { knoxDefaultAxios } from '~/utils';
+import { knoxKcsInstance } from '~/utils';
 import { KnoxRequestError } from '~/errors';
 import { AxiosInstance } from 'axios';
 
@@ -8,7 +8,7 @@ export const kcGetProfileDetails = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCGetProfileDetailsArgs>>>,
 ): Promise<BaseResponse<KCGetProfileDetailsResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxAccessToken });
+  const axios = knoxKcsInstance({ region, knoxAccessToken });
   return request({ args, axios });
 };
 

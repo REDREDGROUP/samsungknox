@@ -3,7 +3,7 @@ import {
   KCUploadAPublicFromPlayStoreOrGalaxyStoreAppArgs,
   KCUploadAPublicFromPlayStoreOrGalaxyStoreAppResponse,
 } from './upload-a-public-app-from-playstore-or-galaxystore.type';
-import { knoxDefaultAxios } from '~/utils';
+import { knoxKcsInstance } from '~/utils';
 import { AxiosInstance } from 'axios';
 import { KnoxRequestError } from '~/errors';
 
@@ -11,7 +11,7 @@ export const kcUploadAPublicAppFromPlayStoreOrGalaxyStore = (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCUploadAPublicFromPlayStoreOrGalaxyStoreAppArgs>>>,
 ): Promise<BaseResponse<KCUploadAPublicFromPlayStoreOrGalaxyStoreAppResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxAccessToken });
+  const axios = knoxKcsInstance({ region, knoxAccessToken });
   return request({ args, axios });
 };
 

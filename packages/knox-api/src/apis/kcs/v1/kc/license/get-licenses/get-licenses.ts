@@ -1,5 +1,5 @@
 import { KnoxRequestError } from '~/errors';
-import { knoxDefaultAxios } from '~/utils';
+import { knoxKcsInstance } from '~/utils';
 import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
 import { KCLicensesArgs, KCLicensesResponse } from './get-licenses.type';
 import { AxiosInstance } from 'axios';
@@ -8,7 +8,7 @@ export const kcGetLicenses = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCLicensesArgs>>>,
 ): Promise<BaseResponse<KCLicensesResponse>> => {
   const { region, knoxAccessToken, args } = value;
-  const axios = knoxDefaultAxios({ region, knoxAccessToken });
+  const axios = knoxKcsInstance({ region, knoxAccessToken });
   return request({ args, axios });
 };
 
