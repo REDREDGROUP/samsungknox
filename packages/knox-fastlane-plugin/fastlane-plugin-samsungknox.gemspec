@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
   spec.require_paths = ['lib']
   spec.metadata['rubygems_mfa_required'] = 'true'
-  spec.required_ruby_version = '>= 2.6'
+  spec.required_ruby_version = '>= 3.1'
 
   spec.add_development_dependency('bundler')
   spec.add_development_dependency('fastlane', '>= 2.217.0')
@@ -23,8 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency('rake')
   spec.add_development_dependency('rspec')
   spec.add_development_dependency('rspec_junit_formatter')
-  spec.add_development_dependency('rubocop', '1.50.2')
-  spec.add_development_dependency('rubocop-performance')
-  spec.add_development_dependency('rubocop-require_tools')
+  spec.add_development_dependency('rubocop', '1.87.0')
+  spec.add_development_dependency('rubocop-performance', '1.26.1')
   spec.add_development_dependency('simplecov')
 end
