@@ -37,13 +37,11 @@ const config = {
         "package.json",
         "packages/**/package.json",
     ],
-    semverRange: "",
-    dependencyTypes: ["dev", "prod", "peer", "pnpmOverrides"],
     versionGroups: [
         {
             dependencies: ["@types/node"],
             packages: ["**"],
-            pinVersion: "20.9.0",
+            pinVersion: "24.10.9",
         },
     ],
 };

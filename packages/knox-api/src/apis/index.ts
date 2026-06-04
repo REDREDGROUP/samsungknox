@@ -1,8 +1,9 @@
 import { AxiosInstance } from 'axios';
+import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
 import { knoxDefaultAxios } from '~/utils';
 import { KCContentManagementApplication, KCContentManagementAsset, KCDevice, KCLicense, KCProfile } from './kcs';
-import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
 
+export * from './ams';
 /**
  * Functions Export
  *
@@ -10,7 +11,6 @@ import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
  * They can also be used independently without creating a class instance.
  */
 export * from './custom';
-export * from './ams';
 export * from './kcs';
 
 /**

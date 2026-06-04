@@ -1,8 +1,8 @@
-import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
-import { KCLicenseDetailArgs, KCLicensesDetailResponse } from './get-license-detail-by-license-id.type';
-import { knoxDefaultAxios } from '~/utils';
-import { KnoxRequestError } from '~/errors';
 import { AxiosInstance } from 'axios';
+import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
+import { KCLicenseDetailArgs, KCLicensesDetailResponse } from './get-license-detail-by-license-id.type';
 
 export const kcGetLicenseDetailByLicenseId = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCLicenseDetailArgs>>>,

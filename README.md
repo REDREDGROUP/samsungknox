@@ -67,11 +67,11 @@ For a detailed explanation, please click [here](https://github.com/REDREDGROUP/s
 
 ## API Support
 
-APIs that continue to be supported are being added and please refer to the corresponding README as soon as they are updated! :)
+APIs that continue to be supported are being added and please refer to the corresponding README as soon as they are updated
 
 ## Copyright
 
-© 2023 REDREDGROUP Web Service. All Right Reserved.
+© 2026 REDREDGROUP Software. All Right Reserved.
 
 **REDREDGROUP is Notify that it is not related to the SamsungKnox service.**
 

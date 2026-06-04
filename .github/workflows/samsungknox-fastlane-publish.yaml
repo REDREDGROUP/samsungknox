@@ -3,20 +3,22 @@ name: Samsungknox-fastlane Gems Publish
 on:
   push:
     branches:
-      - master
+      - main
     paths:
-      - 'packages/knox-fastlane/CHANGELOG.md'
+      - 'packages/knox-fastlane-plugin/CHANGELOG.md'
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.0'
+        ruby-version: '3.1.0'
+        bundler-cache: true
+        working-directory: packages/knox-fastlane-plugin
 
     - name: Install dependencies
       working-directory: packages/knox-fastlane-plugin

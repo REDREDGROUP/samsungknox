@@ -13,22 +13,14 @@ type GitRepoOptions = {
   repo: string;
 };
 
-export const MAIN_BRANCHES = ['main', 'origin/develop', 'changeset-release/develop'];
+export const MAIN_BRANCHES = ['main', 'origin/main', 'changeset-release/main'];
 
 export const GIT_REPO_OPTIONS: GitRepoOptions = {
   owner: 'REDREDGROUP',
   repo: 'samsungknox',
 };
 
-export const createChangeLogTemplate = ({
-  log,
-  releaseVersion,
-  changelogEntries,
-}: {
-  log: Logger;
-  releaseVersion: string;
-  changelogEntries: ChangelogEntries;
-}) => {
+export const createChangeLogTemplate = ({ log, releaseVersion, changelogEntries }: { log: Logger; releaseVersion: string; changelogEntries: ChangelogEntries }) => {
   const logTemplate = `
   # Release v${releaseVersion}
   
@@ -44,27 +36,15 @@ export const createChangeLogTemplate = ({
   return logTemplate;
 };
 
-export const createChangeLogPullRequestDefaultBody = ({
-  log,
-  changelogPath,
-}: {
-  log: Logger;
-  changelogPath: string;
-}) => {
-  const changeLogPullRequestDefaultBody = `See [${changelogPath}](https://github.com/REDREDGROUP/samsungknox/blob/master/${changelogPath}) for more information.`;
+export const createChangeLogPullRequestDefaultBody = ({ log, changelogPath }: { log: Logger; changelogPath: string }) => {
+  const changeLogPullRequestDefaultBody = `See [${changelogPath}](https://github.com/REDREDGROUP/samsungknox/blob/main/${changelogPath}) for more information.`;
 
   log.debug(`Received: changeLogPullRequestDefaultBody ${changeLogPullRequestDefaultBody}`);
 
   return changeLogPullRequestDefaultBody;
 };
 
-export const createChangeLogDocsPath = ({
-  log,
-  releaseVersion,
-}: {
-  log: Logger;
-  releaseVersion: string;
-}) => {
+export const createChangeLogDocsPath = ({ log, releaseVersion }: { log: Logger; releaseVersion: string }) => {
   const LogDocsPath = `docs/releases/v${releaseVersion}-changelog.md`;
 
   log.debug(`Received: changeLogPath ${LogDocsPath}`);

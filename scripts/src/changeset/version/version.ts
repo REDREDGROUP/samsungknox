@@ -1,35 +1,30 @@
-import path from 'path';
-
+import path from 'node:path';
 import { exec } from '@actions/exec';
 import * as github from '@actions/github';
 import fs from 'fs-extra';
 import * as semver from 'semver';
 
-import {
-  createChangeLogPullRequestDefaultBody,
-  createChangeLogDocsPath,
-  createChangeLogTemplate,
-} from '../constraint';
+import { createChangeLogDocsPath, createChangeLogPullRequestDefaultBody, createChangeLogTemplate } from '../constraint';
 import { FunctionsCommonOptions } from '../type';
 import {
-  getChangesetState,
-  getChangedPackages,
-  getVersionsByDirectory,
-  requireChangesetsCliPkgJson,
+  createGitPullRequest,
+  createGitPullRequestTitle,
   execChangesetCommand,
+  formatChangeLogFile,
+  getChangedPackages,
+  getChangelogEntry,
+  getChangesetState,
   getPackageMetadata,
-  gitSwitchToMaybeExistingBranch,
+  getVersionsByDirectory,
   gitCheckIfClean,
-  gitReset,
   gitCommitAll,
   gitPushToOrigin,
-  formatChangeLogFile,
-  createGitPullRequestTitle,
-  createGitPullRequest,
-  updateGitPullRequest,
-  getChangelogEntry,
-  updateRootPackageReleaseVersion,
+  gitReset,
+  gitSwitchToMaybeExistingBranch,
   isMainBranch,
+  requireChangesetsCliPkgJson,
+  updateGitPullRequest,
+  updateRootPackageReleaseVersion,
 } from '../utils';
 
 type VersionOptions = {
@@ -101,7 +96,7 @@ export async function runVersion({
       return {
         highestLevel: entry.highestLevel,
         private: !!pkg.packageJson.private,
-        content: `## ${pkg.packageJson.name}@${pkg.packageJson.version}\n\n` + entry.content,
+        content: `## ${pkg.packageJson.name}@${pkg.packageJson.version}\n\n${entry.content}`,
       };
     }),
   );
@@ -118,7 +113,7 @@ export async function runVersion({
   const isGitCheckoutClean = await gitCheckIfClean();
 
   if (!isGitCheckoutClean) {
-    const finalCommitMessage = `${commitMessage}${!!preState ? ` (${preState.tag})` : ''}`;
+    const finalCommitMessage = `${commitMessage}${preState ? ` (${preState.tag})` : ''}`;
     await gitCommitAll(finalCommitMessage);
   }
 

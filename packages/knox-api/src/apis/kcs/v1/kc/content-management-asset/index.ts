@@ -1,17 +1,13 @@
 import { AxiosInstance } from 'axios';
-import { GetMediaFile, KCGetMediaFileArgs, KCGetMediaFileResponse } from './get-media-file';
 import { BaseArgsInput, BaseResponse } from '~/types';
-import {
-  UploadMediaFileContentInCms,
-  KCUploadMediaFileContentInCmsArgs,
-  KCUploadMediaFileContentInCmsResponse,
-} from './upload-media-file-content-in-cms';
+import { GetMediaFile, KCGetMediaFileArgs, KCGetMediaFileResponse } from './get-media-file';
+import { KCUploadMediaFileContentInCmsArgs, KCUploadMediaFileContentInCmsResponse, UploadMediaFileContentInCms } from './upload-media-file-content-in-cms';
 
+export * from './get-media-file';
 /**
  * Functions Export
  */
 export * from './upload-media-file-content-in-cms';
-export * from './get-media-file';
 
 /**
  * Class Export
@@ -31,9 +27,7 @@ export class KCContentManagementAsset {
     return this.GetMediaFile.getMediaFile({ args });
   }
 
-  public async uploadMediaFileContentInCms({
-    args,
-  }: BaseArgsInput<KCUploadMediaFileContentInCmsArgs>): Promise<BaseResponse<KCUploadMediaFileContentInCmsResponse>> {
+  public async uploadMediaFileContentInCms({ args }: BaseArgsInput<KCUploadMediaFileContentInCmsArgs>): Promise<BaseResponse<KCUploadMediaFileContentInCmsResponse>> {
     return this.UploadMediaFileContentInCms.uploadMediaFileContentInCms({ args });
   }
 }

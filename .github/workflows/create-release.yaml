@@ -3,7 +3,7 @@ name: Create Release
 on:
   pull_request:
     branches:
-      - develop
+      - main
     types: [closed]
   workflow_dispatch:
     inputs:
@@ -16,7 +16,7 @@ on:
 jobs:
   create-release:
     if: >
-      (github.event.pull_request.merged == true && github.head_ref == 'changeset-release/develop') ||
+      (github.event.pull_request.merged == true && github.head_ref == 'changeset-release/main') ||
       (inputs.force_deploy == true)
     name: Create Release Note
     runs-on: ubuntu-latest
@@ -24,19 +24,19 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 10.28.2
 
-      - name: Use Node.js 18
-        uses: actions/setup-node@v3
+      - name: Use Node.js 24.13.0
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 24.13.0
           cache: "pnpm"
           registry-url: 'https://registry.npmjs.org'
       
       - name: Install dependencies
-        run: pnpm i
+        run: pnpm install --frozen-lockfile
 
       - name: Create a release tag
         working-directory: scripts

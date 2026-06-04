@@ -1,12 +1,10 @@
-import { knoxDefaultAxios } from '~/utils';
-import { KnoxRequestError } from '~/errors';
-import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseKCLicense } from '~/types';
-import { KCTrialLicenseArgs } from './generate-trial-license.type';
 import { AxiosInstance } from 'axios';
+import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseArgsInput, BaseKCLicense, BaseResponse, BaseXApiRequire } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
+import { KCTrialLicenseArgs } from './generate-trial-license.type';
 
-export const kcGenerateTrialLicense = async (
-  value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCTrialLicenseArgs>>>,
-): Promise<BaseResponse<BaseKCLicense>> => {
+export const kcGenerateTrialLicense = async (value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCTrialLicenseArgs>>>): Promise<BaseResponse<BaseKCLicense>> => {
   const { region, knoxAccessToken, args } = value;
   const axios = knoxDefaultAxios({ region, knoxAccessToken });
   return request({ args, axios });

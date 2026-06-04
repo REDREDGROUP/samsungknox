@@ -1,10 +1,6 @@
 import { exec } from '@actions/exec';
 
-export async function execWithOutput(
-  command: string,
-  args?: string[],
-  options?: { ignoreReturnCode?: boolean; cwd?: string },
-) {
+export async function execWithOutput(command: string, args?: string[], options?: { ignoreReturnCode?: boolean; cwd?: string }) {
   let myOutput = '';
   let myError = '';
 

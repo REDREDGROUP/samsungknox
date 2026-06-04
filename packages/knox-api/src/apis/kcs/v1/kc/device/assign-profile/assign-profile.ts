@@ -1,8 +1,8 @@
-import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
-import { KCAssignProfileDeviceArgs, KCAssignProfileDeviceResponse } from './assign-profile.type';
-import { knoxDefaultAxios } from '~/utils';
-import { KnoxRequestError } from '~/errors';
 import { AxiosInstance } from 'axios';
+import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
+import { KCAssignProfileDeviceArgs, KCAssignProfileDeviceResponse } from './assign-profile.type';
 
 export const kcAssignProfileDevices = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCAssignProfileDeviceArgs>>>,
@@ -27,13 +27,7 @@ export class AssignProfileDevice {
   }
 }
 
-const request = async ({
-  args,
-  axios,
-}: {
-  args: KCAssignProfileDeviceArgs;
-  axios: AxiosInstance;
-}): Promise<BaseResponse<KCAssignProfileDeviceResponse>> => {
+const request = async ({ args, axios }: { args: KCAssignProfileDeviceArgs; axios: AxiosInstance }): Promise<BaseResponse<KCAssignProfileDeviceResponse>> => {
   try {
     const { data } = await axios.put<KCAssignProfileDeviceResponse>('/kcs/v1/kc/devices/assign', {
       ...args,

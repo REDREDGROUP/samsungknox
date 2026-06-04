@@ -1,8 +1,8 @@
-import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
-import { KCSendCommandToMultipleDeviceArgs, KCSendCommandToMultipleDeviceResponse } from './send-command-to-multiple-devices.type';
-import { knoxDefaultAxios } from '~/utils';
-import { KnoxRequestError } from '~/errors';
 import { AxiosInstance } from 'axios';
+import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
+import { KCSendCommandToMultipleDeviceArgs, KCSendCommandToMultipleDeviceResponse } from './send-command-to-multiple-devices.type';
 
 export const kcSendCommandToMultipleDevices = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCSendCommandToMultipleDeviceArgs>>>,
@@ -19,9 +19,7 @@ export class SendCommandToMultipleDevices {
     this.axios = axios;
   }
 
-  public async sendCommandToMultipleDevices({
-    args,
-  }: BaseArgsInput<KCSendCommandToMultipleDeviceArgs>): Promise<BaseResponse<KCSendCommandToMultipleDeviceResponse>> {
+  public async sendCommandToMultipleDevices({ args }: BaseArgsInput<KCSendCommandToMultipleDeviceArgs>): Promise<BaseResponse<KCSendCommandToMultipleDeviceResponse>> {
     return request({
       args: args,
       axios: this.axios,

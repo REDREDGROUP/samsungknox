@@ -1,13 +1,9 @@
 import 'dotenv/config';
+import { generateBase64EncodedStringPublicKey, generateSignedAccessTokenJWT, generateSignedClientIdentifierJWT } from '@redredgroup/samsungknox-token-library';
 import { describe, expect, it } from 'vitest';
+import { generateKnoxApiToken, KnoxInstance, requestAccessToken } from '~/apis';
 import { KnoxRequestError } from '~/errors';
 import { kcGetLicenses } from './get-licenses';
-import {
-  generateSignedClientIdentifierJWT,
-  generateBase64EncodedStringPublicKey,
-  generateSignedAccessTokenJWT,
-} from '@redredgroup/samsungknox-token-library';
-import { KnoxInstance, generateKnoxApiToken, requestAccessToken } from '~/apis';
 
 describe('GET /kcs/v1/kc/licenses Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {

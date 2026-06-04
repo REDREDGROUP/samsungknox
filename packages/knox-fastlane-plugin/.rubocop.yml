@@ -1,10 +1,10 @@
 ---
-require:
-  - rubocop/require_tools
+plugins:
   - rubocop-performance
 AllCops:
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.1
   NewCops: enable
+  SuggestExtensions: false
   Include:
     - '**/*.rb'
     - '**/*file'
@@ -57,19 +57,6 @@ Style/EmptyMethod:
 Lint/UselessAssignment:
   Exclude:
     - '**/spec/**/*'
-Require/MissingRequireStatement:
-  Exclude:
-    - '**/spec/**/*.rb'
-    - '**/spec_helper.rb'
-    - spaceship/lib/spaceship/babosa_fix.rb
-    - fastlane_core/lib/fastlane_core/ui/disable_colors.rb
-    - '**/Fastfile'
-    - '**/*.gemspec'
-    - rakelib/**/*
-    - '**/*.rake'
-    - '**/Rakefile'
-    - fastlane/**/*
-    - supply/**/*
 Layout/FirstHashElementIndentation:
   Enabled: false
 Layout/HashAlignment:
@@ -103,6 +90,8 @@ Metrics/MethodLength:
   Enabled: false
 Metrics/CyclomaticComplexity:
   Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
 Style/WordArray:
   MinSize: 19
 Style/SignalException:
@@ -135,7 +124,7 @@ Lint/UnusedMethodArgument:
 Lint/ParenthesesAsGroupedExpression:
   Exclude:
     - '**/spec/**/*'
-Naming/PredicateName:
+Naming/PredicatePrefix:
   Enabled: false
 Style/PerlBackrefs:
   Enabled: false

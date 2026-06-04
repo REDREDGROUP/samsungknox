@@ -1,18 +1,18 @@
 import { AxiosInstance } from 'axios';
-import { KCValidateLicenseArgs, ValidateLicense } from './validate-license';
 import { BaseArgsInput, BaseKCLicense, BaseResponse } from '~/types';
-import { KCRegisterLicenseArgs, RegisterLicense } from './register-license';
-import { GetLicense, KCLicensesArgs, KCLicensesResponse } from './get-licenses';
-import { GetLicenseDetail, KCLicenseDetailArgs, KCLicensesDetailResponse } from './get-license-details-by-license-id';
 import { GenerateTrialLicense, KCTrialLicenseArgs } from './generate-trial-license';
+import { GetLicenseDetail, KCLicenseDetailArgs, KCLicensesDetailResponse } from './get-license-details-by-license-id';
+import { GetLicense, KCLicensesArgs, KCLicensesResponse } from './get-licenses';
+import { KCRegisterLicenseArgs, RegisterLicense } from './register-license';
+import { KCValidateLicenseArgs, ValidateLicense } from './validate-license';
 
 /**
  * Functions Export
  */
 export * from './generate-trial-license';
-export * from './register-license';
-export * from './get-licenses';
 export * from './get-license-details-by-license-id';
+export * from './get-licenses';
+export * from './register-license';
 export * from './validate-license';
 
 /**

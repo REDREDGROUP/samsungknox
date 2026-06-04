@@ -1,25 +1,21 @@
 import { AxiosInstance } from 'axios';
-import { KCUnassignProfileDevicesArgs, KCUnassignProfileDevicesResponse, UnassignProfileDevices } from './unassign-profile';
 import { BaseArgsInput, BaseResponse } from '~/types';
-import {
-  KCSendCommandToMultipleDeviceArgs,
-  KCSendCommandToMultipleDeviceResponse,
-  SendCommandToMultipleDevices,
-} from './send-command-to-multiple-devices';
-import { GetDevice, KCGetDevicesArgs, KCGetDevicesResponse } from './get-devices';
-import { GetDeviceLog, KCGetDeviceLogsArgs, KCGetDeviceLogsResponse } from './get-device-logs';
-import { DeleteDevice, KCDeleteDevicesArgs, KCDeleteDevicesResponse } from './delete-devices';
 import { AssignProfileDevice, KCAssignProfileDeviceArgs, KCAssignProfileDeviceResponse } from './assign-profile';
+import { DeleteDevice, KCDeleteDevicesArgs, KCDeleteDevicesResponse } from './delete-devices';
+import { GetDeviceLog, KCGetDeviceLogsArgs, KCGetDeviceLogsResponse } from './get-device-logs';
+import { GetDevice, KCGetDevicesArgs, KCGetDevicesResponse } from './get-devices';
+import { KCSendCommandToMultipleDeviceArgs, KCSendCommandToMultipleDeviceResponse, SendCommandToMultipleDevices } from './send-command-to-multiple-devices';
+import { KCUnassignProfileDevicesArgs, KCUnassignProfileDevicesResponse, UnassignProfileDevices } from './unassign-profile';
 
 /**
  * Functions Export
  */
 export * from './assign-profile';
-export * from './unassign-profile';
-export * from './send-command-to-multiple-devices';
-export * from './get-devices';
-export * from './get-device-logs';
 export * from './delete-devices';
+export * from './get-device-logs';
+export * from './get-devices';
+export * from './send-command-to-multiple-devices';
+export * from './unassign-profile';
 
 /**
  * Class Export
@@ -60,15 +56,11 @@ export class KCDevice {
     return this.AssignProfileDevice.assignProfileDevices({ args });
   }
 
-  public async unassignProfileDevices({
-    args,
-  }: BaseArgsInput<KCUnassignProfileDevicesArgs>): Promise<BaseResponse<KCUnassignProfileDevicesResponse>> {
+  public async unassignProfileDevices({ args }: BaseArgsInput<KCUnassignProfileDevicesArgs>): Promise<BaseResponse<KCUnassignProfileDevicesResponse>> {
     return this.UnassignProfileDevices.unassignProfileDevices({ args });
   }
 
-  public async sendCommandToMultipleDevices({
-    args,
-  }: BaseArgsInput<KCSendCommandToMultipleDeviceArgs>): Promise<BaseResponse<KCSendCommandToMultipleDeviceResponse>> {
+  public async sendCommandToMultipleDevices({ args }: BaseArgsInput<KCSendCommandToMultipleDeviceArgs>): Promise<BaseResponse<KCSendCommandToMultipleDeviceResponse>> {
     return this.SendCommandToMultipleDevices.sendCommandToMultipleDevices({ args });
   }
 }

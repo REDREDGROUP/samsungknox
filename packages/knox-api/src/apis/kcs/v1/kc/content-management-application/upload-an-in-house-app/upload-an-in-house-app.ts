@@ -1,8 +1,8 @@
-import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
-import { KCUploadAnInHouseAppArgs, KCUploadAnInHouseAppResponse } from './upload-an-in-house-app.type';
-import { knoxDefaultAxios } from '~/utils';
 import { AxiosInstance } from 'axios';
 import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
+import { KCUploadAnInHouseAppArgs, KCUploadAnInHouseAppResponse } from './upload-an-in-house-app.type';
 
 export const kcUploadAnInHouseApp = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCUploadAnInHouseAppArgs>>>,
@@ -33,13 +33,7 @@ export class UploadAnInHouseApp {
   }
 }
 
-const request = async ({
-  args,
-  axios,
-}: {
-  args: KCUploadAnInHouseAppArgs;
-  axios: AxiosInstance;
-}): Promise<BaseResponse<KCUploadAnInHouseAppResponse>> => {
+const request = async ({ args, axios }: { args: KCUploadAnInHouseAppArgs; axios: AxiosInstance }): Promise<BaseResponse<KCUploadAnInHouseAppResponse>> => {
   try {
     const { data } = await axios.post<KCUploadAnInHouseAppResponse>(`/kcs/v1/kc/applications/upload`, args);
 

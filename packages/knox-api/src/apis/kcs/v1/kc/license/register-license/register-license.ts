@@ -1,12 +1,10 @@
-import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseKCLicense } from '~/types';
-import { KCRegisterLicenseArgs } from './register-license.type';
-import { knoxDefaultAxios } from '~/utils';
-import { KnoxRequestError } from '~/errors';
 import { AxiosInstance } from 'axios';
+import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseArgsInput, BaseKCLicense, BaseResponse, BaseXApiRequire } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
+import { KCRegisterLicenseArgs } from './register-license.type';
 
-export const kcRegisterLicense = async (
-  value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCRegisterLicenseArgs>>>,
-): Promise<BaseResponse<BaseKCLicense>> => {
+export const kcRegisterLicense = async (value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCRegisterLicenseArgs>>>): Promise<BaseResponse<BaseKCLicense>> => {
   const { region, knoxAccessToken, args } = value;
   const axios = knoxDefaultAxios({ region, knoxAccessToken });
   return request({ args, axios });

@@ -10,8 +10,8 @@ export default defineConfig({
     exclude: [...configDefaults.exclude],
   },
   resolve: {
-    // alias: {
-    //   "~": path.resolve(__dirname, "./src"),
-    // },
+    alias: {
+      src: path.resolve(import.meta.dirname, './src'),
+    },
   },
 });

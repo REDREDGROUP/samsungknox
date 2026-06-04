@@ -1,12 +1,18 @@
-import { EOL } from 'os';
-
+import { EOL } from 'node:os';
 import { Octokit } from '@octokit/rest';
 import fs from 'fs-extra';
-
+import { createLogger } from '@/common';
 import { GIT_REPO_OPTIONS } from '../constraint';
 import { getRootPackageJsonMetadata } from '../utils';
 
-import { createLogger } from '@/common';
+type GitRefError = {
+  status?: number;
+  response?: {
+    data?: {
+      message?: string;
+    };
+  };
+};
 
 async function createGitTag(octokit: Octokit, commitSha: string, tagName: string): Promise<void> {
   const annotatedTag = await octokit.git.createTag({
@@ -23,8 +29,10 @@ async function createGitTag(octokit: Octokit, commitSha: string, tagName: string
       ref: `refs/tags/${tagName}`,
       sha: annotatedTag.data.sha,
     });
-  } catch (error) {
-    if (error.status === 422 && error.response?.data?.message === 'Reference already exists') {
+  } catch (error: unknown) {
+    const gitRefError = error as GitRefError;
+
+    if (gitRefError.status === 422 && gitRefError.response?.data?.message === 'Reference already exists') {
       throw new Error(`Tag ${tagName} already exists in repository`);
     }
     console.error(`Tag creation for ${tagName} failed`);
@@ -62,7 +70,7 @@ async function main(): Promise<void> {
   await fs.appendFile(process.env.GITHUB_OUTPUT, `version=${version}${EOL}`);
 }
 
-main().catch((error) => {
-  console.error(error.stack);
+main().catch((error: unknown) => {
+  console.error(error instanceof Error ? error.stack : error);
   process.exit(1);
 });

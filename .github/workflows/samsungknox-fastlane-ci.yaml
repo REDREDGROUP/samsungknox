@@ -4,34 +4,31 @@ on:
   pull_request:
     paths:
       - packages/knox-fastlane-plugin/**
+      - .github/workflows/samsungknox-fastlane-ci.yaml
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile') }}
-        restore-keys: |
-          ${{ runner.os }}-gem-
+    - uses: actions/checkout@v4
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.0'
+        ruby-version: '3.1.0'
+        bundler-cache: true
+        working-directory: packages/knox-fastlane-plugin
 
     - name: Install dependencies
       working-directory: packages/knox-fastlane-plugin
-      run: bundle check || bundle install --jobs=4 --retry=3 --path vendor/bundle
+      run: bundle check || bundle install --jobs=4 --retry=3
 
     - name: Run tests
       working-directory: packages/knox-fastlane-plugin
       run: bundle exec rake
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: test-results
         path: packages/knox-fastlane-plugin/test-results

@@ -1,9 +1,9 @@
 import 'dotenv/config';
-import { generateSignedClientIdentifierJWT, generateBase64EncodedStringPublicKey } from '@redredgroup/samsungknox-token-library';
-import { describe, expect, it } from 'vitest';
-import { requestAccessToken } from './access-token';
-import { KnoxRequestError } from '~/errors';
+import { generateBase64EncodedStringPublicKey, generateSignedClientIdentifierJWT } from '@redredgroup/samsungknox-token-library';
 import * as jwt from 'jsonwebtoken';
+import { describe, expect, it } from 'vitest';
+import { KnoxRequestError } from '~/errors';
+import { requestAccessToken } from './access-token';
 
 describe('POST /v1/ams/accesstoken Test', () => {
   it('require args missing', async () => {

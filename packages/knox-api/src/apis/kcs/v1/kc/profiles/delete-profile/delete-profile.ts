@@ -1,12 +1,10 @@
-import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
-import { KCDeleteProfileArgs, KCDeleteProfileResponse } from './delete-profile.type';
-import { knoxDefaultAxios } from '~/utils';
-import { KnoxRequestError } from '~/errors';
 import { AxiosInstance } from 'axios';
+import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
+import { KCDeleteProfileArgs, KCDeleteProfileResponse } from './delete-profile.type';
 
-export const kcDeleteProfile = async (
-  value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCDeleteProfileArgs>>>,
-): Promise<BaseResponse<KCDeleteProfileResponse>> => {
+export const kcDeleteProfile = async (value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCDeleteProfileArgs>>>): Promise<BaseResponse<KCDeleteProfileResponse>> => {
   const { region, knoxAccessToken, args } = value;
   const axios = knoxDefaultAxios({ region, knoxAccessToken });
   return request({ args, axios });

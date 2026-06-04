@@ -10,6 +10,7 @@
     "skipLibCheck": true,
     "rootDir": ".",
     "outDir": "dist",
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "~/errors": ["src/errors"],

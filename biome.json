@@ -1,0 +1,85 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.13/schema.json",
+  "root": true,
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": [
+      "packages/**/*.{js,jsx,ts,tsx,json}",
+      "scripts/**/*.{js,jsx,ts,tsx,json}",
+      "libs/**/*.{js,jsx,ts,tsx,json}",
+      "!**/dist",
+      "!**/generated",
+      "package.json",
+      "!**/assets/static"
+    ],
+    "ignoreUnknown": false
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 170
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noArrayIndexKey": "off",
+        "noTemplateCurlyInString": "off",
+        "noShadowRestrictedNames": "off"
+      },
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": {
+          "level": "error",
+          "fix": "safe"
+        },
+        "noConstructorReturn": "off",
+        "useExhaustiveDependencies": "off",
+        "noEmptyPattern": "off"
+      },
+      "style": {
+        "useImportType": "off"
+      },
+      "complexity": {
+        "noBannedTypes": "off",
+        "useOptionalChain": "off",
+        "noStaticOnlyClass": "off"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "single"
+    },
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.config.{js,ts,mjs,cjs}"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
+          }
+        }
+      }
+    }
+  ],
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
-import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
-import { KCUnassignProfileDevicesArgs, KCUnassignProfileDevicesResponse } from './unassign-profile.type';
-import { knoxDefaultAxios } from '~/utils';
-import { KnoxRequestError } from '~/errors';
 import { AxiosInstance } from 'axios';
+import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
+import { KCUnassignProfileDevicesArgs, KCUnassignProfileDevicesResponse } from './unassign-profile.type';
 
 export const kcUnassignProfileDevices = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCUnassignProfileDevicesArgs>>>,
@@ -19,9 +19,7 @@ export class UnassignProfileDevices {
     this.axios = axios;
   }
 
-  public async unassignProfileDevices({
-    args,
-  }: BaseArgsInput<KCUnassignProfileDevicesArgs>): Promise<BaseResponse<KCUnassignProfileDevicesResponse>> {
+  public async unassignProfileDevices({ args }: BaseArgsInput<KCUnassignProfileDevicesArgs>): Promise<BaseResponse<KCUnassignProfileDevicesResponse>> {
     return request({
       args: args,
       axios: this.axios,
@@ -29,13 +27,7 @@ export class UnassignProfileDevices {
   }
 }
 
-const request = async ({
-  args,
-  axios,
-}: {
-  args: KCUnassignProfileDevicesArgs;
-  axios: AxiosInstance;
-}): Promise<BaseResponse<KCUnassignProfileDevicesResponse>> => {
+const request = async ({ args, axios }: { args: KCUnassignProfileDevicesArgs; axios: AxiosInstance }): Promise<BaseResponse<KCUnassignProfileDevicesResponse>> => {
   try {
     const { data } = await axios.put<KCUnassignProfileDevicesResponse>('/kcs/v1/kc/devices/unassign', {
       ...args,

@@ -1,8 +1,8 @@
-import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
-import { KCGetProfileDetailsArgs, KCGetProfileDetailsResponse } from './get-profile-details.type';
-import { knoxDefaultAxios } from '~/utils';
-import { KnoxRequestError } from '~/errors';
 import { AxiosInstance } from 'axios';
+import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
+import { KCGetProfileDetailsArgs, KCGetProfileDetailsResponse } from './get-profile-details.type';
 
 export const kcGetProfileDetails = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCGetProfileDetailsArgs>>>,
@@ -27,13 +27,7 @@ export class GetProfileDetails {
   }
 }
 
-const request = async ({
-  args,
-  axios,
-}: {
-  args: KCGetProfileDetailsArgs;
-  axios: AxiosInstance;
-}): Promise<BaseResponse<KCGetProfileDetailsResponse>> => {
+const request = async ({ args, axios }: { args: KCGetProfileDetailsArgs; axios: AxiosInstance }): Promise<BaseResponse<KCGetProfileDetailsResponse>> => {
   try {
     const { data } = await axios.get<KCGetProfileDetailsResponse>(`/kcs/v1/kc/profiles/${args.profileId}/details`, {});
 

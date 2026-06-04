@@ -1,9 +1,9 @@
+import jwt from 'jsonwebtoken';
 import { BaseCredentialInputType } from '../types';
 import { exportCredentialPrivateKey } from './export-private-key';
 import { exportCredentialPublicDerKey } from './export-public-der-key';
 import { generateJwtId } from './generate-jwt-id';
 import { initCredential } from './init-credential';
-import jwt from 'jsonwebtoken';
 
 type GenerateSignedJwtType = BaseCredentialInputType & {
   tokenOrAccess: string;
@@ -16,11 +16,7 @@ const jwtSignOptionsBase: jwt.SignOptions = {
   algorithm: 'RS512',
 };
 
-export const generateSignedJWT = async ({
-  credential: { key, path },
-  isClientIdentifier,
-  tokenOrAccess,
-}: GenerateSignedJwtType): Promise<{ accessToken: string }> => {
+export const generateSignedJWT = async ({ credential: { key, path }, isClientIdentifier, tokenOrAccess }: GenerateSignedJwtType): Promise<{ accessToken: string }> => {
   const credential = await initCredential({
     credential: {
       path: path,

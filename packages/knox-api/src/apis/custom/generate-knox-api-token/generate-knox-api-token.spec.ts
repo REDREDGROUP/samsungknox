@@ -1,9 +1,9 @@
 import 'dotenv/config';
-import { describe, expect, it } from 'vitest';
-import * as jwt from 'jsonwebtoken';
 import { ERRORS } from '@redredgroup/samsungknox-token-library/src/common';
-import { generateKnoxApiToken } from './generate-knox-api-token';
+import * as jwt from 'jsonwebtoken';
+import { describe, expect, it } from 'vitest';
 import { kcGetProfiles } from '~/apis';
+import { generateKnoxApiToken } from './generate-knox-api-token';
 
 describe('CUSTOM generate knox api token Test', () => {
   it('credential key missing', async () => {
