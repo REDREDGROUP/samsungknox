@@ -1,8 +1,7 @@
 import 'dotenv/config';
 import { generateBase64EncodedStringPublicKey, generateSignedAccessTokenJWT, generateSignedClientIdentifierJWT } from '@redredgroup/samsungknox-token-library';
-import { requestAccessToken } from 'src/apis/ams';
 import { describe, expect, it } from 'vitest';
-import { generateKnoxApiToken, KnoxInstance } from '~/apis';
+import { generateKnoxApiToken, KnoxInstance, requestAccessToken } from '~/apis';
 import { KnoxRequestError } from '~/errors';
 import { kcGetProfiles } from './get-profiles';
 
