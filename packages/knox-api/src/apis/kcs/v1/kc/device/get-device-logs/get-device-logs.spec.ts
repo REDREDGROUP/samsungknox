@@ -1,8 +1,8 @@
 import 'dotenv/config';
 import { describe, expect, it } from 'vitest';
+import { generateKnoxApiToken } from '~/apis';
 import { KnoxRequestError } from '~/errors';
 import { kcGetDeviceLogs } from './get-device-logs';
-import { generateKnoxApiToken } from '~/apis';
 
 describe('PUT /kcs/v1/kc/devices/unassign Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {

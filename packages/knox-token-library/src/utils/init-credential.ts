@@ -1,8 +1,8 @@
-import fs from 'fs';
-import { CredentialType } from '../types';
-import { isNil } from 'lodash-es';
+import fs from 'node:fs';
 import * as jwt from 'jsonwebtoken';
+import { isNil } from 'lodash-es';
 import { ERRORS } from '../common';
+import { CredentialType } from '../types';
 
 const validateJWT = (token: string) => {
   const decoded = jwt.decode(token);
@@ -23,7 +23,7 @@ const readCredential = (credential: { path?: string; key?: string }): Credential
     if (credential.key) {
       return JSON.parse(credential.key);
     }
-  } catch (e) {
+  } catch (_e) {
     throw new TypeError(ERRORS.CREDENTIAL_IS_NOT_JSON_TYPE);
   }
 

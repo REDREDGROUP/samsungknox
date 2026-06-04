@@ -1,16 +1,15 @@
 import { AxiosInstance } from 'axios';
 import { BaseArgsInput, BaseResponse } from '~/types';
-import { GetKnoxConfigureProfilesArgsType, GetKnoxConfigureProfilesResponseType, GetProfile } from './get-profiles';
-import { GetProfileDetails } from './get-profile-details';
-import { KCGetProfileDetailsArgs, KCGetProfileDetailsResponse } from './get-profile-details';
 import { DeleteProfile, KCDeleteProfileArgs, KCDeleteProfileResponse } from './delete-profile';
+import { GetProfileDetails, KCGetProfileDetailsArgs, KCGetProfileDetailsResponse } from './get-profile-details';
+import { GetKnoxConfigureProfilesArgsType, GetKnoxConfigureProfilesResponseType, GetProfile } from './get-profiles';
 
+export * from './delete-profile';
+export * from './get-profile-details';
 /**
  * Functions Export
  */
 export * from './get-profiles';
-export * from './get-profile-details';
-export * from './delete-profile';
 
 /**
  * Class Export

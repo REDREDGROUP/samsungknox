@@ -1,6 +1,6 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import NodeRSA from 'node-rsa';
-import fs from 'fs';
-import path from 'path';
 import { v1 } from 'uuid';
 
 export const generateExampleKey = () => {

@@ -1,8 +1,8 @@
-import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
-import { KCDeleteApplicationVersionsResponse, KCDeleteApplicationVersionsArgs } from './delete-application-versions.type';
-import { knoxDefaultAxios } from '~/utils';
-import { KnoxRequestError } from '~/errors';
 import { AxiosInstance } from 'axios';
+import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
+import { KCDeleteApplicationVersionsArgs, KCDeleteApplicationVersionsResponse } from './delete-application-versions.type';
 
 export const kcDeleteApplicationVersions = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCDeleteApplicationVersionsArgs>>>,
@@ -19,9 +19,7 @@ export class DeleteApplicationVersion {
     this.axios = axios;
   }
 
-  public async deleteApplicationVersions({
-    args,
-  }: BaseArgsInput<KCDeleteApplicationVersionsArgs>): Promise<BaseResponse<KCDeleteApplicationVersionsResponse>> {
+  public async deleteApplicationVersions({ args }: BaseArgsInput<KCDeleteApplicationVersionsArgs>): Promise<BaseResponse<KCDeleteApplicationVersionsResponse>> {
     return request({
       args: args,
       axios: this.axios,
@@ -29,13 +27,7 @@ export class DeleteApplicationVersion {
   }
 }
 
-const request = async ({
-  args,
-  axios,
-}: {
-  args: KCDeleteApplicationVersionsArgs;
-  axios: AxiosInstance;
-}): Promise<BaseResponse<KCDeleteApplicationVersionsResponse>> => {
+const request = async ({ args, axios }: { args: KCDeleteApplicationVersionsArgs; axios: AxiosInstance }): Promise<BaseResponse<KCDeleteApplicationVersionsResponse>> => {
   try {
     const { data } = await axios.delete<KCDeleteApplicationVersionsResponse>(`/kcs/v1/kc/applications/${args.applicationId}`, {
       params: args,

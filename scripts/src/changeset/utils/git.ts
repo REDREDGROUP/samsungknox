@@ -18,10 +18,7 @@ export const gitGenerateBotAuthenticationFile = async ({
 }>) => {
   log.action('setting GitHub credentials');
 
-  await fs.writeFile(
-    `${homePath}/.netrc`,
-    `machine github.com\nlogin github-actions[bot]\npassword ${githubToken}`,
-  );
+  await fs.writeFile(`${homePath}/.netrc`, `machine github.com\nlogin github-actions[bot]\npassword ${githubToken}`);
 };
 
 export const gitSetupUser = async () => {
@@ -34,10 +31,7 @@ export const gitPullBranch = async (branch: string) => {
 };
 
 export const gitPushToOrigin = async (branch: string, { force }: { force?: boolean } = {}) => {
-  await exec(
-    'git',
-    ['push', 'origin', `HEAD:${branch}`, force && '--force'].filter<string>(Boolean as any),
-  );
+  await exec('git', ['push', 'origin', `HEAD:${branch}`, force && '--force'].filter<string>(Boolean as any));
 };
 
 export const gitSwitchToMaybeExistingBranch = async (branch: string) => {
@@ -104,7 +98,7 @@ export const createGitPullRequest = async ({
   octokit: InstanceType<typeof GitHub>;
   option: {
     baseBranch: string; // main
-    versionBranch: string; // changeset-release/develop
+    versionBranch: string; // changeset-release/main
     pullRequestTitle: string;
     pullRequestBody: string;
     githubRepo: Context['repo'];

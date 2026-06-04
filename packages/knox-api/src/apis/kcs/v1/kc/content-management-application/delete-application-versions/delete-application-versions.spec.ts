@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { KnoxInstance } from '~/apis';
 import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
 import { kcDeleteApplicationVersions } from './delete-application-versions';
-import { KnoxInstance } from '~/apis';
 
 describe('DELETE /kcs/v1/kc/applications/{applicationId} Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {

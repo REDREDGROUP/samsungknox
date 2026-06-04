@@ -1,8 +1,8 @@
-import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
-import { KCGetApplicationResponse, KCGetApplicationsArgs } from './get-applications.type';
-import { knoxDefaultAxios } from '~/utils';
-import { KnoxRequestError } from '~/errors';
 import { AxiosInstance } from 'axios';
+import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
+import { KCGetApplicationResponse, KCGetApplicationsArgs } from './get-applications.type';
 
 export const kcGetApplications = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCGetApplicationsArgs>>>,

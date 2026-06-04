@@ -1,9 +1,7 @@
 import * as core from '@actions/core';
-
-import { gitGenerateBotAuthenticationFile, getChangesetState, gitSetupUser } from './utils';
+import { createLogger, LogLevel } from '@/common';
+import { getChangesetState, gitGenerateBotAuthenticationFile, gitSetupUser } from './utils';
 import { runVersion } from './version';
-
-import { LogLevel, createLogger } from '@/common';
 
 const getOptionalInput = (name: string) => core.getInput(name) || undefined;
 

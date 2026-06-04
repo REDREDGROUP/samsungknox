@@ -1,11 +1,11 @@
-import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
+import { AxiosInstance } from 'axios';
+import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
 import {
   KCUploadAPublicFromPlayStoreOrGalaxyStoreAppArgs,
   KCUploadAPublicFromPlayStoreOrGalaxyStoreAppResponse,
 } from './upload-a-public-app-from-playstore-or-galaxystore.type';
-import { knoxDefaultAxios } from '~/utils';
-import { AxiosInstance } from 'axios';
-import { KnoxRequestError } from '~/errors';
 
 export const kcUploadAPublicAppFromPlayStoreOrGalaxyStore = (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCUploadAPublicFromPlayStoreOrGalaxyStoreAppArgs>>>,

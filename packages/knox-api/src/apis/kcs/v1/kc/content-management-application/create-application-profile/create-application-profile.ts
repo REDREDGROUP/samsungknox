@@ -1,8 +1,8 @@
-import { BaseXApiRequire, BaseApiRequireArgs, BaseArgsInput, BaseResponse } from '~/types';
-import { KCCreateApplicationProfileArgs, KCCreateApplicationProfileResponse } from './create-application-profile.type';
-import { knoxDefaultAxios } from '~/utils';
 import { AxiosInstance } from 'axios';
 import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseArgsInput, BaseResponse, BaseXApiRequire } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
+import { KCCreateApplicationProfileArgs, KCCreateApplicationProfileResponse } from './create-application-profile.type';
 
 export const kcCreateApplicationProfile = async (
   value: BaseXApiRequire<BaseApiRequireArgs<BaseArgsInput<KCCreateApplicationProfileArgs>>>,
@@ -19,9 +19,7 @@ export class CreateApplicationProfile {
     this.axios = axios;
   }
 
-  public async createApplicationProfile({
-    args,
-  }: BaseArgsInput<KCCreateApplicationProfileArgs>): Promise<BaseResponse<KCCreateApplicationProfileResponse>> {
+  public async createApplicationProfile({ args }: BaseArgsInput<KCCreateApplicationProfileArgs>): Promise<BaseResponse<KCCreateApplicationProfileResponse>> {
     return request({
       args: args,
       axios: this.axios,
@@ -29,13 +27,7 @@ export class CreateApplicationProfile {
   }
 }
 
-const request = async ({
-  args,
-  axios,
-}: {
-  args: KCCreateApplicationProfileArgs;
-  axios: AxiosInstance;
-}): Promise<BaseResponse<KCCreateApplicationProfileResponse>> => {
+const request = async ({ args, axios }: { args: KCCreateApplicationProfileArgs; axios: AxiosInstance }): Promise<BaseResponse<KCCreateApplicationProfileResponse>> => {
   try {
     const { data } = await axios.post<KCCreateApplicationProfileResponse>('/kcs/v1/kc/applications/profile', args);
 

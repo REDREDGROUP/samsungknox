@@ -1,6 +1,6 @@
-import { knoxDefaultAxios } from '~/utils';
-import { BaseApiRequireArgs, BaseResponse } from '~/types';
 import { KnoxRequestError } from '~/errors';
+import { BaseApiRequireArgs, BaseResponse } from '~/types';
+import { knoxDefaultAxios } from '~/utils';
 import { AccessTokenArgs, AccessTokenResponse } from './access-token.type';
 
 export const requestAccessToken = async ({

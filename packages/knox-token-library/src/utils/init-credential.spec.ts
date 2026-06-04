@@ -1,6 +1,5 @@
-import { initCredential } from './init-credential';
-import { describe, expect, it } from 'vitest';
 import { ERRORS } from 'src/common';
+import { describe, expect, it } from 'vitest';
 import {
   BOTH_CREDENTIAL_DETECTED_CASE,
   CREDENTIAL_PATH_NOT_FOUND_CASE,
@@ -10,6 +9,7 @@ import {
   PRIVATE_KEY_IS_MISSING_CASE,
   PUBLIC_KEY_IS_MISSING_CASE,
 } from '../__test__';
+import { initCredential } from './init-credential';
 
 describe('initCredentialFunctionTest', () => {
   it('credential args missing', async () => {

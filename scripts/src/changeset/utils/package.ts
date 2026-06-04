@@ -1,8 +1,7 @@
-import path from 'path';
-
+import path from 'node:path';
 import { PackageJSON } from '@changesets/types';
-import { getPackages } from '@manypkg/get-packages';
 import type { Package } from '@manypkg/get-packages';
+import { getPackages } from '@manypkg/get-packages';
 import fs from 'fs-extra';
 import semver from 'semver';
 
@@ -31,9 +30,7 @@ export async function getChangedPackages({
     const packageJsonDir = pkg.dir;
 
     const previousVersion = previousVersions.get(packageJsonDir);
-    log.debug(
-      `Received: previousVersion:31 ${previousVersion} ${packageJsonDir} ${packageJsonVersion}`,
-    );
+    log.debug(`Received: previousVersion:31 ${previousVersion} ${packageJsonDir} ${packageJsonVersion}`);
 
     if (previousVersion !== packageJsonVersion) {
       changedPackages.add(pkg);
@@ -43,9 +40,7 @@ export async function getChangedPackages({
   return [...changedPackages];
 }
 
-export const getRootPackageJsonMetadata = async (
-  cwd: string = process.cwd(),
-): Promise<PackageJSON> => {
+export const getRootPackageJsonMetadata = async (cwd: string = process.cwd()): Promise<PackageJSON> => {
   const { root } = await getPackages(cwd);
 
   return root.packageJson;
@@ -76,13 +71,7 @@ export const getPackageMetadata = async (cwd: string) => {
 //   };
 // }
 
-export const updateRootPackageReleaseVersion = async ({
-  cwd,
-  type,
-}: {
-  cwd: string;
-  type: 'minor' | 'patch';
-}): Promise<void> => {
+export const updateRootPackageReleaseVersion = async ({ cwd, type }: { cwd: string; type: 'minor' | 'patch' }): Promise<void> => {
   // TODO: pre releases feature will be added at a later date.
   // const preInfo = await getPreInfo(repo);
 

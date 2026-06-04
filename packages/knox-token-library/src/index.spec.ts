@@ -1,7 +1,7 @@
-import { generateBase64EncodedStringPublicKey, generateSignedAccessTokenJWT, generateSignedClientIdentifierJWT } from './index';
-import { describe, expect, it } from 'vitest';
 import * as jwt from 'jsonwebtoken';
+import { describe, expect, it } from 'vitest';
 import { EXAMPLE_CREDENTIAL_KEY, EXAMPLE_CREDENTIAL_KEY_PATH, EXAMPLE_JWT_TOKEN } from './__test__';
+import { generateBase64EncodedStringPublicKey, generateSignedAccessTokenJWT, generateSignedClientIdentifierJWT } from './index';
 
 describe('Credential Functions', () => {
   describe('generateSignedClientIdentifierJWT', () => {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
 import { KnoxInstance, kcUploadMediaFileContentInCms } from '~/apis';
+import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
 
 describe('POST /kcs/v1/kc/assets Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {

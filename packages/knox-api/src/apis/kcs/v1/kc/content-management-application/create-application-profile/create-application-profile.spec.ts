@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { KnoxInstance } from '~/apis';
 import { ERROR_MESSAGES, KnoxRequestError } from '~/errors';
 import { kcCreateApplicationProfile } from './create-application-profile';
-import { KnoxInstance } from '~/apis';
 
 describe('POST /kcs/v1/kc/applications/profile Test', () => {
   it('X-KNOX_APITOKEN missing', async () => {

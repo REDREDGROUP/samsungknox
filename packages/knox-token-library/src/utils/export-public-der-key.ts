@@ -1,5 +1,5 @@
-import NodeRSA from 'node-rsa';
 import Forge from 'node-forge';
+import NodeRSA from 'node-rsa';
 import { CredentialType } from '../types';
 
 export const exportCredentialPublicDerKey = ({ credential }: { credential: CredentialType }) => {

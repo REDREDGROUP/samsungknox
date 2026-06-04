@@ -3,28 +3,34 @@ on:
   pull_request:
     paths:
       - packages/knox-api/**
+      - packages/knox-token-library/**
+      - biome.json
+      - package.json
+      - pnpm-lock.yaml
+      - turbo.json
+      - .github/workflows/samsungknox-api-ci.yaml
 
 jobs:
   everything:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16, 18, 20]
+        node-version: [22, 24]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 10.28.2
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm i
+        run: pnpm install --frozen-lockfile
 
       - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v1
@@ -64,4 +70,3 @@ jobs:
         if: always()
         with: 
           working-directory:  packages/knox-api
-

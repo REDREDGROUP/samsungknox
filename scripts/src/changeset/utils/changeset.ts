@@ -1,7 +1,7 @@
 import { exec } from '@actions/exec';
 import { readPreState } from '@changesets/pre';
 import readChangesets from '@changesets/read';
-import type { PreState, NewChangeset } from '@changesets/types';
+import type { NewChangeset, PreState } from '@changesets/types';
 import mdastToString from 'mdast-util-to-string';
 import remarkParse from 'remark-parse';
 import remarkStringify from 'remark-stringify';
@@ -50,14 +50,8 @@ export const requireChangesetsCliPkgJson = (cwd: string) => {
   }
 };
 
-export const execChangesetCommand = async ({
-  log,
-  cwd,
-  command,
-}: FunctionsCommonOptions<{ cwd: string; command: string }>) => {
-  log.action(
-    `Received: execChangesetCommand ${resolveFrom(cwd, '@changesets/cli/bin.js')} ${command}`,
-  );
+export const execChangesetCommand = async ({ log, cwd, command }: FunctionsCommonOptions<{ cwd: string; command: string }>) => {
+  log.action(`Received: execChangesetCommand ${resolveFrom(cwd, '@changesets/cli/bin.js')} ${command}`);
 
   await exec('node', [resolveFrom(cwd, '@changesets/cli/bin.js'), command], {
     cwd,
@@ -83,7 +77,7 @@ export const formatChangeLogFile = async ({
     log.debug(`Received: formattedChangeLog ${formattedChangeLog}`);
 
     return formattedChangeLog;
-  } catch (error) {}
+  } catch (_error) {}
 };
 
 export const BumpLevels = {
@@ -98,7 +92,7 @@ export function getChangelogEntry(changelog: string, version: string) {
 
   let highestLevel: number = BumpLevels.dep;
 
-  //@ts-ignore
+  //@ts-expect-error
   const nodes = ast.children as Array<any>;
   let headingStartInfo:
     | {
@@ -124,18 +118,14 @@ export function getChangelogEntry(changelog: string, version: string) {
         };
         continue;
       }
-      if (
-        endIndex === undefined &&
-        headingStartInfo !== undefined &&
-        headingStartInfo.depth === node.depth
-      ) {
+      if (endIndex === undefined && headingStartInfo !== undefined && headingStartInfo.depth === node.depth) {
         endIndex = i;
         break;
       }
     }
   }
   if (headingStartInfo) {
-    //@ts-ignore
+    //@ts-expect-error
     ast.children = (ast.children as any).slice(headingStartInfo.index + 1, endIndex);
   }
   return {
@@ -144,10 +134,7 @@ export function getChangelogEntry(changelog: string, version: string) {
   };
 }
 
-export function sortTheThings(
-  a: { private: boolean; highestLevel: number },
-  b: { private: boolean; highestLevel: number },
-) {
+export function sortTheThings(a: { private: boolean; highestLevel: number }, b: { private: boolean; highestLevel: number }) {
   if (a.private === b.private) {
     return b.highestLevel - a.highestLevel;
   }

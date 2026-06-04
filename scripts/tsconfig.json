@@ -10,6 +10,7 @@
     "target": "es2020",
     "sourceMap": true,
     "outDir": "./dist",
+    "ignoreDeprecations": "6.0",
     "baseUrl": "./",
     "incremental": false,
     "paths": {

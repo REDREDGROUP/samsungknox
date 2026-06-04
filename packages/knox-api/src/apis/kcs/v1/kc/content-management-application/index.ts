@@ -1,12 +1,12 @@
 import { AxiosInstance } from 'axios';
-import { DeleteApplicationVersion, KCDeleteApplicationVersionsArgs } from './delete-application-versions';
 import { BaseArgsInput, BaseResponse } from '~/types';
-import { GetApplication, KCGetApplicationResponse, KCGetApplicationsArgs } from './get-applications';
 import { CreateApplicationProfile, KCCreateApplicationProfileArgs, KCCreateApplicationProfileResponse } from './create-application-profile';
+import { DeleteApplicationVersion, KCDeleteApplicationVersionsArgs } from './delete-application-versions';
+import { GetApplication, KCGetApplicationResponse, KCGetApplicationsArgs } from './get-applications';
 import {
-  UploadAPublicAppFromPlayStoreOrGalaxyStore,
   KCUploadAPublicFromPlayStoreOrGalaxyStoreAppArgs,
   KCUploadAPublicFromPlayStoreOrGalaxyStoreAppResponse,
+  UploadAPublicAppFromPlayStoreOrGalaxyStore,
 } from './upload-a-public-app-from-playstore-or-galaxystore';
 import { KCUploadAnInHouseAppArgs, KCUploadAnInHouseAppResponse, UploadAnInHouseApp } from './upload-an-in-house-app';
 
@@ -14,10 +14,10 @@ import { KCUploadAnInHouseAppArgs, KCUploadAnInHouseAppResponse, UploadAnInHouse
  * Functions Export
  */
 export * from './create-application-profile';
+export * from './delete-application-versions';
+export * from './get-applications';
 export * from './upload-a-public-app-from-playstore-or-galaxystore';
 export * from './upload-an-in-house-app';
-export * from './get-applications';
-export * from './delete-application-versions';
 
 /**
  * Class Export
@@ -39,9 +39,7 @@ export class KCContentManagementApplication {
     this.DeleteApplicationVersion = new DeleteApplicationVersion({ axios: this.axios });
   }
 
-  public async createApplicationProfile({
-    args,
-  }: BaseArgsInput<KCCreateApplicationProfileArgs>): Promise<BaseResponse<KCCreateApplicationProfileResponse>> {
+  public async createApplicationProfile({ args }: BaseArgsInput<KCCreateApplicationProfileArgs>): Promise<BaseResponse<KCCreateApplicationProfileResponse>> {
     return this.CreateApplicationProfile.createApplicationProfile({ args });
   }
 

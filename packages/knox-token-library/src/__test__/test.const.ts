@@ -1,5 +1,5 @@
-import { generateExampleKey } from '../../scripts/generate-example-key';
 import { generateExampleJwtToken } from '../../scripts/generate-example-jwt-token';
+import { generateExampleKey } from '../../scripts/generate-example-key';
 
 export const EXAMPLE_JWT_TOKEN = generateExampleJwtToken();
 export const EXAMPLE_CREDENTIAL_KEY = generateExampleKey();
