@@ -1,45 +1,29 @@
-import { BaseCredentialInputType } from './types';
-import { exportCredentialPublicDerKey, generateSignedJWT, initCredential } from './utils';
+import { KNOX_OAUTH_SCOPES } from './types';
+import { generateBase64EncodedStringPublicKey } from './v1/generate-base64-encoded-string-public-key';
+import { generateSignedAccessTokenJWT } from './v1/generate-signed-access-token-jwt';
+import { generateSignedClientIdentifierJWT } from './v1/generate-signed-client-identifier-jwt';
+import { requestOAuthAccessToken } from './v2/request-oauth-access-token';
 
-type GenerateSignedClientIdentifierJwtType = BaseCredentialInputType & {
-  clientIdentifierJwtToken: string;
+export type { KnoxOAuthScope, KnoxOAuthScopeInput } from './types';
+export { KNOX_OAUTH_SCOPES } from './types';
+export type { OAuthAccessTokenResponse, RequestOAuthAccessTokenParams } from './v2/request-oauth-access-token';
+
+const v1 = {
+  generateSignedClientIdentifierJWT,
+  generateSignedAccessTokenJWT,
+  generateBase64EncodedStringPublicKey,
 };
 
-type GenerateSignedAccessTokenJwtType = BaseCredentialInputType & {
-  accessToken: string;
+const v2 = {
+  oauthScopes: KNOX_OAUTH_SCOPES,
+  requestOAuthAccessToken,
 };
 
-type GenerateBase64EncodedStringPublicKeyType = BaseCredentialInputType;
+export { v1, v2 };
 
-export const generateSignedClientIdentifierJWT = async (params: GenerateSignedClientIdentifierJwtType): Promise<{ accessToken: string }> =>
-  generateSignedJWT({
-    credential: {
-      key: params.credential.key,
-      path: params.credential.path,
-    },
-    tokenOrAccess: params.clientIdentifierJwtToken,
-    isClientIdentifier: true,
-  });
-
-export const generateSignedAccessTokenJWT = async (params: GenerateSignedAccessTokenJwtType): Promise<{ accessToken: string }> =>
-  generateSignedJWT({
-    credential: {
-      key: params.credential.key,
-      path: params.credential.path,
-    },
-    tokenOrAccess: params.accessToken,
-    isClientIdentifier: false,
-  });
-
-export const generateBase64EncodedStringPublicKey = async (params: GenerateBase64EncodedStringPublicKeyType): Promise<{ publicKey: string }> => {
-  const { publicKey } = exportCredentialPublicDerKey({
-    credential: await initCredential({
-      credential: {
-        key: params.credential.key,
-        path: params.credential.path,
-      },
-    }),
-  });
-
-  return { publicKey };
+const knoxTokenLibrary = {
+  v1,
+  v2,
 };
+
+export default knoxTokenLibrary;

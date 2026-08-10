@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { generateBase64EncodedStringPublicKey, generateSignedClientIdentifierJWT } from '@redredgroup/samsungknox-token-library';
+import { v1 } from '@redredgroup/samsungknox-token-library';
 import * as jwt from 'jsonwebtoken';
 import { describe, expect, it } from 'vitest';
 import { KnoxRequestError } from '~/errors';
@@ -54,14 +54,14 @@ describe('POST /v1/ams/accesstoken Test', () => {
         throw new TypeError('env is missing');
       }
 
-      const data = await generateSignedClientIdentifierJWT({
+      const data = await v1.generateSignedClientIdentifierJWT({
         credential: {
           key: process.env.CREDENTIAL_KEY,
         },
         clientIdentifierJwtToken: process.env.CLIENT_IDENTIFIER_JWT_TOKEN,
       });
 
-      const { publicKey } = await generateBase64EncodedStringPublicKey({
+      const { publicKey } = await v1.generateBase64EncodedStringPublicKey({
         credential: {
           key: process.env.CREDENTIAL_KEY,
         },

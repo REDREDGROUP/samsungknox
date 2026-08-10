@@ -13,6 +13,7 @@
       "libs/**/*.{js,jsx,ts,tsx,json}",
       "!**/dist",
       "!**/generated",
+      "!**/next-env.d.ts",
       "package.json",
       "!**/assets/static"
     ],
