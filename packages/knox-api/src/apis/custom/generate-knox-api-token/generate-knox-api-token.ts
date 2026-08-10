@@ -1,9 +1,9 @@
-import { generateBase64EncodedStringPublicKey, generateSignedAccessTokenJWT, generateSignedClientIdentifierJWT } from '@redredgroup/samsungknox-token-library';
+import { v1 } from '@redredgroup/samsungknox-token-library';
 import { requestAccessToken } from '~/apis';
 import { GenerateKnoxApiTokenArgs } from './generate-knox-api-token.type';
 
 export const generateKnoxApiToken = async ({ credential, clientIdentifierJwtToken, region }: GenerateKnoxApiTokenArgs): Promise<{ accessToken: string }> => {
-  const data = await generateSignedClientIdentifierJWT({
+  const data = await v1.generateSignedClientIdentifierJWT({
     credential: {
       key: credential.credentialKey,
       path: credential.credentialPath,
@@ -11,7 +11,7 @@ export const generateKnoxApiToken = async ({ credential, clientIdentifierJwtToke
     clientIdentifierJwtToken,
   });
 
-  const { publicKey } = await generateBase64EncodedStringPublicKey({
+  const { publicKey } = await v1.generateBase64EncodedStringPublicKey({
     credential: {
       key: credential.credentialKey,
       path: credential.credentialPath,
@@ -25,7 +25,7 @@ export const generateKnoxApiToken = async ({ credential, clientIdentifierJwtToke
     validityForAccessTokenInMinutes: 10,
   });
 
-  const { accessToken } = await generateSignedAccessTokenJWT({
+  const { accessToken } = await v1.generateSignedAccessTokenJWT({
     credential: {
       key: credential.credentialKey,
       path: credential.credentialPath,
