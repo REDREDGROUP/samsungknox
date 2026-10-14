@@ -80,3 +80,34 @@ export type BulkAssignRequest = {
 export type BulkUnassignRequest = {
   readonly deviceIds: readonly DeviceId[];
 };
+
+export type BulkPushRequest = {
+  readonly profilePushType: 'ProfilePush' | 'ProfileDeltaPush';
+  /** Omit to update every device currently assigned to the profile. */
+  readonly deviceIds?: readonly DeviceId[];
+  readonly noUserConsent?: boolean;
+  readonly customPushMessageId?: string;
+};
+
+export type CreateCustomPushNotificationRequest = {
+  /** Must match the profile version. */
+  readonly version: string;
+  readonly message: string;
+  readonly hyperlink?: string;
+};
+
+export type CreateCustomPushNotificationResponse = {
+  readonly id?: string;
+};
+
+export type CustomPushNotification = {
+  readonly id?: string;
+  readonly version?: string;
+  readonly message?: string;
+  readonly hyperlink?: string;
+  readonly latestSelected?: boolean;
+};
+
+export type GetCustomPushNotificationsResponse = {
+  readonly messages?: readonly CustomPushNotification[];
+};

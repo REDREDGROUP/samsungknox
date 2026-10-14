@@ -1,7 +1,18 @@
 import type { AxiosInstance } from 'axios';
 import type { CommonResponse, ProfileId } from './device/types';
 import type { GetProfileDetailsResponse } from './profiles/details';
-import type { BulkAssignRequest, BulkUnassignRequest, CreateProfileRequest, CreateProfileResponse, GetProfilesRequest, GetProfilesResponse } from './profiles/types';
+import type {
+  BulkAssignRequest,
+  BulkPushRequest,
+  BulkUnassignRequest,
+  CreateCustomPushNotificationRequest,
+  CreateCustomPushNotificationResponse,
+  CreateProfileRequest,
+  CreateProfileResponse,
+  GetCustomPushNotificationsResponse,
+  GetProfilesRequest,
+  GetProfilesResponse,
+} from './profiles/types';
 
 export type * from './profiles/configuration';
 export type * from './profiles/details';
@@ -30,6 +41,18 @@ export function createProfileApi(axios: AxiosInstance) {
     },
     async bulkUnassign(args: BulkUnassignRequest): Promise<CommonResponse> {
       const { data } = await axios.post<CommonResponse>('/kc/v2/profiles/bulkUnassign', args);
+      return data;
+    },
+    async bulkPush(profileId: ProfileId, args: BulkPushRequest): Promise<CommonResponse> {
+      const { data } = await axios.post<CommonResponse>(`/kc/v2/profiles/${encodeURIComponent(profileId)}/bulkPush`, args);
+      return data;
+    },
+    async createCustomPushNotification(profileId: ProfileId, args: CreateCustomPushNotificationRequest): Promise<CreateCustomPushNotificationResponse> {
+      const { data } = await axios.post<CreateCustomPushNotificationResponse>(`/kc/v2/profiles/${encodeURIComponent(profileId)}/customNotifications`, args);
+      return data;
+    },
+    async getCustomPushNotifications(profileId: ProfileId): Promise<GetCustomPushNotificationsResponse> {
+      const { data } = await axios.get<GetCustomPushNotificationsResponse>(`/kc/v2/profiles/${encodeURIComponent(profileId)}/customNotifications`);
       return data;
     },
   } as const;
