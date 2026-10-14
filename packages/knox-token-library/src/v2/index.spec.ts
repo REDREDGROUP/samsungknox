@@ -86,6 +86,7 @@ describe('requestOAuthAccessToken', () => {
 
   it('should only accept documented OAuth scope types', () => {
     expectTypeOf<'kc.devices:view'>().toExtend<KnoxOAuthScope>();
+    expectTypeOf<'kc.application' | 'kc.application:view' | 'kc.application:manage' | 'kc.content' | 'kc.content:manage'>().toExtend<KnoxOAuthScope>();
     expectTypeOf<'unknown.scope'>().not.toExtend<KnoxOAuthScope>();
   });
 });
