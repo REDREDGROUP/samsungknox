@@ -64,6 +64,7 @@ export const requestOAuthAccessToken = async (params: RequestOAuthAccessTokenPar
       data === null ||
       !('access_token' in data) ||
       typeof data.access_token !== 'string' ||
+      !/^[A-Za-z0-9._~+/-]+=*$/.test(data.access_token) ||
       !('expires_in' in data) ||
       typeof data.expires_in !== 'number' ||
       !Number.isInteger(data.expires_in) ||

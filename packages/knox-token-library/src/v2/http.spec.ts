@@ -83,6 +83,11 @@ describe('OAuth over HTTP', () => {
     ['wrong expiration type', JSON.stringify({ ...token, expires_in: '599' })],
     ['fractional expiration', JSON.stringify({ ...token, expires_in: 1.5 })],
     ['wrong access token type', JSON.stringify({ ...token, access_token: 123 })],
+    ['empty access token', JSON.stringify({ ...token, access_token: '' })],
+    ['blank access token', JSON.stringify({ ...token, access_token: ' ' })],
+    ['CRLF access token', JSON.stringify({ ...token, access_token: 'token\r\nHeader: value' })],
+    ['whitespace in access token', JSON.stringify({ ...token, access_token: 'token value' })],
+    ['control character in access token', JSON.stringify({ ...token, access_token: 'token\u0000value' })],
     ['wrong scope type', JSON.stringify({ ...token, scope: [] })],
   ])('rejects %s when the server returns HTTP 200', async (_label, body) => {
     // Given
@@ -91,6 +96,17 @@ describe('OAuth over HTTP', () => {
       const result = requestOAuthAccessToken({ endpoint, clientId: 'client', clientSecret, scope: 'kc' });
       // Then
       await expect(result).rejects.toMatchObject({ name: 'KnoxOAuthTokenError', code: 'INVALID_RESPONSE', status: 200 });
+    });
+  });
+
+  it('preserves opaque bearer token characters without requiring JWT syntax', async () => {
+    // Given
+    const response = { ...token, access_token: 'opaque.~_+/-==' };
+    await withTokenServer({ status: 200, body: JSON.stringify(response) }, async (endpoint) => {
+      // When
+      const result = await requestOAuthAccessToken({ endpoint, clientId: 'client', clientSecret, scope: 'kc' });
+      // Then
+      expect(result.accessToken).toBe(response.access_token);
     });
   });
 
