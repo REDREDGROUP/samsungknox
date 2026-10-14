@@ -1,80 +1,34 @@
-<h1 align="center"> Samsung Knox </h1>
+# Samsung Knox SDK
 
-## Documentation
+This monorepo provides a TypeScript client for Samsung Knox Configure, OAuth
+token utilities, and a Fastlane plugin for uploading in-house applications.
 
-For more information on how to use it, see here. : [Documentation](https://redredgroup.github.io/samsungknox)
+## Current Configure API
 
+For new integrations, use the explicitly versioned OAuth Configure v2 client.
+Start with the [migration guide](packages/knox-docs/docs/knox-api/migration-v2.mdx).
+The client sends a global API request with an OAuth Bearer access token. Your
+application owns token issuance, storage, expiry, and renewal.
 
-## Introduction
-
-Samsung Knox has been designed to conveniently utilize Knox API products in an SDK format.
-
-Despite the vast scope of the Knox API, the documentation is limited to static REST examples and usage instructions. To address this issue, a repository has been developed in Typescript, making it extremely convenient to use the APIs for Samsung Knox products.
-
+The current API reference is labeled **26.10 UAT**. Its production rollout and
+authentication against a real tenant have not been verified by this project.
 
 ## Packages
 
-### [@redredgroup/samsungknox-token-library](https://www.npmjs.com/package/@redredgroup/samsungknox-token-library)
-<div align="center">
+- `@redredgroup/samsungknox-api`: Configure v2 client and retained legacy API.
+- `@redredgroup/samsungknox-token-library`: OAuth access-token requests and
+  retained v1 JWT helpers.
+- `fastlane-plugin-samsungknox`: OAuth-default in-house APK upload with an
+  explicit legacy authentication mode.
 
-[![npm version](https://img.shields.io/npm/v/@redredgroup%2Fsamsungknox-token-library.svg?style=flat-square)](https://www.npmjs.com/package/@redredgroup/samsungknox-token-library)
-[![License](https://img.shields.io/badge/license-Apache2.0-green.svg?style=flat-square)](https://github.com/REDREDGROUP/samsungknox/blob/master/LICENSE)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@redredgroup%2Fsamsungknox-token-library?style=flat-square)](https://bundlephobia.com/package/@redredgroup%2Fsamsungknox-token-library@latest)
-[![npm downloads](https://img.shields.io/npm/dm/@redredgroup%2Fsamsungknox-token-library.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@redredgroup%2Fsamsungknox-token-library)
-[![Platforms](https://img.shields.io/badge/os-macos%20--%20linux%20--%20windows-blue?style=flat-square)](#)
-</div>
-This library is essential when using the Samsung Knox API as it pertains to JWT signing. It fully supports the existing packages and is even more stable. It includes basic functions for token and authentication key verification.
+## Compatibility
 
-</br>
-
-<div align="center">
-
-For a detailed explanation, please click [here](https://github.com/REDREDGROUP/samsungknox/tree/develop/packages/knox-token-library).
-
-</div>
-
-### [@redredgroup/samsungknox-api](https://www.npmjs.com/package/@redredgroup/samsungknox-api)
-<div align="center">
-
-[![npm version](https://img.shields.io/npm/v/@redredgroup%2Fsamsungknox-api.svg?style=flat-square)](https://www.npmjs.com/package/@redredgroup/samsungknox-api)
-[![License](https://img.shields.io/badge/license-Apache2.0-green.svg?style=flat-square)](https://github.com/REDREDGROUP/samsungknox/blob/master/LICENSE)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@redredgroup%2Fsamsungknox-api?style=flat-square)](https://bundlephobia.com/package/@redredgroup%2Fsamsungknox-api@latest)
-[![npm downloads](https://img.shields.io/npm/dm/@redredgroup%2Fsamsungknox-api.svg?style=flat-square)](https://npm-stat.com/charts.html?package=@redredgroup%2Fsamsungknox-api)
-[![Platforms](https://img.shields.io/badge/os-macos%20--%20linux%20--%20windows-blue?style=flat-square)](#)
-
-</div>
-This library can be used when utilizing the APIs for Samsung Knox. It includes fundamental verification features and supports almost all types found in the Knox documentation to near perfection.
-
-</br>
-
-### [@redredgroup/samsungknox-fastlane](https://rubygems.org/gems/fastlane-plugin-samsungknox)
-
-<div align="center">
-
-[![Gem](https://img.shields.io/gem/v/fastlane-plugin-samsungknox.svg?style=flat-square)](https://rubygems.org/gems/fastlane-plugin-samsungknox)
-[![License](https://img.shields.io/badge/license-Apache2.0-green.svg?style=flat-square)](https://github.com/REDREDGROUP/samsungknox/blob/master/LICENSE)
-[![Platforms](https://img.shields.io/badge/os-macos%20--%20linux%20--%20windows-blue?style=flat-square)](#)
-
-</div>
-
-
-
-<div align="center">
-
-For a detailed explanation, please click [here](https://github.com/REDREDGROUP/samsungknox/tree/develop/packages/knox-api).
-
-</div>
-
-## API Support
-
-APIs that continue to be supported are being added and please refer to the corresponding README as soon as they are updated
-
-## Copyright
-
-© 2026 REDREDGROUP Software. All Right Reserved.
-
-**REDREDGROUP is Notify that it is not related to the SamsungKnox service.**
+Existing root exports, `KnoxInstance`, and old operation examples describe the
+legacy API surface. They are not aliases for Configure v2 and do not fall back
+to v2. Trial license generation, validation, Galaxy Store upload, and
+per-version deletion have no supported v2 equivalent in this SDK and remain
+legacy-only.
 
 ## License
 
-Apache 2.0
+Apache-2.0. REDREDGROUP is not affiliated with Samsung Knox.

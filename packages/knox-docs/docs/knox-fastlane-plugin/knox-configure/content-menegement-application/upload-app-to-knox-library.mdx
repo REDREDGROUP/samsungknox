@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Upload App To Library
+title: "Legacy: Upload App To Library"
 keywords:
   - knox-fastlane
   - Knox Configure
@@ -10,6 +10,11 @@ last_update:
 ---
 
 # Upload App to Library
+
+:::warning Legacy Fastlane action
+This page shows the legacy regional upload contract. It is not a v2 fallback.
+For new usage, see the [OAuth v2 upload guide](/docs/knox-fastlane-plugin/oauth-v2).
+:::
 
 To upload app the **knox library**, use the following methods.
 
@@ -21,8 +26,8 @@ lane :deploy_to_samsungknox do
  ...your app build step
 
   knox_configure_library_upload_app(
+    auth_mode: 'legacy',
     credential_key: ENV['CREDENTIAL_KEY'],
-    credential_path: 'YOUR_CREDENTIAL_PATH',
     clientIdentifierJwtToken: ENV['CLIENT_IDENTIFIER_JWT_TOKEN'],
     app_description: 'YOUR_APP_DESCRIPTION', #Optinal
     app_file_path: 'YOUR_APP_FILE_PATH',
@@ -46,4 +51,6 @@ Provide only one of the following: **credential_key** or **credential_path**. Th
 
 Output:
 
-- A mantra will be printed stating that the app deployment is complete.
+- The action submits the upload through the legacy regional API. This operation
+  does not report v2 processing states, so a successful response or message
+  does not guarantee that processing is complete or the app is ready to deploy.
