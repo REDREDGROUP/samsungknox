@@ -17,6 +17,9 @@ Gem::Specification.new do |spec|
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.required_ruby_version = '>= 3.1'
 
+  spec.add_dependency('jwt', '>= 2.10.3', '< 4')
+  spec.add_dependency('multipart-post', '>= 2.0', '< 3')
+
   spec.add_development_dependency('bundler')
   spec.add_development_dependency('fastlane', '>= 2.217.0')
   spec.add_development_dependency('pry')
