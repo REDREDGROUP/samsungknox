@@ -4,6 +4,7 @@
  * @remarks
  * | Scope name | Description |
  * | --- | --- |
+ * | `oauth2.client:manage` | Create and manage other OAuth 2.0 clients. |
  * | `tag` | Manage all functionality related to common tags across Knox cloud services. |
  * | `tag.tags:view` | View common tags across Knox cloud services. |
  * | `tag.tags:manage` | Create, update, delete, and assign common tags to devices across Knox cloud services. |
@@ -78,6 +79,7 @@
  * | `openid` | Use a Samsung Knox user identifier. |
  *
  * Source: https://docs.samsungknox.com/dev/knox-cloud-authentication/knox-oauth-2-0-authentication/scopes-for-knox-cloud-services-apis/
+ * Administration scope: https://docs.samsungknox.com/dev/knox-cloud-authentication/knox-oauth-2-0-authentication/assets/knox-oauth-2-0-authentication-api.yml
  * Last synchronized: 2026-10-14
  */
 export const KNOX_OAUTH_SCOPES = [
@@ -168,6 +170,7 @@ export const KNOX_OAUTH_SCOPES = [
   'msp.profiles',
 
   // Knox OAuth 2.0 authorization server operations
+  'oauth2.client:manage',
   'email',
   'openid',
 ] as const;

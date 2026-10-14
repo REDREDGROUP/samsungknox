@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { afterEach, describe, expect, expectTypeOf, it, vi } from 'vitest';
-import { KnoxOAuthScope } from '../types';
+import { KNOX_OAUTH_SCOPES, type KnoxOAuthScope } from '../types';
 import { requestOAuthAccessToken } from './request-oauth-access-token';
 
 describe('requestOAuthAccessToken', () => {
@@ -85,6 +85,8 @@ describe('requestOAuthAccessToken', () => {
   });
 
   it('should only accept documented OAuth scope types', () => {
+    expect(KNOX_OAUTH_SCOPES).toContain('oauth2.client:manage');
+    expectTypeOf<'oauth2.client:manage'>().toExtend<KnoxOAuthScope>();
     expectTypeOf<'kc.devices:view'>().toExtend<KnoxOAuthScope>();
     expectTypeOf<'kc.application' | 'kc.application:view' | 'kc.application:manage' | 'kc.content' | 'kc.content:manage'>().toExtend<KnoxOAuthScope>();
     expectTypeOf<'unknown.scope'>().not.toExtend<KnoxOAuthScope>();
