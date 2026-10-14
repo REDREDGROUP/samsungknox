@@ -23,7 +23,7 @@ module Fastlane
 
       data
     rescue JSON::ParserError
-      raise InvalidResponse, "#{operation} returned invalid JSON"
+      raise InvalidResponse, "#{operation} returned invalid JSON", cause: nil
     end
   end
 end

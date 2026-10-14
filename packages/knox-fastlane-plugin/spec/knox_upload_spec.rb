@@ -65,6 +65,7 @@ describe Fastlane::KnoxConfigureLibraryUploadApp do
     [400, '{"data":"APP_BINARY_EXISTS"}', Fastlane::KnoxHttpResponse::RequestError],
     [500, '<html>token secret</html>', Fastlane::KnoxHttpResponse::RequestError],
     [200, 'not JSON', Fastlane::KnoxHttpResponse::InvalidResponse],
+    [200, '<html>token secret</html>', Fastlane::KnoxHttpResponse::InvalidResponse],
     [200, 'null', Fastlane::KnoxHttpResponse::InvalidResponse],
     [200, '{"status":"Deployable"}', Fastlane::KnoxHttpResponse::InvalidResponse],
     [200, '{"applicationId":123,"status":"Deployable"}', Fastlane::KnoxHttpResponse::InvalidResponse],
@@ -77,7 +78,8 @@ describe Fastlane::KnoxConfigureLibraryUploadApp do
       with_http_responses([[status, body]]) do
         # When / Then
         expect { described_class.upload_oauth_app('token', @path, nil) }.to raise_error(error) do |failure|
-          expect(failure.message).not_to include('token secret')
+          expect(failure.full_message).not_to include('token secret')
+          expect(failure.cause).to be_nil
         end
       end
     end

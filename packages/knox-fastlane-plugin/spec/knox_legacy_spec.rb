@@ -19,7 +19,8 @@ describe 'Legacy helpers' do
         with_http_responses([[500, body]]) do
           # When / Then
           expect { Fastlane::KnoxConfigureLibraryUploadApp.upload_app('legacy-token', file.path, nil, 'eu') }.to raise_error(Fastlane::KnoxHttpResponse::RequestError) do |error|
-            expect(error.message).not_to include('legacy-token')
+            expect(error.full_message).not_to include('legacy-token')
+            expect(error.cause).to be_nil
           end
         end
       end

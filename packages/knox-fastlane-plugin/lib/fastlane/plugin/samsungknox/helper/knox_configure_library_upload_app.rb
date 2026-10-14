@@ -67,7 +67,7 @@ module Fastlane
           begin
             upload_response_body = JSON.parse(response.body)
           rescue JSON::ParserError
-            raise KnoxHttpResponse::RequestError.new('Legacy application upload', response.code)
+            raise KnoxHttpResponse::RequestError.new('Legacy application upload', response.code), cause: nil
           end
           raise KnoxHttpResponse::RequestError.new('Legacy application upload', response.code) unless upload_response_body.kind_of?(Hash)
 

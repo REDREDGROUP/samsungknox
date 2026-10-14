@@ -22,6 +22,7 @@ describe Fastlane::KnoxTokenGenerator do
     [401, '{"message":"secret =+ opaque-token"}', Fastlane::KnoxHttpResponse::RequestError],
     [503, '<html>secret =+</html>', Fastlane::KnoxHttpResponse::RequestError],
     [200, 'not JSON', Fastlane::KnoxHttpResponse::InvalidResponse],
+    [200, '<html>secret =+ opaque-token</html>', Fastlane::KnoxHttpResponse::InvalidResponse],
     [200, '[]', Fastlane::KnoxHttpResponse::InvalidResponse],
     [200, '{}', Fastlane::KnoxHttpResponse::InvalidResponse],
     [200, '{"access_token":"","token_type":"Bearer"}', Fastlane::KnoxHttpResponse::InvalidResponse],
@@ -34,7 +35,8 @@ describe Fastlane::KnoxTokenGenerator do
       with_http_responses([[status, body]]) do
         # When / Then
         expect { described_class.generate_oauth_access_token(client_id: 'id', client_secret: 'secret =+') }.to raise_error(error) do |failure|
-          expect(failure.message).not_to include('secret =+', 'opaque-token')
+          expect(failure.full_message).not_to include('secret =+', 'opaque-token')
+          expect(failure.cause).to be_nil
           expect(failure.status).to eq(status.to_s) if failure.kind_of?(Fastlane::KnoxHttpResponse::RequestError)
         end
       end
