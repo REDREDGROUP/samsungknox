@@ -6,7 +6,7 @@ and renewal are not handled by the action. The OAuth flow never falls back to
 legacy credentials.
 
 To deliberately use the retained regional JWT flow, set `auth_mode: 'legacy'`
-and supply its legacy options. See the [plugin OAuth guide](../knox-docs/docs/knox-fastlane-plugin/oauth-v2.mdx)
+and supply its legacy options. See the [plugin OAuth guide](https://github.com/REDREDGROUP/samsungknox/blob/main/packages/knox-docs/docs/knox-fastlane-plugin/oauth-v2.mdx)
 for both configurations, upload status meanings, and evidence limits.
 
 The current Configure reference is labeled **26.10 UAT**. Production rollout

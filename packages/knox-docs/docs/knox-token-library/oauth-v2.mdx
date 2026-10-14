@@ -34,8 +34,10 @@ caller to the API client as a Bearer token. OAuth errors preserve the HTTP
 status when the server returned one and avoid retaining secret-bearing request
 details.
 
-Existing root JWT-generation functions and `v1` remain legacy. They are not
-used by this helper, and a failed OAuth request never falls back to them.
+The preserved JWT-signing helpers remain legacy and are available under the
+`v1` namespace and the default export's `v1` property. They are not named root
+generator-function exports. They are not used by this helper, and a failed
+OAuth request never falls back to them.
 
 The current Configure reference is labeled **26.10 UAT**. Production rollout
 and successful authentication against an actual tenant are unverified.

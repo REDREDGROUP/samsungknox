@@ -19,13 +19,13 @@ the operations you call. The Configure OAuth scopes are:
 | --- | --- |
 | `kc.devices:view` | Read devices and device logs |
 | `kc.devices:manage` | Delete devices and send commands |
-| `kc.profile:view` | Read profiles and details |
-| `kc.profile:manage` | Create and delete profiles |
+| `kc.profile:view` | Read profiles, details, and custom push notifications |
+| `kc.profile:manage` | Create/delete profiles, push updates, and create custom push notifications |
 | `kc.profile:assign` | Assign or unassign profiles |
 | `kc.license:view` | Read licenses and license details |
 | `kc.license:manage` | Register and delete licenses |
-| `kc.application:view` | Read applications and generate download URLs |
-| `kc.application:manage` | Upload and delete applications |
+| `kc.application:view` | Read applications |
+| `kc.application:manage` | Upload and delete applications; generate download URLs |
 | `kc.content:manage` | Upload, delete, and generate content download URLs |
 
 Request a token with `v2.requestOAuthAccessToken` from
@@ -86,12 +86,27 @@ The principal operation shapes are:
 | Domain | Methods |
 | --- | --- |
 | `device` | `getDevices(args?)`, `getDeviceLogs(args)`, `bulkDelete(args)`, `sendCommand(args)` |
-| `profiles` | `getProfiles(args?)`, `getProfileDetails(profileId)`, `createProfile(args)`, `deleteProfile(profileId)`, `bulkAssign(profileId, args)`, `bulkUnassign(args)` |
+| `profiles` | `getProfiles(args?)`, `getProfileDetails(profileId)`, `createProfile(args)`, `deleteProfile(profileId)`, `bulkAssign(profileId, args)`, `bulkUnassign(args)`, `bulkPush(profileId, args)`, `createCustomPushNotification(profileId, args)`, `getCustomPushNotifications(profileId)` |
 | `license` | `getLicenses(args?)`, `getLicenseDetailsByLicenseKey({ licenseKey })`, `registerLicense(args)`, `deleteLicense({ licenseKey })` |
 | `application` | `getApplications(args?)`, `getAppDetails(args)`, `uploadPublicApplication(args)`, `uploadInHouseApplication(args)`, `deleteApplications(args)`, `generateAppDownloadUrl(args)` |
 | `content` | `uploadContentFiles(args)`, `generateContentDownloadUrl(args)`, `deleteContentFiles(args)` |
 
 Identifiers and request/response fields follow the current Configure schema.
+The three push-notification methods are on the same `client.profiles` object.
+`bulkPush` requires `args.profilePushType`, exactly `'ProfilePush'` (push
+changed profile content) or `'ProfileDeltaPush'` (push the full profile).
+Optional arguments are `deviceIds`, `noUserConsent`, and
+`customPushMessageId`. Omit `deviceIds` to target all devices currently
+assigned to the profile. `customPushMessageId` may be an ID returned when
+creating a custom push notification.
+
+`bulkPush` and `createCustomPushNotification` require `kc.profile:manage`;
+`getCustomPushNotifications` requires `kc.profile:view`. Notification
+creation requires string `version` (the profile version) and `message`;
+string `hyperlink` is optional. A successful create returns HTTP 201 with an
+optional `id`, which can be supplied as `customPushMessageId` when pushing. Push
+returns HTTP 202 when accepted; this does not mean devices completed the
+update. Listing notifications returns HTTP 200 with an optional `messages` collection.
 For example, license detail and deletion use `licenseKey`; bulk deletion
 accepts identifier arrays and current v2 methods use domain-specific method
 names. Consult generated TypeScript types for precise fields.
@@ -117,6 +132,10 @@ success; `Failed` is a failed processing result. The SDK does not poll for a
 final state or reinterpret partial status responses.
 
 ## Legacy-only behavior
+
+The token library's preserved JWT helpers are available under `v1` and the
+default export's `v1` property. They are legacy APIs, not named root
+generator-function exports.
 
 Old root exports and the old operation pages use `KnoxInstance`, regional
 URLs, legacy headers, and legacy request/response shapes. Keep them only when

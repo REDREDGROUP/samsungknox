@@ -11,12 +11,23 @@ last_update:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+# Legacy API: Get Started
+
+This page documents the legacy `KnoxInstance`, regional authentication, and
+legacy request contract. It is retained for existing integrations and does not
+describe Configure v2. For current integrations, start with the
+[Configure v2 migration guide](./migration-v2.mdx).
+
 ## Install Knox API Package
 
 :::note
 The recommended environment for installation and use is as follows:
 
-**Node.js 16 or higher**
+**Node.js 22 or 24**
+
+These are maintained release lines. Local verification used Node.js 24 and CI
+targets Node.js 22 and 24; this does not establish an exact minimum Node.js
+version for consumers or confirm remote CI results.
 :::
 
 <Tabs
