@@ -8,11 +8,24 @@ description: Explain what the Knox API
 
 [![npm version](https://badge.fury.io/js/@redredgroup%2Fsamsungknox-api.svg)](https://www.npmjs.com/package/@redredgroup/samsungknox-api)
 
-This library provides utility methods to generate and sign Knox Tokens using server side Javascript. The pre-requisites for using this utility are
+## Current Knox Configure API
 
-- You have downloaded the Knox Credential file (credential.json)
-- You have generated a Client Identifier (api-key) for accessing apis of Knox Cloud Services. (Use this package: [@redredgroup/samsungknox-token-library](https://www.npmjs.com/package/@redredgroup/samsungknox-token-library))
+For new Knox Configure integrations, use `KnoxConfigureClient` with a global
+OAuth access token. Create a Cloud App to obtain its `client_id` and
+`client_secret`, then use
+[`v2.requestOAuthAccessToken`](https://www.npmjs.com/package/@redredgroup/samsungknox-token-library)
+from the token library to request that token. These Cloud App credentials are
+inputs to the token helper; a Knox Credential file and signed identifier are
+not prerequisites for current v2.
 
-The keys below must have Cloud API privileges on Samsung Knox. If you do not have permission, you can request permission by disconnecting the Ticket from the Samsung Knox Admin Portal.
+See the [Configure v2 migration guide](./migration-v2.mdx) for setup, scopes,
+client usage, and migration details. The client uses the global
+`https://api.samsungknox.com` host.
 
-Read: https://docs.samsungknox.com/dev/knox-cloud-authentication/tutorial/tutorial-for-customers-generate-access-token/
+## Legacy authentication
+
+The earlier API uses a Knox Credential file (`credential.json`), signed
+identifiers, regional authentication, and the legacy request contract. Keep
+that guidance only when maintaining an existing integration; see the
+[legacy Get Started guide](./get-started.mdx) and the retained legacy
+operation pages.

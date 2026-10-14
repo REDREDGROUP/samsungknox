@@ -1,0 +1,158 @@
+---
+sidebar_position: 1
+title: Configure v2 Migration
+---
+
+# Configure v2 migration
+
+Use the explicitly versioned OAuth client for new Knox Configure integrations.
+The existing root `KnoxInstance` and endpoint functions keep their old contract
+and are **legacy**, not aliases or automatic fallbacks to v2.
+
+## Cloud App and OAuth setup
+
+In Samsung Knox Cloud Apps, register a Cloud App for your integration and
+obtain its client ID and client secret. Request only the permissions needed by
+the operations you call. The Configure OAuth scopes are:
+
+| Scope | Use |
+| --- | --- |
+| `kc.devices:view` | Read devices and device logs |
+| `kc.devices:manage` | Delete devices and send commands |
+| `kc.profile:view` | Read profiles, details, and custom push notifications |
+| `kc.profile:manage` | Create/delete profiles, push updates, and create custom push notifications |
+| `kc.profile:assign` | Assign or unassign profiles |
+| `kc.license:view` | Read licenses and license details |
+| `kc.license:manage` | Register and delete licenses |
+| `kc.application:view` | Read applications |
+| `kc.application:manage` | Upload and delete applications; generate download URLs |
+| `kc.content:manage` | Upload, delete, and generate content download URLs |
+
+Request a token with `v2.requestOAuthAccessToken` from
+`@redredgroup/samsungknox-token-library`. Tokens are opaque Bearer credentials.
+The API library does not acquire, cache, store, or renew them. The caller owns
+secure storage, expiry tracking, and requesting a replacement before expiry.
+Never use a token after it expires. There is no JWT or legacy-auth fallback.
+
+```ts
+import { v2 as tokenV2 } from '@redredgroup/samsungknox-token-library';
+import { KnoxConfigureClient } from '@redredgroup/samsungknox-api';
+
+async function listDevices(clientId: string, clientSecret: string) {
+  const token = await tokenV2.requestOAuthAccessToken({
+    clientId,
+    clientSecret,
+    scope: ['kc.devices:view'],
+  });
+  const client = new KnoxConfigureClient({ accessToken: token.accessToken });
+  return client.device.getDevices({ pageSize: 25 });
+}
+```
+
+Supply Cloud App credentials from a secure secret store and validate that
+configuration at your application's boundary. Do not put credentials in
+browser code, source control, or logs.
+
+## API client and direct function
+
+`KnoxConfigureClient` sends requests to the global
+`https://api.samsungknox.com` host with `Authorization: Bearer`. It accepts
+`baseURL`, `managedTenantId`, and `timeout` overrides for controlled
+environments. `managedTenantId`, when supplied, is sent as
+`x-wsm-managed-tenantid`.
+
+Domain methods are available on `.device`, `.profiles`, `.license`,
+`.application`, and `.content`. Results use current v2 schemas directly, not
+the legacy `SUCCESS` wrapper. A `204` with no body resolves to `undefined`.
+For `207 Multi-Status`, the returned response is preserved, including its
+partial failures.
+
+The standalone functions are available under the root `v2` namespace. They
+take the same token and arguments as the client method:
+
+```ts
+import { v2 } from '@redredgroup/samsungknox-api';
+
+async function listDevices(accessToken: string) {
+  return v2.kcV2GetDevices({
+    accessToken,
+    args: { pageSize: 25 },
+  });
+}
+```
+
+The principal operation shapes are:
+
+| Domain | Methods |
+| --- | --- |
+| `device` | `getDevices(args?)`, `getDeviceLogs(args)`, `bulkDelete(args)`, `sendCommand(args)` |
+| `profiles` | `getProfiles(args?)`, `getProfileDetails(profileId)`, `createProfile(args)`, `deleteProfile(profileId)`, `bulkAssign(profileId, args)`, `bulkUnassign(args)`, `bulkPush(profileId, args)`, `createCustomPushNotification(profileId, args)`, `getCustomPushNotifications(profileId)` |
+| `license` | `getLicenses(args?)`, `getLicenseDetailsByLicenseKey({ licenseKey })`, `registerLicense(args)`, `deleteLicense({ licenseKey })` |
+| `application` | `getApplications(args?)`, `getAppDetails(args)`, `uploadPublicApplication(args)`, `uploadInHouseApplication(args)`, `deleteApplications(args)`, `generateAppDownloadUrl(args)` |
+| `content` | `uploadContentFiles(args)`, `generateContentDownloadUrl(args)`, `deleteContentFiles(args)` |
+
+Identifiers and request/response fields follow the current Configure schema.
+The three push-notification methods are on the same `client.profiles` object.
+`bulkPush` requires `args.profilePushType`, exactly `'ProfilePush'` (push
+changed profile content) or `'ProfileDeltaPush'` (push the full profile).
+Optional arguments are `deviceIds`, `noUserConsent`, and
+`customPushMessageId`. Omit `deviceIds` to target all devices currently
+assigned to the profile. `customPushMessageId` may be an ID returned when
+creating a custom push notification.
+
+`bulkPush` and `createCustomPushNotification` require `kc.profile:manage`;
+`getCustomPushNotifications` requires `kc.profile:view`. Notification
+creation requires string `version` (the profile version) and `message`;
+string `hyperlink` is optional. A successful create returns HTTP 201 with an
+optional `id`, which can be supplied as `customPushMessageId` when pushing. Push
+returns HTTP 202 when accepted; this does not mean devices completed the
+update. Listing notifications returns HTTP 200 with an optional `messages` collection.
+For example, license detail and deletion use `licenseKey`; bulk deletion
+accepts identifier arrays and current v2 methods use domain-specific method
+names. Consult generated TypeScript types for precise fields.
+
+## Binary upload and processing status
+
+For in-house applications and content, pass a binary `Blob` as `file`, with an
+optional `filename`. Application upload also accepts `description`. The client
+constructs multipart form data and lets Axios set its boundary. Don't encode a
+file as JSON or set a multipart boundary yourself.
+
+```ts
+const result = await client.application.uploadInHouseApplication({
+  file: new Blob([apkBytes], { type: 'application/vnd.android.package-archive' }),
+  filename: 'release.apk',
+  description: 'Internal release',
+});
+```
+
+An application upload returns its application ID and service status. `InProgress`
+means accepted for processing, not ready to deploy. `Deployable` indicates
+success; `Failed` is a failed processing result. The SDK does not poll for a
+final state or reinterpret partial status responses.
+
+## Legacy-only behavior
+
+The token library's preserved JWT helpers are available under `v1` and the
+default export's `v1` property. They are legacy APIs, not named root
+generator-function exports.
+
+Old root exports and the old operation pages use `KnoxInstance`, regional
+URLs, legacy headers, and legacy request/response shapes. Keep them only when
+maintaining an existing integration; migrate deliberately to the new methods.
+There is no automatic compatibility adapter.
+
+Trial license generation, validation, Galaxy Store upload, and per-version
+application deletion have no equivalent in this SDK's v2 methods. Their old
+operation pages are retained as legacy references only. They do not become v2
+operations through fallback or argument translation.
+
+## Verification limits
+
+The official Configure v2 YAML at
+`https://docs.samsungknox.com/dev/knox-configure/assets/kc-api-v2.yml` is labeled
+**26.10 UAT**. We used its documented global URLs, operations, scopes, and
+schemas. Local loopback tests verify request encoding, binary bytes, and
+response handling. They do not establish Samsung production availability,
+Cloud App entitlement, successful authentication against a real tenant, or
+production behavior. Those remain unverified.

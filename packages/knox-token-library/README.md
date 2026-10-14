@@ -1,17 +1,17 @@
-# SamsungKnox Token Library
+# `@redredgroup/samsungknox-token-library`
 
-[![npm version](https://badge.fury.io/js/@redredgroup%2Fsamsungknox-token-library.svg)](https://www.npmjs.com/package/@redredgroup/samsungknox-token-library)
+Use `v2.requestOAuthAccessToken` to request an OAuth 2.0 client-credentials
+token for Knox Configure. See the [OAuth migration guide](https://github.com/REDREDGROUP/samsungknox/blob/main/packages/knox-docs/docs/knox-token-library/oauth-v2.mdx).
+The preserved JWT-signing surface is available through `v1` and the default
+export's `v1` property; these remain legacy APIs.
 
-## Documentation
+The helper returns the access token, expiry in seconds, granted scope, and
+token type. It does not cache, store, or renew tokens. Your application owns
+expiry and renewal.
 
-For more information on how to use it, see here. : [Documentation](https://redredgroup.github.io/samsungknox/docs/category/knox-token-library)
-
-## Copyright
-
-© 2023 REDREDGROUP Web Service. All Right Reserved.
-
-**REDREDGROUP has only changed the design of SamsungKnox [knox-token-library-js](https://www.npmjs.com/package/knox-token-library-js) package. Notify that it is not related to the SamsungKnox service.**
+The Configure API reference is labeled **26.10 UAT**. Production rollout and
+authentication against an actual Samsung tenant are unverified.
 
 ## License
 
-Apache-2.0
+Apache-2.0. REDREDGROUP is not affiliated with Samsung Knox.

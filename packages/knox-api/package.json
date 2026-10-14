@@ -45,14 +45,15 @@
     "lint:format": "biome format .",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
+    "test:v2": "vitest run src/v2",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@redredgroup/samsungknox-token-library": "workspace:*",
     "axios": "1.18.0",
     "jsonwebtoken": "9.0.3"
   },
   "devDependencies": {
-    "@redredgroup/samsungknox-token-library": "workspace:*",
     "@types/jsonwebtoken": "9.0.10",
     "@vitest/coverage-v8": "4.1.8",
     "dotenv": "17.4.2",

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Get Started
+title: "Legacy API: Get Started"
 keywords:
   - knox-api
   - installation
@@ -11,12 +11,23 @@ last_update:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+# Legacy API: Get Started
+
+This page documents the legacy `KnoxInstance`, regional authentication, and
+legacy request contract. It is retained for existing integrations and does not
+describe Configure v2. For current integrations, start with the
+[Configure v2 migration guide](./migration-v2.mdx).
+
 ## Install Knox API Package
 
 :::note
 The recommended environment for installation and use is as follows:
 
-**Node.js 16 or higher**
+**Node.js 22 or 24**
+
+These are maintained release lines. Local verification used Node.js 24 and CI
+targets Node.js 22 and 24; this does not establish an exact minimum Node.js
+version for consumers or confirm remote CI results.
 :::
 
 <Tabs
@@ -46,6 +57,10 @@ pnpm install @redredgroup/samsungknox-api
 ## Class or function calls
 
 The cases for both codes are described for every endpoint, and you can use them in any way that makes sense for your own codebase.
+
+> **Legacy API:** The examples on this page use `KnoxInstance`, regional
+> authentication, and the legacy request contract. For new integrations, use
+> [Configure v2](./migration-v2.mdx). There is no automatic fallback.
 
 ## Using the API with instances (Class)
 

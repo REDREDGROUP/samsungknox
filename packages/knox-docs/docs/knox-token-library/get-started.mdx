@@ -11,12 +11,27 @@ last_update:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+## Current OAuth 2.0 setup
+
+Create a Cloud App in Samsung Knox Cloud Apps and obtain its client ID and
+client secret. Use `v2.requestOAuthAccessToken` to request a Bearer access
+token, then supply it to the API client. The token is opaque: the library does
+not cache or renew it; the caller tracks expiry and requests a replacement.
+This current flow does not use RSA assertions or fall back to Legacy v1.
+
+See [OAuth v2 access tokens](./oauth-v2.mdx) for a code example and
+[Legacy v1 workflow](./knox-token-library.md#legacy-v1-token-generation) for the retained credential
+file, client-identifier, and two-signature workflow.
+
 ### Install Knox Token Library Package
 
 :::note
 The recommended environment for installation and use is as follows:
 
-**Node.js 16 or higher**
+**Node.js 22 or 24**
+
+The current local environment is Node.js 24. CI targets have not been verified
+as the minimum supported Node.js version.
 :::
 
 <Tabs
