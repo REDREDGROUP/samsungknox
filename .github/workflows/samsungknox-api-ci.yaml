@@ -32,15 +32,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Doppler CLI
-        uses: dopplerhq/cli-action@v1
-  
-      - name: Export .env
-        working-directory: packages/knox-api
-        run: doppler secrets download --no-file --format env-no-quotes > .env
-        env: 
-          DOPPLER_TOKEN: ${{ secrets.TEST_DOPPLER_TOKEN }}
-
       - name: Lint Format
         working-directory: packages/knox-api
         run: pnpm lint:format
@@ -57,9 +48,9 @@ jobs:
         working-directory: packages/knox-api
         run: pnpm lint
 
-      - name: Test
+      - name: Test Configure v2 HTTP contracts
         working-directory: packages/knox-api
-        run: pnpm test:coverage
+        run: pnpm test:v2 --coverage
 
       - name: Build
         working-directory: packages/knox-api
