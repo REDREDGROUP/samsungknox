@@ -4,6 +4,7 @@
  * @remarks
  * | Scope name | Description |
  * | --- | --- |
+ * | `oauth2.client:manage` | Create and manage other OAuth 2.0 clients. |
  * | `tag` | Manage all functionality related to common tags across Knox cloud services. |
  * | `tag.tags:view` | View common tags across Knox cloud services. |
  * | `tag.tags:manage` | Create, update, delete, and assign common tags to devices across Knox cloud services. |
@@ -26,6 +27,11 @@
  * | `kc.license` | Manage all functionality related to Knox Configure licenses. |
  * | `kc.license:view` | View Knox Configure licenses and license information. |
  * | `kc.license:manage` | Create, update, and delete Knox Configure licenses. |
+ * | `kc.application` | Manage all Knox Configure application functionality. |
+ * | `kc.application:view` | View Knox Configure applications and their information. |
+ * | `kc.application:manage` | Upload and manage Knox Configure applications. |
+ * | `kc.content` | Manage all Knox Configure content functionality. |
+ * | `kc.content:manage` | Upload, delete, and obtain download URLs for Knox Configure content. |
  * | `kdp` | Manage all Knox Deployment Program functionality. |
  * | `kdp.devices` | Manage all Knox Deployment Program functionality related to devices. |
  * | `kdp.devices:view` | View devices and device statuses. |
@@ -73,7 +79,8 @@
  * | `openid` | Use a Samsung Knox user identifier. |
  *
  * Source: https://docs.samsungknox.com/dev/knox-cloud-authentication/knox-oauth-2-0-authentication/scopes-for-knox-cloud-services-apis/
- * Last synchronized: 2026-06-17
+ * Administration scope: https://docs.samsungknox.com/dev/knox-cloud-authentication/knox-oauth-2-0-authentication/assets/knox-oauth-2-0-authentication-api.yml
+ * Last synchronized: 2026-10-14
  */
 export const KNOX_OAUTH_SCOPES = [
   // Common APIs — Tag API
@@ -103,6 +110,11 @@ export const KNOX_OAUTH_SCOPES = [
   'kc.license',
   'kc.license:view',
   'kc.license:manage',
+  'kc.application',
+  'kc.application:view',
+  'kc.application:manage',
+  'kc.content',
+  'kc.content:manage',
 
   // Knox Deployment Program
   'kdp',
@@ -158,6 +170,7 @@ export const KNOX_OAUTH_SCOPES = [
   'msp.profiles',
 
   // Knox OAuth 2.0 authorization server operations
+  'oauth2.client:manage',
   'email',
   'openid',
 ] as const;

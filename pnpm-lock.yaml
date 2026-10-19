@@ -47,6 +47,9 @@ importers:
 
   packages/knox-api:
     dependencies:
+      '@redredgroup/samsungknox-token-library':
+        specifier: workspace:*
+        version: link:../knox-token-library
       axios:
         specifier: 1.18.0
         version: 1.18.0
@@ -54,9 +57,6 @@ importers:
         specifier: 9.0.3
         version: 9.0.3
     devDependencies:
-      '@redredgroup/samsungknox-token-library':
-        specifier: workspace:*
-        version: link:../knox-token-library
       '@types/jsonwebtoken':
         specifier: 9.0.10
         version: 9.0.10

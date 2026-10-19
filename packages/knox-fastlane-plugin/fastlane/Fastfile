@@ -1,11 +1,9 @@
 lane :test do
   knox_configure_library_upload_app(
-    credential_key: ENV.fetch('CREDENTIAL_KEY', nil),
-    clientIdentifierJwtToken: ENV.fetch('CLIENT_IDENTIFIER_JWT_TOKEN', nil),
-    # app_name: '',
-    app_description: '',
-    app_file_path: '',
-    api_region: 'EU'
-    # package_name: ''
+    client_id: ENV.fetch('KNOX_CLIENT_ID'),
+    client_secret: ENV.fetch('KNOX_CLIENT_SECRET'),
+    scope: 'kc.application:manage',
+    app_description: 'Internal Android application',
+    app_file_path: ENV.fetch('KC_APP_FILE_PATH')
   )
 end

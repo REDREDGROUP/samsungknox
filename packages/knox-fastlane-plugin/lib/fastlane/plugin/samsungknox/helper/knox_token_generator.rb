@@ -3,12 +3,32 @@ require 'jwt'
 require 'openssl'
 require 'base64'
 require 'securerandom'
+require 'net/http'
+require 'uri'
+require 'json'
 require_relative 'knox_configure_error_message'
+require_relative 'knox_http_response'
 
 module Fastlane
   UI = FastlaneCore::UI unless Fastlane.const_defined?("UI")
 
   module KnoxTokenGenerator
+    def self.generate_oauth_access_token(client_id:, client_secret:, scope: 'kc.application:manage')
+      uri = URI('https://api.samsungknox.com/ams/v1/oauth2/token')
+      request = Net::HTTP::Post.new(uri)
+      request.set_form_data(grant_type: 'client_credentials', client_id: client_id, client_secret: client_secret, scope: scope)
+      response = Net::HTTP.start(uri.host, uri.port, use_ssl: true, open_timeout: 30, read_timeout: 30) do |http|
+        http.request(request)
+      end
+      data = KnoxHttpResponse.parse(response, 'OAuth token exchange')
+      token = data['access_token']
+      unless token.kind_of?(String) && !token.strip.empty? && data['token_type'].kind_of?(String) && data['token_type'].casecmp?('Bearer') && !token.match?(/[\r\n]/)
+        raise KnoxHttpResponse::InvalidResponse, 'OAuth token exchange returned an invalid bearer token'
+      end
+
+      token
+    end
+
     def self.read_credential(credential)
       UI.crash!(ErrorMessage::BOTH_CREDENTIAL_DETECTED) if credential[:path] && credential[:key]
       UI.crash!(ErrorMessage::CREDENTIAL_MISSING) unless credential[:path] || credential[:key]
@@ -65,13 +85,9 @@ module Fastlane
 
       response = Net::HTTP.post(uri, request_body.to_json, "Content-Type" => "application/json")
 
-      if response.kind_of?(Net::HTTPSuccess)
-        data = JSON.parse(response.body)
-        UI.success('✅ ams accessToken generated successfully')
-        return data["accessToken"]
-      else
-        raise "Request failed with response: #{response.body}"
-      end
+      data = KnoxHttpResponse.parse(response, 'Legacy token exchange')
+      UI.success('✅ ams accessToken generated successfully')
+      return data["accessToken"]
     end
 
     def self.generate_knox_access_token(credential, client_identifier_jwt_token, api_region)

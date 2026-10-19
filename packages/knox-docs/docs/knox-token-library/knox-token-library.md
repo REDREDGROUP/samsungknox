@@ -10,31 +10,29 @@ description: Explain what is Knox Token Library.
 
 **referenced the package** : [knox-token-library-js](https://www.npmjs.com/package/knox-token-library-js)
 
-This library provides utility methods to generate and sign Knox Tokens using server side Javascript. The pre-requisites for using this utility are
+Use the current OAuth 2.0 flow with `v2.requestOAuthAccessToken`. Create a
+Cloud App in Samsung Knox Cloud Apps and use its client ID and client secret.
+The helper returns an opaque Bearer access token; pass it to your API client
+and renew it when needed. The caller owns token expiry and renewal.
 
-- You have downloaded the Knox Credential file (credential.json)
-- You have generated a Client Identifier (api-key) for accessing apis of Knox Cloud Services.
+See [OAuth v2 access tokens](./oauth-v2.mdx) for setup and usage.
 
-The keys below must have Cloud API privileges on Samsung Knox. If you do not have permission, you can request permission by disconnecting the Ticket from the Samsung Knox Admin Portal.
+## Legacy v1 token generation
 
-Read: https://docs.samsungknox.com/dev/knox-cloud-authentication/tutorial/tutorial-for-customers-generate-access-token/
+The credential-file and client-identifier workflow below is for **Legacy v1**
+only. It is not required by the current OAuth 2.0 flow.
 
-# Intended Use
+### Legacy v1 portal steps
 
-The workflow for making api calls to Knox Cloud Services is divided into a portal workflow, and a programmatic workflow.
+1. Download the Knox Credential file (`credential.json`).
+2. Generate and download a Client Identifier (`api-key`) for a specific Knox
+   Solution.
 
-Check out the official Samsung Knox documentation below for more information.
+### Legacy v1 programmatic steps
 
-https://docs.samsungknox.com/dev/knox-cloud-authentication
+3. Call Knox API to generate an API access token. This call requires a signed
+   Client Identifier and specific contents of your credential (public key).
+4. Call Knox API for your intended workflow. This call requires a signed API
+   access token and specific contents of your credential (public key).
 
-### Portal flow
-
-1.  Download credential from Knox Api Portal
-2.  Generate and Download ClientIdentifier (api-key) for a specific Knox Solution
-
-### Programmatic flow
-
-3. Call Knox api to generate an Api Access Token. This api call requires a **signed ClientIdentifier**, and specific contents of your credential (Public Key).
-4. Call Knox api for your intended workflow (eg: upload device, configure device etc). This api call requires your **signed Api Access Token**, and specific contents of your credential (Public Key).
-
-This utility js library helps generate signed clientIdentifiers, and signed accessTokens.
+The library retains these signed-token utilities for Legacy v1 integrations.

@@ -1,0 +1,43 @@
+---
+sidebar_position: 2
+title: OAuth v2 Access Tokens
+---
+
+# OAuth v2 access tokens
+
+Use `v2.requestOAuthAccessToken` for the client-credentials OAuth flow. First
+create a Cloud App in Samsung Knox Cloud Apps and obtain its client ID and
+secret. Choose only scopes required by your Configure operations. For example,
+device reads need `kc.devices:view`; application upload needs
+`kc.application:manage`.
+
+```ts
+import { v2 } from '@redredgroup/samsungknox-token-library';
+
+async function requestConfigureToken(clientId: string, clientSecret: string) {
+  return v2.requestOAuthAccessToken({
+    clientId,
+    clientSecret,
+    scope: ['kc.devices:view', 'kc.application:manage'],
+  });
+}
+```
+
+The helper posts form-encoded `client_credentials` parameters to the global
+Knox OAuth endpoint. `scope` can be one scope or a non-empty scope tuple. The
+optional endpoint override supports controlled testing. Do not expose secrets
+or access tokens in logs or browser bundles.
+
+The returned token is not cached or renewed. The caller owns secure storage,
+expiry tracking, and obtaining a replacement. A token must be presented by the
+caller to the API client as a Bearer token. OAuth errors preserve the HTTP
+status when the server returned one and avoid retaining secret-bearing request
+details.
+
+The preserved JWT-signing helpers remain legacy and are available under the
+`v1` namespace and the default export's `v1` property. They are not named root
+generator-function exports. They are not used by this helper, and a failed
+OAuth request never falls back to them.
+
+The current Configure reference is labeled **26.10 UAT**. Production rollout
+and successful authentication against an actual tenant are unverified.

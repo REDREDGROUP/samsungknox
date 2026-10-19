@@ -5,6 +5,12 @@ title: Request AccessToken
 
 # Request Knox Cloud Authentication AccessToken
 
+:::warning Legacy API
+The examples on this page use the legacy contract. They are not v2 fallbacks.
+Operations without a v2 equivalent remain legacy-only. See the [Configure v2
+migration guide](/docs/knox-api/migration-v2).
+:::
+
 :::note
 This token is not X-KNOX-APITOKEN. The Access Token after signing the corresponding Access Token from generateSignedAccessTokenJWT is X-KNOX-APITOKEN
 :::

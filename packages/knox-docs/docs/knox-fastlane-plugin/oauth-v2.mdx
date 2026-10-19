@@ -1,0 +1,61 @@
+---
+sidebar_position: 3
+title: OAuth v2 APK Upload
+---
+
+# OAuth v2 APK upload
+
+The `knox_configure_library_upload_app` action uses OAuth unless you explicitly
+select legacy mode. Create a Cloud App in Samsung Knox Cloud Apps and provide
+its client ID and secret through Fastlane secrets or environment variables.
+The default scope is `kc.application:manage`.
+
+```ruby
+lane :upload_internal_app do
+  knox_configure_library_upload_app(
+    client_id: ENV.fetch('KNOX_CLIENT_ID'), # store these in your CI secret store
+    client_secret: ENV.fetch('KNOX_CLIENT_SECRET'),
+    app_file_path: ENV.fetch('KC_APP_FILE_PATH'),
+    app_description: 'Internal Android application'
+  )
+end
+```
+
+OAuth mode accepts `client_id`, `client_secret`, optional space-separated
+`scope`, `app_file_path`, and optional `app_description`. Environment names
+are `KNOX_CLIENT_ID`, `KNOX_CLIENT_SECRET`, `KNOX_SCOPE`, `KC_APP_FILE_PATH`,
+and `KC_APP_DESCRIPTION`. The file must be a readable APK. The default scope
+is `kc.application:manage`.
+
+The action requests a client-credentials token from the global Knox endpoint,
+then uploads the actual APK bytes as multipart data to the global Configure v2
+in-house application endpoint. The description is sent as a query parameter.
+No manual multipart boundary is needed.
+
+The returned application ID and status describe processing. `InProgress` is
+accepted but is not ready to deploy. `Deployable` is successful. `Failed`
+raises an upload failure with the application ID. The action does not poll,
+cache or renew tokens, or skip duplicate binaries. OAuth failure does not
+trigger legacy authentication.
+
+## Explicit legacy mode
+
+To maintain an existing regional JWT integration, set `auth_mode: 'legacy'`.
+Provide `api_region`, `clientIdentifierJwtToken`, and exactly one of
+`credential_key` or `credential_path`. This retains the legacy request
+contract and is not the default. Don't mix OAuth and legacy credentials.
+
+```ruby
+knox_configure_library_upload_app(
+  auth_mode: 'legacy',
+  api_region: 'YOUR_REGION',
+  clientIdentifierJwtToken: ENV.fetch('KNOX_CLIENT_IEDNTIFIER_JWT_TOKEN'),
+  credential_path: ENV.fetch('KNOX_CREDENTIAL_PATH'),
+  app_file_path: ENV.fetch('KC_APP_FILE_PATH')
+)
+```
+
+The current Configure reference is labeled **26.10 UAT**. Local wire tests
+verify OAuth form fields, binary multipart bytes, and processing status. They
+do not verify production rollout, Samsung Cloud App entitlement, or successful
+authentication and upload against a real tenant.
