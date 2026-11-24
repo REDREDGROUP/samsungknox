@@ -77,7 +77,10 @@ export const formatChangeLogFile = async ({
     log.debug(`Received: formattedChangeLog ${formattedChangeLog}`);
 
     return formattedChangeLog;
-  } catch (_error) {}
+  } catch (error) {
+    log.info(`Prettier is unavailable in "${cwd}"; writing the changelog unformatted. ${(error as Error).message}`);
+    return changeLog;
+  }
 };
 
 export const BumpLevels = {
