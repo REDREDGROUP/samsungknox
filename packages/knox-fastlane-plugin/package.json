@@ -1,7 +1,7 @@
 {
   "name": "@redredgroup/knox-fastlane-plugin",
   "description": "",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "scripts": {
     "format": "biome check --write .",
     "lint:format": "biome format ."
