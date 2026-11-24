@@ -1,5 +1,12 @@
 # @redredgroup/samsungknox-docs
 
+## 1.6.4
+
+### Patch Changes
+
+- 89cda2b: Document Fastlane plugin 1.0.0 installation, the Ruby 3.1 requirement, and the
+  upgrade from 0.1.x, and remove the pre-release warning.
+
 ## 1.6.3
 
 ### Patch Changes
