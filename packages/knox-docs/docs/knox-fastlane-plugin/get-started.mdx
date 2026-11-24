@@ -5,25 +5,39 @@ keywords:
   - knox-fastlane
   - installation
 last_update:
-  date: 11/25/2023
+  date: 11/24/2026
 ---
 
 ## Install Knox Fastlane Plugin
 
 :::note
-The recommended environment for installation and use is as follows:
-
-**Ruby 2.7.5 or higher and fastlane >= 2.217.0**
+Version 1.0.0 requires **Ruby 3.1 or later**. It is tested on Ruby 3.4 with
+fastlane 2.217.0 or later.
 :::
 
 :::warning
-For now, this plugin only works on Android. Do not use it on iOS! We have not tested it. We will update the documentation as soon as we do.
+This plugin uploads Android APK files only. It has not been tested on iOS.
 :::
 
-To install the fastlane plugin, use the command below. (Inside the Android/fastlane folder)
+Inside your Android fastlane folder, add the plugin:
 
 ```bash
 fastlane add_plugin samsungknox
 ```
 
-If you don't have fastlane installed, [click here](https://docs.fastlane.tools/getting-started/android/setup/) to install Fastlane.
+This adds the gem to `fastlane/Pluginfile`. Pin the major version so a future
+breaking release is not picked up automatically:
+
+```ruby
+gem 'fastlane-plugin-samsungknox', '~> 1.0'
+```
+
+Then run `bundle install` and commit both `Pluginfile` and `Gemfile.lock`.
+
+If you don't have fastlane installed, follow the
+[fastlane Android setup guide](https://docs.fastlane.tools/getting-started/android/setup/).
+
+Next, configure OAuth credentials and the upload action in the
+[OAuth v2 APK upload guide](/docs/knox-fastlane-plugin/oauth-v2). If you are
+upgrading from 0.1.x, read [Upgrading from 0.1.x](/docs/knox-fastlane-plugin/oauth-v2#upgrading-from-01x)
+first, because 1.0.0 changes the default authentication.
