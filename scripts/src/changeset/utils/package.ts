@@ -41,9 +41,12 @@ export async function getChangedPackages({
 }
 
 export const getRootPackageJsonMetadata = async (cwd: string = process.cwd()): Promise<PackageJSON> => {
-  const { root } = await getPackages(cwd);
+  const { rootPackage } = await getPackages(cwd);
+  if (!rootPackage) {
+    throw new Error(`No root package found in "${cwd}"`);
+  }
 
-  return root.packageJson;
+  return rootPackage.packageJson;
 };
 
 export const getPackageMetadata = async (cwd: string) => {
@@ -75,8 +78,11 @@ export const updateRootPackageReleaseVersion = async ({ cwd, type }: { cwd: stri
   // TODO: pre releases feature will be added at a later date.
   // const preInfo = await getPreInfo(repo);
 
-  const { root } = await getPackages(cwd);
-  const currentVersion = root.packageJson.version;
+  const { rootPackage } = await getPackages(cwd);
+  if (!rootPackage) {
+    throw new Error(`No root package found in "${cwd}"`);
+  }
+  const currentVersion = rootPackage.packageJson.version;
 
   let nextVersion: string | null = null;
 
@@ -105,9 +111,9 @@ export const updateRootPackageReleaseVersion = async ({ cwd, type }: { cwd: stri
   }
 
   await fs.writeJson(
-    path.join(root.dir, 'package.json'),
+    path.join(rootPackage.dir, 'package.json'),
     {
-      ...root.packageJson,
+      ...rootPackage.packageJson,
       version: nextVersion,
     },
     { spaces: 2, encoding: 'utf8' },

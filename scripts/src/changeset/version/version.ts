@@ -76,7 +76,7 @@ export async function runVersion({
 
   const searchQuery = `repo:${repo}+state:open+head:${versionBranch}+base:${branch}`;
 
-  const searchResult = await octokit.search.issuesAndPullRequests({
+  const searchResult = await octokit.rest.search.issuesAndPullRequests({
     q: searchQuery,
   });
 
@@ -137,18 +137,14 @@ export async function runVersion({
   }
 
   // Already PR Exists
-  if (searchResult.data.items.length) {
-    const pullRequest = updateGitPullRequest({
-      log,
-      octokit,
-      option: {
-        pullRequestNumber: searchResult.data.items[0].number,
-        pullRequestTitle,
-        pullRequestBody,
-        githubRepo: github.context.repo,
-      },
-    });
-
-    return pullRequest;
-  }
+  return updateGitPullRequest({
+    log,
+    octokit,
+    option: {
+      pullRequestNumber: searchResult.data.items[0].number,
+      pullRequestTitle,
+      pullRequestBody,
+      githubRepo: github.context.repo,
+    },
+  });
 }

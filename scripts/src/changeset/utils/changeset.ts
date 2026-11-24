@@ -2,11 +2,11 @@ import { exec } from '@actions/exec';
 import { readPreState } from '@changesets/pre';
 import readChangesets from '@changesets/read';
 import type { NewChangeset, PreState } from '@changesets/types';
-import mdastToString from 'mdast-util-to-string';
+import { toString as mdastToString } from 'mdast-util-to-string';
 import remarkParse from 'remark-parse';
 import remarkStringify from 'remark-stringify';
 import resolveFrom from 'resolve-from';
-import unified from 'unified';
+import { unified } from 'unified';
 
 import { FunctionsCommonOptions } from '../type';
 
@@ -43,7 +43,7 @@ export const requireChangesetsCliPkgJson = (cwd: string) => {
   try {
     return require(resolveFrom(cwd, '@changesets/cli/package.json'));
   } catch (err) {
-    if (err && err.code === 'MODULE_NOT_FOUND') {
+    if ((err as NodeJS.ErrnoException)?.code === 'MODULE_NOT_FOUND') {
       throw new Error(`Have you forgotten to install \`@changesets/cli\` in "${cwd}"?`);
     }
     throw err;
@@ -92,7 +92,6 @@ export function getChangelogEntry(changelog: string, version: string) {
 
   let highestLevel: number = BumpLevels.dep;
 
-  //@ts-expect-error
   const nodes = ast.children as Array<any>;
   let headingStartInfo:
     | {
@@ -125,7 +124,6 @@ export function getChangelogEntry(changelog: string, version: string) {
     }
   }
   if (headingStartInfo) {
-    //@ts-expect-error
     ast.children = (ast.children as any).slice(headingStartInfo.index + 1, endIndex);
   }
   return {
