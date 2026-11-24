@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_redredgroup_samsungknox_docs||=[]).push([[9647],{4068(e,r,s){s.r(r),s.d(r,{default:()=>t});s(405);var u=s(851),a=s(9227),c=s(1728),d=s(706),n=s(6022),o=s(9793);function t(e){return(0,o.jsx)(c.e3,{className:(0,u.A)(a.G.wrapper.docsPages),children:(0,o.jsx)(n.A,{children:(0,d.v)(e.route.routes)})})}}}]);
