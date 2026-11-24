@@ -10,6 +10,7 @@ export default defineConfig({
   },
   target: 'es2020',
   noExternal: [/.*/],
+  shims: true,
   sourcemap: process.env.NODE_ENV !== 'production',
   dts: true,
   clean: true,
