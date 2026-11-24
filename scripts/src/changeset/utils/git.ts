@@ -1,5 +1,5 @@
 import { exec } from '@actions/exec';
-import type { Context } from '@actions/github/lib/context';
+import type { context } from '@actions/github';
 import { GitHub } from '@actions/github/lib/utils';
 import { PreState } from '@changesets/types';
 import fs from 'fs-extra';
@@ -64,7 +64,7 @@ export const createGitPullRequestTitle = ({
   preState,
 }: FunctionsCommonOptions<{
   pullRequestTitle: string;
-  preState: PreState;
+  preState: PreState | undefined;
 }>) => {
   const preStateSuffix = preState ? ` (${preState.tag})` : '';
 
@@ -80,7 +80,7 @@ export const createGitPullRequestCommitMessage = ({
   preState,
 }: FunctionsCommonOptions<{
   pullRequestTitle: string;
-  preState: PreState;
+  preState: PreState | undefined;
 }>) => {
   const preStateSuffix = preState ? ` (${preState.tag})` : '';
 
@@ -101,7 +101,7 @@ export const createGitPullRequest = async ({
     versionBranch: string; // changeset-release/main
     pullRequestTitle: string;
     pullRequestBody: string;
-    githubRepo: Context['repo'];
+    githubRepo: (typeof context)['repo'];
   };
 }>) => {
   log.debug(`Option Received: createGitPullRequest ${JSON.stringify(option)}`);
@@ -111,7 +111,7 @@ export const createGitPullRequest = async ({
 
   const {
     data: { number },
-  } = await octokit.pulls.create({
+  } = await octokit.rest.pulls.create({
     base: baseBranch,
     head: versionBranch,
     title: pullRequestTitle,
@@ -136,7 +136,7 @@ export const updateGitPullRequest = async ({
     pullRequestNumber: number;
     pullRequestTitle: string;
     pullRequestBody: string;
-    githubRepo: Context['repo'];
+    githubRepo: (typeof context)['repo'];
   };
 }>) => {
   const { pullRequestBody, pullRequestNumber, pullRequestTitle, githubRepo } = option;
@@ -144,7 +144,7 @@ export const updateGitPullRequest = async ({
 
   log.action('updating pull request....');
 
-  await octokit.pulls.update({
+  await octokit.rest.pulls.update({
     pull_number: pullRequestNumber,
     title: pullRequestTitle,
     body: pullRequestBody,

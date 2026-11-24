@@ -6,30 +6,51 @@ on:
       - main
     paths:
       - 'packages/knox-fastlane-plugin/CHANGELOG.md'
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
     - uses: actions/checkout@v4
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.1.0'
+        ruby-version: '3.4'
         bundler-cache: true
         working-directory: packages/knox-fastlane-plugin
 
-    - name: Install dependencies
+    - name: Run tests
       working-directory: packages/knox-fastlane-plugin
-      run: bundle install
+      run: bundle exec rake
 
-    - name: Rake install
+    - name: Check published version
+      id: version
       working-directory: packages/knox-fastlane-plugin
-      run: bundle exec rake install
+      run: |
+        version=$(ruby -e 'require_relative "lib/fastlane/plugin/samsungknox/version"; print Fastlane::Samsungknox::VERSION')
+        echo "version=$version" >> "$GITHUB_OUTPUT"
+        if gem list --remote --exact --all fastlane-plugin-samsungknox | grep -Eq "[(, ]$version[,)]"; then
+          echo "published=true" >> "$GITHUB_OUTPUT"
+          echo "fastlane-plugin-samsungknox $version is already on RubyGems; skipping."
+        else
+          echo "published=false" >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: Build Gem
+      if: steps.version.outputs.published == 'false'
+      working-directory: packages/knox-fastlane-plugin
+      run: gem build fastlane-plugin-samsungknox.gemspec
+
+    - name: Configure RubyGems trusted publishing
+      if: steps.version.outputs.published == 'false'
+      uses: rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a # v2.1.0
 
     - name: Release Gem
+      if: steps.version.outputs.published == 'false'
       working-directory: packages/knox-fastlane-plugin
-      run: bundle exec rake release
-      env:
-        RUBYGEMS_AUTH_TOKEN: ${{ secrets.RUBYGEMS_AUTH_TOKEN }}
+      run: gem push "fastlane-plugin-samsungknox-${{ steps.version.outputs.version }}.gem"
