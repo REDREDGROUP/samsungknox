@@ -8,16 +8,12 @@ description: Explain what the Knox API
 
 [![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-samsungknox)
 
-[![License](https://img.shields.io/badge/license-Apache2.0-green.svg?style=flat)](https://github.com/REDREDGROUP/samsungknox/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-Apache2.0-green.svg?style=flat)](https://github.com/REDREDGROUP/samsungknox/blob/main/LICENSE)
 [![Gem](https://img.shields.io/gem/v/fastlane-plugin-samsungknox.svg?style=flat)](https://rubygems.org/gems/fastlane-plugin-samsungknox)
 [![Platforms](https://img.shields.io/badge/os-macos%20--%20linux%20--%20windows-blue?style=flat)](#)
 
 :::warning
 For now, this plugin only works on Android. **Do not use it on iOS!** We have not tested it. We will update the documentation as soon as we do.
-:::
-
-:::warning
-This plugin is not officially released yet! There may be features that don't work as they should, or features that were previously used for research may be missing. As long as this statement is present, it means that the release plugin is not yet available!
 :::
 
 ## Before you start...

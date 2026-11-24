@@ -38,6 +38,43 @@ raises an upload failure with the application ID. The action does not poll,
 cache or renew tokens, or skip duplicate binaries. OAuth failure does not
 trigger legacy authentication.
 
+## Upgrading from 0.1.x
+
+Version 1.0.0 is a breaking release. In 0.1.x the action always used the
+regional JWT flow. In 1.0.0 it uses OAuth unless `auth_mode: 'legacy'` is set,
+and OAuth mode rejects legacy options instead of ignoring them.
+
+A 0.1.x lane that passes `credential_key` or `credential_path`,
+`clientIdentifierJwtToken`, and `api_region` fails on 1.0.0 with
+`OAuth cannot be mixed with legacy credentials or region`. The same happens
+when those options come from environment variables such as
+`KNOX_CREDENTIAL_KEY` or `KC_API_REGION`. Choose one path:
+
+- **Move to OAuth (recommended):** create a Cloud App with the
+  `kc.application:manage` scope, pass `client_id` and `client_secret`, and
+  remove every legacy option and environment variable from the lane.
+- **Stay on legacy for now:** add `auth_mode: 'legacy'` to the existing call
+  and keep the legacy options. See [Explicit legacy mode](#explicit-legacy-mode).
+
+```ruby
+# 0.1.x
+knox_configure_library_upload_app(
+  credential_key: ENV['KNOX_CONFIGURE_CREDENTIAL_KEY'],
+  clientIdentifierJwtToken: ENV['KNOX_CLIENT_IDENTIFIER_JWT_TOKEN'],
+  app_file_path: 'app/build/outputs/apk/release/app-release.apk',
+  api_region: 'EU',
+)
+
+# 1.0.0 with OAuth
+knox_configure_library_upload_app(
+  client_id: ENV.fetch('KNOX_CLIENT_ID'),
+  client_secret: ENV.fetch('KNOX_CLIENT_SECRET'),
+  app_file_path: 'app/build/outputs/apk/release/app-release.apk',
+)
+```
+
+OAuth uses the global Knox API endpoint, so `api_region` is no longer needed.
+
 ## Explicit legacy mode
 
 To maintain an existing regional JWT integration, set `auth_mode: 'legacy'`.

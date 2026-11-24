@@ -1,5 +1,24 @@
 # `fastlane-plugin-samsungknox`
 
+## Installation
+
+Requires Ruby 3.1 or later. Inside your Android fastlane folder:
+
+```bash
+fastlane add_plugin samsungknox
+```
+
+Pin the major version in `fastlane/Pluginfile`:
+
+```ruby
+gem 'fastlane-plugin-samsungknox', '~> 1.0'
+```
+
+Upgrading from 0.1.x? Version 1.0.0 switches the default authentication to
+OAuth. See [Upgrading from 0.1.x](https://github.com/REDREDGROUP/samsungknox/blob/main/packages/knox-docs/docs/knox-fastlane-plugin/oauth-v2.mdx#upgrading-from-01x).
+
+## Usage
+
 The `knox_configure_library_upload_app` action uses OAuth by default. Provide
 `client_id`, `client_secret`, and an existing readable APK path. Token expiry
 and renewal are not handled by the action. The OAuth flow never falls back to
